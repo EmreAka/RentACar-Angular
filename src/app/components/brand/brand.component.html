@@ -3,7 +3,7 @@
       <span class="visually-hidden">Loading...</span>
     </div>
 </div>
-<table *ngIf="dataLoaded == true" class = 'table'>
+<!-- <table *ngIf="dataLoaded == true" class = 'table'>
     <thead>
         <tr>
             <th>
@@ -18,4 +18,10 @@
         <td>{{brand.id}}</td>
         <td>{{brand.name}}</td>
     </tr>
-</table>
+</table> -->
+<h2 *ngIf="dataLoaded == true">Brands</h2>
+<ul *ngIf="dataLoaded == true" class="list-group">
+    <li (click)="setCurrentBrandDefault()" [class]="getCurrentBrandAllClass()">All Brands</li>
+    <li (click)="setCurrentBrand(brand)" *ngFor="let brand of brands" 
+    [class]="getCurrentBrandClass(brand)">{{brand.name}}</li>
+</ul>

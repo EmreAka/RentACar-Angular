@@ -3,7 +3,7 @@
       <span class="visually-hidden">Loading...</span>
     </div>
 </div>
-<table *ngIf="dataLoaded == true" class = "table">
+<!-- <table *ngIf="dataLoaded == true" class = "table">
     <thead>
         <tr>
             <th>
@@ -22,4 +22,9 @@
             {{colour.name}}
         </td>
     </tr>
-</table>
+</table> -->
+<h2 *ngIf="dataLoaded == true">Colours</h2>
+<ul *ngIf="dataLoaded == true" class="list-group">
+    <li (click)="setCurrentColourDefault()" [class]="getCurrentBrandAllClass()">All Colours</li>
+    <li (click)="setCurrentColour(colour)" *ngFor="let colour of colours" [class]="getCurrentColourClass(colour)">{{colour.name}}</li>
+</ul>

@@ -24,6 +24,9 @@
             <th>
                 Description
             </th>
+            <th>
+                Detail
+            </th>
         </tr>
     </thead>
     <tr *ngFor="let car of cars">
@@ -33,5 +36,8 @@
         <td>{{car.modelYear}}</td>
         <td>{{car.dailyPrice}}</td>
         <td>{{car.description}}</td>
+        <td>
+            <button type="button" class="btn btn-outline-dark">Review</button>
+        </td>
     </tr>
 </table>

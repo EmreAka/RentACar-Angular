@@ -1,7 +1,7 @@
 import { CarService } from './../../services/car.service';
 import { Car } from './../../models/car';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-car',
@@ -12,7 +12,7 @@ export class CarComponent implements OnInit {
 
   cars:Car[] = [];
   dataLoaded:boolean = false;
-  constructor(private carService:CarService, private activatedRoute:ActivatedRoute) { }
+  constructor(private carService:CarService, private activatedRoute:ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -47,6 +47,10 @@ export class CarComponent implements OnInit {
       this.cars = response.data;
       this.dataLoaded = true;
     })
+  }
+
+  setCurrentRoute(carId:number){
+    this.router.navigateByUrl("cars/detail/" + carId);
   }
 
 }

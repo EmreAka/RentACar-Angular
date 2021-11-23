@@ -37,7 +37,7 @@
         <td>{{car.dailyPrice}}</td>
         <td>{{car.description}}</td>
         <td>
-            <button type="button" class="btn btn-outline-dark">Review</button>
+            <button (click)="setCurrentRoute(car.id)" type="button" class="btn btn-outline-dark">Review</button>
         </td>
     </tr>
 </table>

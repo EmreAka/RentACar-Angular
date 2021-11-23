@@ -3,12 +3,12 @@
       <span class="visually-hidden">Loading...</span>
     </div>
 </div>
-<h1 *ngIf="dataLoaded == true" class= "display-1">{{car[0].brandName}}</h1>
+<h1 *ngIf="dataLoaded == true" class= "display-1">{{car.brandName}}</h1>
 
 <div id="carouselExampleControls" data-interval="false" id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        <div class="carousel-item" *ngFor="let imageUrl of car[0].images let i = index" [ngClass]="{active: i == 0}">
-          <img src={{imageUrl}} class="d-block w-100" alt="...">
+        <div class="carousel-item" *ngFor="let imageUrl of car.images let i = index" [ngClass]="{active: i == 0}">
+          <img [src]="imageUrl" class="d-block w-100" alt="...">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

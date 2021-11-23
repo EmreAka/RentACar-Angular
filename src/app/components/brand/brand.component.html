@@ -3,23 +3,7 @@
       <span class="visually-hidden">Loading...</span>
     </div>
 </div>
-<!-- <table *ngIf="dataLoaded == true" class = 'table'>
-    <thead>
-        <tr>
-            <th>
-                Brand Id
-            </th>
-            <th>
-                Brand Name
-            </th>
-        </tr>
-    </thead>
-    <tr *ngFor="let brand of brands">
-        <td>{{brand.id}}</td>
-        <td>{{brand.name}}</td>
-    </tr>
-</table> -->
-<h2 *ngIf="dataLoaded == true">Brands</h2>
+<h1 *ngIf="dataLoaded == true" class = "display-6">Brands</h1>
 <ul *ngIf="dataLoaded == true" class="list-group">
     <li routerLink="cars" (click)="setCurrentBrandDefault()" [class]="getCurrentBrandAllClass()">All Brands</li>
     <li routerLink="cars/brand/{{brand.id}}" (click)="setCurrentBrand(brand)" *ngFor="let brand of brands" 

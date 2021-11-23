@@ -1,0 +1,6 @@
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    z-index:2;
+    color:#ffffff;
+    background-color: #212529;
+    border-color:#212529;
+  }

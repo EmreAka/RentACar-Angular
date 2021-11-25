@@ -5,10 +5,10 @@
 </div>
 
 
-<div class = "card" style="margin-top: 30px;">
+<div *ngIf="dataLoaded == true" class = "card" style="margin-top: 30px;">
   <div class = "card-body">
     <div class = "card-title">
-      <h1 *ngIf="dataLoaded == true" class= "display-3">{{car.brandName}}</h1>
+      <h1 class= "display-3">{{car.brandName}}</h1>
     </div>
     <div id="carouselExampleControls" data-interval="false" id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">

@@ -1,3 +1,4 @@
+import { ColourListComponent } from './components/colour-list/colour-list.component';
 import { BrandListComponent } from './components/brand-list/brand-list.component';
 import { BrandComponent } from './components/brand/brand.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
@@ -12,7 +13,7 @@ const routes: Routes = [
   {path: "cars/brand/:brandId", component: CarComponent},
   {path: "cars/colour/:colourId", component: CarComponent},
   {path: "cars/detail/:carId", component: CarDetailComponent},
-  {path: "colours", component: ColourComponent},
+  {path: "colours", component: ColourListComponent},
   {path: "brands", component: BrandListComponent}
 ];
 

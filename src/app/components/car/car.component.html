@@ -4,6 +4,15 @@
   </div>
 </div>
 
+<div class="mb-3">
+  <label for="filterText" class="form-label"><h1 class="display-6">Search A Car</h1></label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="enter a search expression">
+</div>
+
+<div *ngIf="filterText" class="alert alert-primary">
+  {{filterText}} searched.
+</div>
+
 <table *ngIf="dataLoaded == true" class="table">
   <thead>
     <tr>
@@ -17,12 +26,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let car of cars">
+    <tr *ngFor="let car of cars | carFilter: filterText">
       <td>{{ car.id }}</td>
       <td>{{ car.brandName }}</td>
       <td>{{ car.colourName }}</td>
       <td>{{ car.modelYear }}</td>
-      <td>{{ car.dailyPrice }}</td>
+      <td>{{ car.dailyPrice | currency}}</td>
       <td>{{ car.description }}</td>
       <td>
         <button

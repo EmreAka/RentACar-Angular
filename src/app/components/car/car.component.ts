@@ -12,6 +12,8 @@ export class CarComponent implements OnInit {
 
   cars:Car[] = [];
   dataLoaded:boolean = false;
+  filterText:string = "";
+
   constructor(private carService:CarService, private activatedRoute:ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {

@@ -7,26 +7,18 @@
   </div>
 </div>
 
-<form *ngIf="brandsLoaded == true && coloursLoaded == true" [formGroup]="filterForm" (ngSubmit)="submit()">
-  <div class="row">
-    <div class="col-md-5">
-      <select formControlName="brandId" class="form-select" aria-label="Default select example">
-        <option [ngValue]="null" selected>Open this select menu</option>
-        <ng-container *ngFor="let brand of brands">
-          <option [ngValue]="brand.id">{{ brand.name }}</option>
-        </ng-container>
-      </select>
-    </div>
-    <div class="col-md-5">
-      <select formControlName="colourId" class="form-select" aria-label="Default select example">
-        <option [ngValue]="null" selected>Open this select menu</option>
-        <ng-container *ngFor="let colour of colours">
-          <option [ngValue]="colour.id">{{ colour.name }}</option>
-        </ng-container>
-      </select>
-    </div>
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-warning">Apply Filter</button>
-    </div>
+<div class="row">
+  <div class="col-md-5">
+    <select [(ngModel)]="brandId" class="form-select" aria-label="Default select example">
+      <option *ngFor="let brand of brands" [ngValue]="brand.id">{{brand.name}}</option>
+    </select>
   </div>
-</form>
+  <div class="col-md-5">
+    <select [(ngModel)]="colourId" class="form-select" aria-label="Default select example">
+      <option *ngFor="let colour of colours" [ngValue]="colour.id">{{colour.name}}</option>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <button (click)="setCurrentRoute()" type="button" class="btn btn-warning">Apply Filter</button>
+  </div>
+</div>

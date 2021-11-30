@@ -1,0 +1,29 @@
+<div *ngIf="dataLoaded == false" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div class="mb-3">
+    <label for="filterText" class="form-label"><h1 class="display-6">Search A Brand</h1></label>
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="enter a search expression">
+  </div>
+  
+<div *ngIf="filterText" class="alert alert-primary">
+  {{filterText}} searched.
+</div>
+
+<table *ngIf="dataLoaded == true" class="table">
+    <thead>
+        <tr>
+            <th>Brand Id</th>
+            <th>Brand Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let brand of brands | brandFilter: filterText">
+            <td>{{brand.id}}</td>
+            <td>{{brand.name}}</td>
+        </tr>
+    </tbody>
+</table>

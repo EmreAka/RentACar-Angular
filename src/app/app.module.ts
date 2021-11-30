@@ -41,7 +41,6 @@ import { CarFilterComponent } from './components/car-filter/car-filter.component
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

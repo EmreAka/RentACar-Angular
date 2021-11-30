@@ -4,9 +4,9 @@
   </div>
 </div>
 
-<app-car-filter></app-car-filter>
+<app-car-filter *ngIf="dataLoaded == true"></app-car-filter>
 
-<div class="mb-3">
+<div *ngIf="dataLoaded == true" class="mb-3">
   <label for="filterText" class="form-label"><h1 class="display-6">Search A Car</h1></label>
   <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="enter a search expression">
 </div>

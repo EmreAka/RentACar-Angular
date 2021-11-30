@@ -2,7 +2,8 @@ import { ColourService } from './../../services/colour.service';
 import { BrandService } from './../../services/brand.service';
 import { Colour } from './../../models/colour';
 import { Brand } from './../../models/brand';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-car-filter',
@@ -16,11 +17,23 @@ export class CarFilterComponent implements OnInit {
   brandsLoaded:boolean = false;
   coloursLoaded:boolean = false;
 
-  constructor(private brandService:BrandService, private colourService:ColourService) { }
+  filterForm:FormGroup;
+
+  constructor(private brandService:BrandService, private colourService:ColourService,
+    private form:FormBuilder) { }
 
   ngOnInit(): void {
     this.getBrands();
     this.getColours();
+    this.filterForm = this.form.group({
+      brandId: [null],
+      colourId: [null]
+    })
+  }
+
+  submit(){
+    console.log("Form submitted.");
+    console.log(this.filterForm.value)
   }
 
   getBrands(){

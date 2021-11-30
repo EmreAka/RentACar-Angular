@@ -7,20 +7,26 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-5">
-    <select class="form-select" aria-label="Default select example">
-      <option selected>Select A Brand</option>
-      <option *ngFor="let brand of brands" value="brand.id">{{brand.name}}</option>
-    </select>
+<form *ngIf="brandsLoaded == true && coloursLoaded == true" [formGroup]="filterForm" (ngSubmit)="submit()">
+  <div class="row">
+    <div class="col-md-5">
+      <select formControlName="brandId" class="form-select" aria-label="Default select example">
+        <option [ngValue]="null" selected>Open this select menu</option>
+        <ng-container *ngFor="let brand of brands">
+          <option [ngValue]="brand.id">{{ brand.name }}</option>
+        </ng-container>
+      </select>
+    </div>
+    <div class="col-md-5">
+      <select formControlName="colourId" class="form-select" aria-label="Default select example">
+        <option [ngValue]="null" selected>Open this select menu</option>
+        <ng-container *ngFor="let colour of colours">
+          <option [ngValue]="colour.id">{{ colour.name }}</option>
+        </ng-container>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-warning">Apply Filter</button>
+    </div>
   </div>
-  <div class="col-md-5">
-    <select class="form-select" aria-label="Default select example">
-      <option selected>Select A Colour</option>
-      <option *ngFor="let colour of colours" value="colour.id">{{colour.name}}</option>
-    </select>
-  </div>
-  <div class="col-md-2">
-    <button type="button" class="btn btn-warning">Apply Filter</button>
-  </div>
-</div>
+</form>

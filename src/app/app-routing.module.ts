@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: "cars", component: CarComponent},
   {path: "cars/brand/:brandId", component: CarComponent},
   {path: "cars/colour/:colourId", component: CarComponent},
+  {path: "cars/brand/:brandId/colour/:colourId", component: CarComponent},
   {path: "cars/detail/:carId", component: CarDetailComponent},
   {path: "colours", component: ColourListComponent},
   {path: "brands", component: BrandListComponent}

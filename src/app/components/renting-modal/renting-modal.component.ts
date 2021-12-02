@@ -13,8 +13,8 @@ export class RentingModalComponent implements OnInit {
 
   currentDate:any;
   returnDate:any;
-  isCarAvailable:boolean = true;
-  errorToDisplay:string;
+  isCarAvailable:boolean;
+  messageToDisplay:string;
   carId:number = 2;
 
   constructor(private rentalService:RentalService, private activatedRoute:ActivatedRoute,
@@ -27,7 +27,7 @@ export class RentingModalComponent implements OnInit {
   checkIfCarIsAvailable(carId:number, rentDate:string, returnDate:string){
     this.rentalService.checkIfCarIsAvailable(carId, rentDate, returnDate).subscribe((response) => {
       this.isCarAvailable = response.success;
-      this.errorToDisplay = response.message;
+      this.messageToDisplay = response.message;
     })
   }
 

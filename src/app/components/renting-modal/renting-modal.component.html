@@ -1,0 +1,53 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-dark float-end" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+    Rent The Car
+    <i class="bi-wallet" style="font-size: 1rem; color: rgb(5, 5, 5);"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalToggle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Rent The Car</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="currentDate" class="form-label"><h1 class="display-6">Rent from</h1></label>
+                <input type="text" [(ngModel)]="currentDate" class="form-control" id="currentDate" placeholder="enter a search expression">
+                <label for="returnDate" class="form-label"><h1 class="display-6">Rent to</h1></label>
+                <input type="text" [(ngModel)]="returnDate" class="form-control" id="returnDate" placeholder="enter a search expression">
+            </div>
+            <div class="modal-footer">
+                <div *ngIf="isCarAvailable == false" class="alert alert-danger" role="alert">
+                    {{messageToDisplay}}
+                </div>
+                <div *ngIf="isCarAvailable == true" class="alert alert-info" role="alert">
+                    {{messageToDisplay}}
+                </div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button (click)="checkIfCarIsAvailable(carId, currentDate, returnDate)" type="button" class="btn btn-primary">Check If Car Is Available Before Pay!</button>
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Pay</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel2">Payment Informations</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Hide this modal and show the first with the button below.
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
+        </div>
+      </div>
+    </div>
+</div>

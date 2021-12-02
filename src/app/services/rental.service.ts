@@ -1,6 +1,6 @@
 import { Rental } from './../models/rental';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ListResponseModel } from '../models/ListResponsemodel';
 
@@ -9,10 +9,21 @@ import { ListResponseModel } from '../models/ListResponsemodel';
 })
 export class RentalService {
 
-  apiUrl = "https://localhost:5001/api/Rentals/getdetails";
+  apiUrl = "https://localhost:5001/api/";
   constructor(private httpClient:HttpClient) { }
 
   getRentals():Observable<ListResponseModel<Rental>>{
-    return this.httpClient.get<ListResponseModel<Rental>>(this.apiUrl);
+    let newPath = this.apiUrl + "Rentals/getdetails";
+    return this.httpClient.get<ListResponseModel<Rental>>(newPath);
+  }
+
+  checkIfCarIsAvailable(carId:number, rentDate:string, returnDate:string):Observable<any>{
+    let newPath = this.apiUrl + `Rentals/checkifcarisavailable?carId=${carId}&rentDate=${rentDate}&returnDate=${returnDate}`;
+    return this.httpClient.get<any>(newPath);
+  }
+
+  addRental(rental:any):Observable<any>{
+    let newPath = this.apiUrl + "Rentals/add";
+    return this.httpClient.post<any>(newPath, rental);
   }
 }

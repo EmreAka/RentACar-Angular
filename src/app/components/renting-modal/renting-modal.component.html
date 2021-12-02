@@ -1,0 +1,32 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-dark float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Rent The Car
+    <i class="bi-wallet" style="font-size: 1rem; color: rgb(5, 5, 5);"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Rent The Car</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="currentDate" class="form-label"><h1 class="display-6">Rent from</h1></label>
+                <input type="text" [(ngModel)]="currentDate" class="form-control" id="currentDate" placeholder="enter a search expression">
+                <label for="returnDate" class="form-label"><h1 class="display-6">Rent to</h1></label>
+                <input type="text" [(ngModel)]="returnDate" class="form-control" id="returnDate" placeholder="enter a search expression">
+            </div>
+            <div class="modal-footer">
+                <div *ngIf="!isCarAvailable" class="alert alert-danger" role="alert">
+                    {{errorToDisplay}}
+                </div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button (click)="checkIfCarIsAvailable(carId, currentDate, returnDate)" type="button" class="btn btn-primary">Rent!</button>
+            </div>
+        </div>
+    </div>
+</div>

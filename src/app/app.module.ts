@@ -18,6 +18,8 @@ import { BrandFilterPipe } from './pipes/brand-filter.pipe';
 import { ColourListComponent } from './components/colour-list/colour-list.component';
 import { ColourFilterPipe } from './pipes/colour-filter.pipe';
 import { CarFilterComponent } from './components/car-filter/car-filter.component';
+import { RentingModalComponent } from './components/renting-modal/renting-modal.component';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -34,15 +36,19 @@ import { CarFilterComponent } from './components/car-filter/car-filter.component
     BrandFilterPipe,
     ColourListComponent,
     ColourFilterPipe,
-    CarFilterComponent
+    CarFilterComponent,
+    RentingModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    CommonModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -44,6 +44,7 @@ import { CommonModule, DatePipe } from '@angular/common';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule
   ],
   providers: [

@@ -51,6 +51,11 @@ export class RentingModalComponent implements OnInit {
     this.rentalService.checkIfCarIsAvailable(carId, rentDate, returnDate).subscribe((response) => {
       this.isCarAvailable = response.success;
       this.messageToDisplay = response.message;
+      if (response.success) {
+        this.toastrService.success(response.message);
+      }else{
+        this.toastrService.error(response.message);
+      }
     })
   }
 

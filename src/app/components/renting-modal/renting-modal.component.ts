@@ -20,6 +20,7 @@ export class RentingModalComponent implements OnInit {
   isCarAvailable:boolean;
   messageToDisplay:string;
   carId:number;
+  isSaveCardChecked:boolean;
 
   paymentForm: FormGroup;
   months:number[] = [1,2,3,4,5,6,7,8,9,10,11,12]; 
@@ -57,6 +58,14 @@ export class RentingModalComponent implements OnInit {
         this.toastrService.error(response.message);
       }
     })
+  }
+
+  getCurrentClassOfPayButton(){
+    if (this.isCarAvailable) {
+      return "btn btn-primary";
+    }else{
+      return "btn btn-primary disabled";
+    }
   }
 
   addRental(currentDate:string, returnDate:string, carId:number){

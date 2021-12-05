@@ -26,32 +26,36 @@
                     placeholder="enter a search expression" />
             </div>
             <div class="modal-footer">
-                <div class="row">
-                    <div class="col-12">
-                        <div *ngIf="isCarAvailable == false" class="alert alert-danger" role="alert">
-                            {{ messageToDisplay }}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div *ngIf="isCarAvailable == false" class="alert alert-danger" role="alert">
+                                {{ messageToDisplay }}
+                            </div>
+                            <div *ngIf="isCarAvailable == true" class="alert alert-info" role="alert">
+                                {{ messageToDisplay }}
+                            </div>
                         </div>
-                        <div *ngIf="isCarAvailable == true" class="alert alert-info" role="alert">
-                            {{ messageToDisplay }}
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="btn-group float-start" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+
+                                <button (click)="checkIfCarIsAvailable(carId, currentDate, returnDate)" type="button"
+                                    class="btn btn-warning">
+                                    Check If Car Is Available
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row align-items-end">
-                    <div class="col-2">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Close
-                        </button>
-                    </div>
-                    <div class="col-8">
-                        <button (click)="checkIfCarIsAvailable(carId, currentDate, returnDate)" type="button"
-                            class="btn btn-warning">
-                            Check If Car Is Available Before Pay!
-                        </button>
-                    </div>
-                    <div class="col-2">
-                        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
-                            Pay
-                        </button>
+                        <div class="col-2">
+                            <button [class]="getCurrentClassOfPayButton()" data-bs-target="#exampleModalToggle2"
+                                data-bs-toggle="modal">
+                                Pay
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -107,10 +111,28 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
-                    Back
-                </button>
-                <button (click)="pay()" class="btn btn-primary">Complete Payment</button>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check float-start">
+                                <input [(ngModel)]="isSaveCardChecked" class="form-check-input" type="checkbox"
+                                    value="true" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Save the card
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="btn-group float-end" role="group" aria-label="Basic example">
+                                <button class="btn btn-secondary" data-bs-target="#exampleModalToggle"
+                                    data-bs-toggle="modal">
+                                    Back
+                                </button>
+                                <button (click)="pay()" class="btn btn-primary" data-bs-dismiss="modal">Complete Payment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

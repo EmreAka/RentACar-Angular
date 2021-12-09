@@ -136,15 +136,19 @@ export class RentingModalComponent implements OnInit {
       }
     }
     else if (this.isSaveCardChecked == true) {
-      this.paymentService.pay(card).subscribe((response) => {
-        if (response.success) {
-          this.toastrService.success("Payment has been made successfully");
-          this.addRental();
-          this.addCard();
-        } else {
-          this.toastrService.error("An error occured! Try later.");
-        }
-      });
+      if (this.paymentForm.valid) {
+        this.paymentService.pay(card).subscribe((response) => {
+          if (response.success) {
+            this.toastrService.success("Payment has been made successfully");
+            this.addRental();
+            this.addCard();
+          } else {
+            this.toastrService.error("An error occured! Try later.");
+          }
+        });
+      }else {
+        this.toastrService.error("Complete the form!");
+      }
     }
   }
 }

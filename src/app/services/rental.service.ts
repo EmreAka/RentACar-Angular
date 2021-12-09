@@ -2,7 +2,7 @@ import { Rental } from './../models/rental';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ListResponseModel } from '../models/ListResponsemodel';
+import { ListResponseModel } from '../models/listResponseModel';
 
 @Injectable({
   providedIn: 'root'

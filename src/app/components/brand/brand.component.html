@@ -4,7 +4,7 @@
     </div>
 </div>
 <h1 *ngIf="dataLoaded == true" class = "display-6">Brands</h1>
-<ul *ngIf="dataLoaded == true" class="list-group">
+<ul *ngIf="dataLoaded == true" class="list-group shadow mb-5 bg-body rounded">
     <li routerLink="cars" (click)="setCurrentBrandDefault()" [class]="getCurrentBrandAllClass()">All Brands</li>
     <li routerLink="cars/brand/{{brand.id}}" (click)="setCurrentBrand(brand)" *ngFor="let brand of brands" 
     [class]="getCurrentBrandClass(brand)">{{brand.name}}</li>

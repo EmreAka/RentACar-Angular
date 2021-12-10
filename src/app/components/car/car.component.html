@@ -33,7 +33,7 @@
         <th>Model Year</th>
         <th>Daily Price</th>
         <th>Description</th>
-        <th>Detail</th>
+        <th><Button (click)="setCurrentRouteToCarAdd()" class="btn btn-dark float-end">Add Car</Button></th>
       </tr>
     </thead>
     <tbody>
@@ -46,9 +46,9 @@
         <td>{{ car.description }}</td>
         <td>
           <button
-            (click)="setCurrentRoute(car.id)"
+            (click)="setCurrentRouteToCarDetail(car.id)"
             type="button"
-            class="btn btn-outline-dark"
+            class="btn btn-outline-dark float-end"
           >
             Review
           </button>

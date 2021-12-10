@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Brand } from './../../models/brand';
 import { BrandService } from './../../services/brand.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,7 @@ export class BrandListComponent implements OnInit {
   dataLoaded:boolean = false;
   filterText:string = "";
 
-  constructor(private brandService:BrandService) { }
+  constructor(private brandService:BrandService, private router: Router) { }
 
   ngOnInit(): void {
     this.getBrands();
@@ -24,5 +25,9 @@ export class BrandListComponent implements OnInit {
       this.brands = response.data;
       this.dataLoaded = true;
     })
+  }
+
+  setCurrentRouteToBrandAdd(){
+    this.router.navigateByUrl("brands/add");
   }
 }

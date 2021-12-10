@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ColourService } from './../../services/colour.service';
 import { Colour } from './../../models/colour';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,7 @@ export class ColourListComponent implements OnInit {
   filterText:string = "";
   colours:Colour[] = [];
 
-  constructor(private colourService:ColourService) { }
+  constructor(private colourService:ColourService, private router: Router) { }
 
   ngOnInit(): void {
     this.getColours();
@@ -24,6 +25,10 @@ export class ColourListComponent implements OnInit {
       this.colours = response.data;
       this.dataLoaded = true;
     })
+  }
+
+  setCurrentRouterToColourAdd(){
+    this.router.navigateByUrl("colours/add");
   }
 
 }

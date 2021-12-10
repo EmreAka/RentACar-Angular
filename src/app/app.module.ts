@@ -23,6 +23,7 @@ import { CarFilterComponent } from './components/car-filter/car-filter.component
 import { RentingModalComponent } from './components/renting-modal/renting-modal.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { ColourAddComponent } from './components/colour-add/colour-add.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { BrandAddComponent } from './components/brand-add/brand-add.component';
     ColourFilterPipe,
     CarFilterComponent,
     RentingModalComponent,
-    BrandAddComponent
+    BrandAddComponent,
+    ColourAddComponent
   ],
   imports: [
     BrowserModule,

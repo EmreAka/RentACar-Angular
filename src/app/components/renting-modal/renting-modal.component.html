@@ -78,31 +78,31 @@
                     <div>
                         <div class="row">
                             <div class="col-8">
-                                <label class="form-label">Credit Card Number</label>
-                                <input class="form-control" placeholder="Enter the card number"
+                                <label for="cardNumber" class="form-label">Credit Card Number</label>
+                                <input id="cardNumber" type="text" class="form-control" placeholder="Enter the card number"
                                     formControlName="cardNumber">
                             </div>
                             <div class="col-4">
-                                <label class="form-label">CVV</label>
-                                <input class="form-control" placeholder="Enter the CVV" formControlName="cvv">
+                                <label for="cvv" class="form-label">CVV</label>
+                                <input id="cvv" type="text" class="form-control" placeholder="Enter the CVV" formControlName="cvv">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-6">
-                                <label class="form-label">Name On Card</label>
-                                <input class="form-control" placeholder="Enter the full name"
+                                <label for="nameOnCard" class="form-label">Name On Card</label>
+                                <input id="nameOnCard" type="text" class="form-control" placeholder="Enter the full name"
                                     formControlName="nameOnCard">
                             </div>
                             <div class="col-3">
-                                <label class="form-label">Month</label>
-                                <select formControlName="expirationMonth" class="form-select">
+                                <label for="expirationMonth" class="form-label">Month</label>
+                                <select id="expirationMonth" formControlName="expirationMonth" class="form-select">
                                     <option *ngFor="let month of months">{{month}}</option>
                                 </select>
                             </div>
                             <div class="col-3">
-                                <label class="form-label">Year</label>
-                                <select formControlName="expirationYear" class="form-select">
+                                <label for="expirationYear" class="form-label">Year</label>
+                                <select id="expirationYear" formControlName="expirationYear" class="form-select">
                                     <option *ngFor="let year of years">{{year}}</option>
                                 </select>
                             </div>

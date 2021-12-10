@@ -4,7 +4,7 @@
     </div>
 </div>
 <h1 *ngIf="dataLoaded == true" class = "display-6">Colours</h1>
-<ul *ngIf="dataLoaded == true" class="list-group">
+<ul *ngIf="dataLoaded == true" class="list-group shadow mb-5 bg-body rounded">
     <li routerLink="cars" (click)="setCurrentColourDefault()" [class]="getCurrentBrandAllClass()">All Colours</li>
     <li routerLink="cars/colour/{{colour.id}}" (click)="setCurrentColour(colour)" *ngFor="let colour of colours" [class]="getCurrentColourClass(colour)">{{colour.name}}</li>
 </ul>

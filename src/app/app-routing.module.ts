@@ -1,3 +1,4 @@
+import { CarEditComponent } from './components/car-edit/car-edit.component';
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { ColourAddComponent } from './components/colour-add/colour-add.component';
 import { BrandAddComponent } from './components/brand-add/brand-add.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: "", pathMatch: "full", component: CarComponent},
   {path: "cars", component: CarComponent},
   {path: "cars/add", component: CarAddComponent},
+  {path: "cars/edit/:carId", component: CarEditComponent},
   {path: "cars/brand/:brandId", component: CarComponent},
   {path: "cars/colour/:colourId", component: CarComponent},
   {path: "cars/brand/:brandId/colour/:colourId", component: CarComponent},

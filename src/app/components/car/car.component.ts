@@ -69,4 +69,8 @@ export class CarComponent implements OnInit {
     this.router.navigateByUrl("cars/add");
   }
 
+  setCurrentRouteToCarEdit(carId:number){
+    this.router.navigateByUrl("cars/edit/" + carId);
+  }
+
 }

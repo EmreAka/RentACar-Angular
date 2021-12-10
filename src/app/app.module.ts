@@ -25,6 +25,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { BrandAddComponent } from './components/brand-add/brand-add.component';
 import { ColourAddComponent } from './components/colour-add/colour-add.component';
 import { CarAddComponent } from './components/car-add/car-add.component';
+import { CarEditComponent } from './components/car-edit/car-edit.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CarAddComponent } from './components/car-add/car-add.component';
     RentingModalComponent,
     BrandAddComponent,
     ColourAddComponent,
-    CarAddComponent
+    CarAddComponent,
+    CarEditComponent
   ],
   imports: [
     BrowserModule,

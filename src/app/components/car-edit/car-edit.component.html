@@ -1,0 +1,54 @@
+<div class="card shadow p-3 mb-5 bg-body rounded">
+    <div class="card-body">
+        <div class="card-title">
+            <h1 class="display-3">Update Car</h1>
+        </div>
+        <form [formGroup]="carUpdateForm">
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="brandId" class="form-label">Select Brand</label>
+                        <select id="brandId" class="form-select" formControlName="brandId">
+                            <option *ngFor="let brand of brands" [ngValue]="brand.id">
+                                {{ brand.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="colourId" class="form-label">Select Colour</label>
+                        <select id="colourId" formControlName="colourId" class="form-select">
+                            <option *ngFor="let colour of colours" [ngValue]="colour.id">{{colour.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="modelYear" class="form-label">Model Year</label>
+                        <input id="modelYear" type="number" class="form-control" placeholder="Enter model year"
+                            formControlName="modelYear" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label for="dailyPrice" class="form-label">Daily Price</label>
+                    <div class="input-group md-3">
+                        <span class="input-group-text">$</span>
+                        <input id="dailyPrice" type="number" class="form-control" placeholder="Enter daily price"
+                            formControlName="dailyPrice" />
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea id="description" type="text" class="form-control" placeholder="Enter a description"
+                    formControlName="description" rows="3"></textarea>
+            </div>
+        </form>
+        <div class="card-footer">
+            <button (click)="update()" class="btn btn-primary float-end">Update Car</button>
+        </div>
+    </div>
+</div>

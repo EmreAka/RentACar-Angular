@@ -27,12 +27,14 @@
       <tr>
         <th>Brand Id</th>
         <th>Brand Name</th>
+        <th><button (click)="setCurrentRouteToBrandAdd()" class="btn btn-dark float-end">Add Brand</button></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let brand of brands | brandFilter: filterText">
         <td>{{ brand.id }}</td>
         <td>{{ brand.name }}</td>
+        <td><button (click)="setCurrentRouteToBrandEdit(brand.id)" class="btn btn-outline-dark float-end">Edit</button></td>
       </tr>
     </tbody>
   </table>

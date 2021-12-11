@@ -27,12 +27,14 @@
       <tr>
         <th>Colour Id</th>
         <th>Colour Name</th>
+        <th><button (click)="setCurrentRouterToColourAdd()" class="btn btn-dark float-end">Add Colour</button></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let colour of colours | colourFilter: filterText">
         <td>{{ colour.id }}</td>
         <td>{{ colour.name }}</td>
+        <td><button (click)="setCurrentRouteToColourEdit(colour.id)" class="btn btn-outline-dark float-end">Edit</button></td>
       </tr>
     </tbody>
   </table>

@@ -1,3 +1,4 @@
+import { SingleResponseModel } from './../models/singleResponseModel';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -18,8 +19,18 @@ export class ColourService {
     return this.httpClient.get<ListResponseModel<Colour>>(newPath);
   }
 
+  getColourById(colourId: number):Observable<SingleResponseModel<Colour>>{
+    let newPath: string = this.apiUrl + "Colours/getbyid?id=" + colourId;
+    return this.httpClient.get<SingleResponseModel<Colour>>(newPath);
+  }
+
   add(colour:Colour):Observable<ResponseModel>{
     let newPath: string = this.apiUrl + "Colours/add";
+    return this.httpClient.post<ResponseModel>(newPath, colour);
+  }
+
+  update(colour: Colour):Observable<ResponseModel>{
+    let newPath: string = this.apiUrl + "Colours/update";
     return this.httpClient.post<ResponseModel>(newPath, colour);
   }
 }

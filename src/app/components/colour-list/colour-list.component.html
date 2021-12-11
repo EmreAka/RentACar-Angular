@@ -34,7 +34,7 @@
       <tr *ngFor="let colour of colours | colourFilter: filterText">
         <td>{{ colour.id }}</td>
         <td>{{ colour.name }}</td>
-        <td><button class="btn btn-outline-dark float-end">Edit</button></td>
+        <td><button (click)="setCurrentRouteToColourEdit(colour.id)" class="btn btn-outline-dark float-end">Edit</button></td>
       </tr>
     </tbody>
   </table>

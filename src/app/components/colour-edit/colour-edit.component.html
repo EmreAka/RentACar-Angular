@@ -1,0 +1,16 @@
+<div class="card shadow p-3 mb-5 bg-body rounded">
+    <div class="card-body">
+        <div class="card-title">
+            <h1 class="display-3">Update Colour</h1>
+        </div>
+        <form [formGroup]="colourUpdateForm">
+            <div class="mb-3">
+                <label for="brandName" class="form-label">Colour Name</label>
+                <input id="brandName" formControlName="name" class="form-control" placeholder="Enter colour name"/>
+            </div>
+        </form>
+        <div class="card-footer">
+            <button (click)="update()" class="btn btn-primary float-end">Update</button>
+        </div>
+    </div>
+</div>

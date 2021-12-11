@@ -1,3 +1,4 @@
+import { ColourEditComponent } from './components/colour-edit/colour-edit.component';
 import { CarEditComponent } from './components/car-edit/car-edit.component';
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { ColourAddComponent } from './components/colour-add/colour-add.component';
@@ -23,7 +24,8 @@ const routes: Routes = [
   {path: "colours", component: ColourListComponent},
   {path: "brands", component: BrandListComponent},
   {path: "brands/add", component: BrandAddComponent},
-  {path: "colours/add", component: ColourAddComponent}
+  {path: "colours/add", component: ColourAddComponent},
+  {path: "colours/edit/:colourId", component: ColourEditComponent}
 ];
 
 @NgModule({

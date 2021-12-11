@@ -31,4 +31,8 @@ export class ColourListComponent implements OnInit {
     this.router.navigateByUrl("colours/add");
   }
 
+  setCurrentRouteToColourEdit(colourId: number){
+    this.router.navigateByUrl("colours/edit/" + colourId);
+  }
+
 }

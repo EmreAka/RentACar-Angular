@@ -34,7 +34,7 @@
       <tr *ngFor="let brand of brands | brandFilter: filterText">
         <td>{{ brand.id }}</td>
         <td>{{ brand.name }}</td>
-        <td><button class="btn btn-outline-dark float-end">Edit</button></td>
+        <td><button (click)="setCurrentRouteToBrandEdit(brand.id)" class="btn btn-outline-dark float-end">Edit</button></td>
       </tr>
     </tbody>
   </table>

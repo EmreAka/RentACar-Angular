@@ -30,4 +30,8 @@ export class BrandListComponent implements OnInit {
   setCurrentRouteToBrandAdd(){
     this.router.navigateByUrl("brands/add");
   }
+
+  setCurrentRouteToBrandEdit(brandId: number){
+    this.router.navigateByUrl("brands/edit/" + brandId);
+  }
 }

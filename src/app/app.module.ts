@@ -1,6 +1,7 @@
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -28,6 +29,7 @@ import { CarAddComponent } from './components/car-add/car-add.component';
 import { CarEditComponent } from './components/car-edit/car-edit.component';
 import { ColourEditComponent } from './components/colour-edit/colour-edit.component';
 import { BrandEditComponent } from './components/brand-edit/brand-edit.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { BrandEditComponent } from './components/brand-edit/brand-edit.component
     CarAddComponent,
     CarEditComponent,
     ColourEditComponent,
-    BrandEditComponent
+    BrandEditComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ import { BrandEditComponent } from './components/brand-edit/brand-edit.component
     })
   ],
   providers: [
-    DatePipe
+    DatePipe,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

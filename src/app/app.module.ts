@@ -30,6 +30,7 @@ import { CarEditComponent } from './components/car-edit/car-edit.component';
 import { ColourEditComponent } from './components/colour-edit/colour-edit.component';
 import { BrandEditComponent } from './components/brand-edit/brand-edit.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { LoginComponent } from './components/login/login.component';
     CarEditComponent,
     ColourEditComponent,
     BrandEditComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

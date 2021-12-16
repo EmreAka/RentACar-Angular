@@ -1,3 +1,4 @@
+import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { BrandEditComponent } from './components/brand-edit/brand-edit.component';
 import { ColourEditComponent } from './components/colour-edit/colour-edit.component';
@@ -29,7 +30,8 @@ const routes: Routes = [
   {path: "brands/edit/:brandId", component: BrandEditComponent},
   {path: "colours/add", component: ColourAddComponent},
   {path: "colours/edit/:colourId", component: ColourEditComponent},
-  {path: "login", component: LoginComponent}
+  {path: "login", component: LoginComponent},
+  {path: "register", component: RegisterComponent}
 ];
 
 @NgModule({

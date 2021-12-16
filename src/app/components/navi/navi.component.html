@@ -23,6 +23,10 @@
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-light" type="submit">Search</button>
         </form>
+        <div class="btn-group ms-3" role="group">
+          <button (click)="setCurrentRouteToLogin()" class="btn btn-primary">Sign-in</button>
+          <button (click)="setCurrentRouteToRegister()" class="btn btn-secondary">Sign-up</button>
+        </div>
       </div>
     </div>
   </nav>

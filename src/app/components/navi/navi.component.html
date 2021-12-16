@@ -19,13 +19,13 @@
             <a class="nav-link active" aria-current="page" routerLink="/brands">Brands</a>
           </li>
         </ul>
-        <form class="d-flex">
+        <!-- <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-light" type="submit">Search</button>
-        </form>
+        </form> -->
         <div class="btn-group ms-3" role="group">
-          <button (click)="setCurrentRouteToLogin()" class="btn btn-primary">Sign-in</button>
-          <button (click)="setCurrentRouteToRegister()" class="btn btn-secondary">Sign-up</button>
+          <button (click)="setCurrentRouteToLogin()" [class]="getSignInButtonClass()">Sign In</button>
+          <button (click)="setCurrentRouteToRegister()" [class]="getSignUpButtonClass()">Sign Up</button>
         </div>
       </div>
     </div>

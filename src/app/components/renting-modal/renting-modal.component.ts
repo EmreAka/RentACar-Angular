@@ -87,13 +87,15 @@ export class RentingModalComponent implements OnInit {
   addRental() {
     let values = this.returnDate.split("-");
     let returnDataConverted = this.datePipe.transform(new Date(+values[0], +values[1] - 1, +values[2]), 'yyyy-MM-dd');
-    let rental = { carId: this.carId, customerId: 2023, rentDate: this.currentDate, returnDate: returnDataConverted };
+    let rental = { carId: this.carId, customerId: 3023, rentDate: this.currentDate, returnDate: returnDataConverted };
     this.rentalService.addRental(rental).subscribe((response) => {
       if (response.success) {
         this.toastrService.success("The rent has been successfully completed.");
       } else {
         this.toastrService.error("An error occured! Try later.");
       }
+    }, (errorResponse) => {
+      this.toastrService.error(errorResponse.error.message);
     });
   }
 
@@ -102,7 +104,7 @@ export class RentingModalComponent implements OnInit {
     let card: Card = {
       cardNumber: this.paymentForm.value.cardNumber, cvv: this.paymentForm.value.cvv,
       expiration: this.paymentForm.value.expirationYear + "-" + this.paymentForm.value.expirationMonth + "-" + "01",
-      nameOnCard: this.paymentForm.value.nameOnCard, userId: 2023
+      nameOnCard: this.paymentForm.value.nameOnCard, userId: 3023
     };
     console.log(card.expiration);
     this.cardService.addCard(card).subscribe((response) => {

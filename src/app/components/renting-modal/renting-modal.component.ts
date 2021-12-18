@@ -124,7 +124,7 @@ export class RentingModalComponent implements OnInit {
     };
     if (this.isSaveCardChecked != true) {
       if (this.paymentForm.valid) {
-        this.paymentService.pay(card).subscribe((response) => {
+        this.paymentService.pay(card, this.carId).subscribe((response) => {
           if (response.success) {
             this.toastrService.success("Payment has been made successfully");
             this.addRental();
@@ -139,7 +139,7 @@ export class RentingModalComponent implements OnInit {
     }
     else if (this.isSaveCardChecked == true) {
       if (this.paymentForm.valid) {
-        this.paymentService.pay(card).subscribe((response) => {
+        this.paymentService.pay(card, this.carId).subscribe((response) => {
           if (response.success) {
             this.toastrService.success("Payment has been made successfully");
             this.addRental();

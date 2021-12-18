@@ -1,3 +1,4 @@
+import { LocalStorageService } from './../../services/local-storage.service';
 import { LoginModel } from './../../models/loginModel';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../services/auth.service';
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService,
-    private toastrService: ToastrService) { }
+    private toastrService: ToastrService, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
     this.createLoginForm();
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(loginModel).subscribe((response) => {
         this.toastrService.info(response.message);
-        localStorage.setItem('token', response.data.token);
+        this.localStorageService.add('token', response.data.token);
       }, (responseError) => {
         this.toastrService.error(responseError.error);
       })

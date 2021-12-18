@@ -1,3 +1,4 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { RegisterModel } from './../models/registerModel';
 import { Observable } from 'rxjs';
 import { TokenModel } from './../models/tokenModel';
@@ -13,7 +14,9 @@ export class AuthService {
 
   apiUrl = "https://localhost:5001/api/Auth/";
 
-  constructor(private httpClient: HttpClient) { }
+  loggedIn = false;
+
+  constructor(private httpClient: HttpClient, private jwtHelperService: JwtHelperService) { }
 
   login(login: LoginModel): Observable<SingleResponseModel<TokenModel>>{
     return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + "login", login);
@@ -32,4 +35,7 @@ export class AuthService {
     }
   }
 
+  isLoggedIn(){
+    return this.loggedIn;
+  }
 }

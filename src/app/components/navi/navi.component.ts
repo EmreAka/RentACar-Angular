@@ -1,3 +1,6 @@
+import { LocalStorageService } from './../../services/local-storage.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthService } from './../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,8 +13,9 @@ export class NaviComponent implements OnInit {
 
   isSignInButtonActive = false;
   isSignUpButtonActive = false;
-
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  
+  constructor(private router: Router, private activatedRoute: ActivatedRoute,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -46,4 +50,7 @@ export class NaviComponent implements OnInit {
     }
   }
 
+  isLoggedIn(){
+    return this.authService.isLoggedIn();
+  }
 }

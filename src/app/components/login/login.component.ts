@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginModel).subscribe((response) => {
         this.toastrService.info(response.message);
         this.localStorageService.add('token', response.data.token);
+        this.authService.loggedIn = true;
       }, (responseError) => {
         this.toastrService.error(responseError.error);
       })

@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
         this.toastrService.info(response.message);
         this.localStorageService.add('token', response.data.token);
         this.getCustomerDetailByEmail();
-        this.authService.loggedIn = true;
       }, (responseError) => {
         this.toastrService.error(responseError.error);
       })

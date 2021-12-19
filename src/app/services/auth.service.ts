@@ -14,8 +14,6 @@ export class AuthService {
 
   apiUrl = "https://localhost:5001/api/Auth/";
 
-  loggedIn = false;
-
   constructor(private httpClient: HttpClient, private jwtHelperService: JwtHelperService) { }
 
   login(login: LoginModel): Observable<SingleResponseModel<TokenModel>>{
@@ -33,9 +31,5 @@ export class AuthService {
     else {
       return false;
     }
-  }
-
-  isLoggedIn(){
-    return this.loggedIn;
   }
 }

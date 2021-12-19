@@ -53,7 +53,7 @@ export class NaviComponent implements OnInit {
   }
 
   isLoggedIn(){
-    return this.authService.isLoggedIn();
+    return this.authService.isAuthenticated();
   }
 
   getUserName(){

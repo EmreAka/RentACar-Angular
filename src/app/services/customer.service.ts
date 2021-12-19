@@ -9,10 +9,16 @@ import { ListResponseModel } from '../models/listResponseModel';
 })
 export class CustomerService {
 
-  apiUrl = "https://localhost:5001/api/Customers/getcustomerdetails";
-  constructor(private httpClient:HttpClient) { }
+  apiUrl = "https://localhost:5001/api/Customers/";
+  constructor(private httpClient: HttpClient) { }
 
-  getCustomers():Observable<ListResponseModel<Customer>>{
-    return this.httpClient.get<ListResponseModel<Customer>>(this.apiUrl);
+  getCustomers(): Observable<ListResponseModel<Customer>> {
+    let newPath = this.apiUrl + "getcustomerdetails";
+    return this.httpClient.get<ListResponseModel<Customer>>(newPath);
+  }
+
+  getCustomerByEmail(email: string): Observable<ListResponseModel<Customer>> {
+    let newPath = this.apiUrl + "getcustomerdetailbyemail?email=" + email;
+    return this.httpClient.get<ListResponseModel<Customer>>(newPath);
   }
 }

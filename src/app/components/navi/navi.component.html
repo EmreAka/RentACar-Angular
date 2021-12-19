@@ -28,7 +28,7 @@
           <button (click)="setCurrentRouteToRegister()" [class]="getSignUpButtonClass()">Sign Up</button>
         </div>
         <div *ngIf="isLoggedIn()">
-          <h4 class="text-light">Emre Aka</h4>
+          <h4 class="text-light">{{getUserName()}}</h4>
         </div>
       </div>
     </div>

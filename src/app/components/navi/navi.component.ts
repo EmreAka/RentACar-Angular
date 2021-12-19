@@ -52,6 +52,10 @@ export class NaviComponent implements OnInit {
     }
   }
 
+  logout(){
+    this.authService.logout();
+  }
+
   isLoggedIn(){
     return this.authService.isAuthenticated();
   }

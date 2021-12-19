@@ -19,6 +19,17 @@
             <a class="nav-link active" aria-current="page" routerLink="/brands">Brands</a>
           </li>
         </ul>
+        <ul *ngIf="isLoggedIn()" class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{getUserName()}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item">Profile</a></li>
+              <li><a (click)="logout()" class="dropdown-item">Log Out</a></li>
+            </ul>
+          </li>
+        </ul>
         <!-- <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-light" type="submit">Search</button>
@@ -27,9 +38,9 @@
           <button (click)="setCurrentRouteToLogin()" [class]="getSignInButtonClass()">Sign In</button>
           <button (click)="setCurrentRouteToRegister()" [class]="getSignUpButtonClass()">Sign Up</button>
         </div>
-        <div *ngIf="isLoggedIn()">
+        <!-- <div *ngIf="isLoggedIn()">
           <h4 class="text-light">{{getUserName()}}</h4>
-        </div>
+        </div> -->
       </div>
     </div>
   </nav>

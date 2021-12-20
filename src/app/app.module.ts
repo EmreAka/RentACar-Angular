@@ -1,9 +1,11 @@
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +30,9 @@ import { CarAddComponent } from './components/car-add/car-add.component';
 import { CarEditComponent } from './components/car-edit/car-edit.component';
 import { ColourEditComponent } from './components/colour-edit/colour-edit.component';
 import { BrandEditComponent } from './components/brand-edit/brand-edit.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +56,10 @@ import { BrandEditComponent } from './components/brand-edit/brand-edit.component
     CarAddComponent,
     CarEditComponent,
     ColourEditComponent,
-    BrandEditComponent
+    BrandEditComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +74,10 @@ import { BrandEditComponent } from './components/brand-edit/brand-edit.component
     })
   ],
   providers: [
-    DatePipe
+    DatePipe,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
+    JwtHelperService
   ],
   bootstrap: [AppComponent]
 })

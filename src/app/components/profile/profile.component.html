@@ -1,0 +1,40 @@
+<div style="margin-top: 30px" class="card shadow p-3 mb-5 bg-body rounded">
+    <div class="card-title">
+       <h1 class="display-3">Profile</h1>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="profileForm">
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input formControlName="firstName" id="firstName" class="form-control" type="text" placeholder="First name"/>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input id="lastName" type="text" formControlName="lastName" class="form-control" placeholder="Last name"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input formControlName="email" id="email" class="form-control" type="text" placeholder="Example@example.com"/>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="companyName" class="form-label">Company Name</label>
+                        <input id="companyName" type="text" formControlName="companyName" class="form-control" placeholder="Company name"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <button [class]="getCurrentClassOfButton()">Save the changes</button>
+    </div>
+</div>

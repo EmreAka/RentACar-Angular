@@ -25,7 +25,7 @@
               {{getUserName()}}
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item">Profile</a></li>
+              <li><a (click)="setCurrentRouteToProfile()" class="dropdown-item">Profile</a></li>
               <li><a (click)="logout()" class="dropdown-item">Log Out</a></li>
             </ul>
           </li>

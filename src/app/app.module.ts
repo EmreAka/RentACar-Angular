@@ -32,6 +32,7 @@ import { ColourEditComponent } from './components/colour-edit/colour-edit.compon
 import { BrandEditComponent } from './components/brand-edit/brand-edit.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { RegisterComponent } from './components/register/register.component';
     ColourEditComponent,
     BrandEditComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

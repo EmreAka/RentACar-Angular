@@ -1,3 +1,6 @@
+import { ToastrService } from 'ngx-toastr';
+import { Customer } from './../../models/customer';
+import { CustomerService } from './../../services/customer.service';
 import { LocalStorageService } from './../../services/local-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -12,11 +15,13 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup
   user: any;
 
-  constructor(private formBuilder: FormBuilder, private localStorageService: LocalStorageService) { }
+  constructor(private formBuilder: FormBuilder, private localStorageService: LocalStorageService,
+    private customerService: CustomerService, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getUserInformation();
     this.createProfileForm();
+    this.profileForm.valueChanges.subscribe(console.log);
   }
 
   createProfileForm(){
@@ -25,6 +30,7 @@ export class ProfileComponent implements OnInit {
       lastName: [this.user.lastName, Validators.required],
       email: [this.user.email, Validators.required],
       companyName: [this.user.companyName, Validators.required],
+      status: [true, Validators.required]
     });
   }
 
@@ -48,6 +54,15 @@ export class ProfileComponent implements OnInit {
       return "btn btn-dark float-end";
     }
     return "btn btn-dark float-end disabled"
+  }
+
+  updateCustomerDetails(){
+    let updateModel: Customer = Object.assign({}, this.profileForm.value);
+    this.customerService.updateCustomerDetails(updateModel).subscribe((response) => {
+      this.toastrService.success(response.message);
+    }, (responseError) => {
+      this.toastrService.error("An error occured. Try later.");
+    });
   }
 
 }

@@ -33,6 +33,7 @@ import { BrandEditComponent } from './components/brand-edit/brand-edit.component
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { CardNumberPipe } from './pipes/card-number.pipe';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     BrandEditComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    CardNumberPipe
   ],
   imports: [
     BrowserModule,

@@ -74,25 +74,34 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="paymentForm">
+                <div *ngIf="hasSavedCard" class="row" style="margin-bottom: 6px;">
+                    <div class="col-6">
+                        <label for="card" class="form-label">Saved Cards</label>
+                        <select [(ngModel)]="cardFromDropdown" class="form-select" id="card">
+                            <option [ngValue]="card" *ngFor="let card of cards">{{card.cardNumber | cardNumber}}</option>
+                        </select>
+                    </div>
+                </div>
+                <form *ngIf="hasSavedCard == false" [formGroup]="paymentForm">
                     <div>
                         <div class="row">
                             <div class="col-8">
                                 <label for="cardNumber" class="form-label">Credit Card Number</label>
-                                <input id="cardNumber" type="text" class="form-control" placeholder="Enter the card number"
-                                    formControlName="cardNumber">
+                                <input id="cardNumber" type="text" class="form-control"
+                                    placeholder="Enter the card number" formControlName="cardNumber">
                             </div>
                             <div class="col-4">
                                 <label for="cvv" class="form-label">CVV</label>
-                                <input id="cvv" type="text" class="form-control" placeholder="Enter the CVV" formControlName="cvv">
+                                <input id="cvv" type="text" class="form-control" placeholder="Enter the CVV"
+                                    formControlName="cvv">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-6">
                                 <label for="nameOnCard" class="form-label">Name On Card</label>
-                                <input id="nameOnCard" type="text" class="form-control" placeholder="Enter the full name"
-                                    formControlName="nameOnCard">
+                                <input id="nameOnCard" type="text" class="form-control"
+                                    placeholder="Enter the full name" formControlName="nameOnCard">
                             </div>
                             <div class="col-3">
                                 <label for="expirationMonth" class="form-label">Month</label>
@@ -114,12 +123,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <div class="form-check float-start">
+                            <div *ngIf="hasSavedCard == false" class="form-check float-start">
                                 <input [(ngModel)]="isSaveCardChecked" class="form-check-input" type="checkbox"
                                     value="true" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Save the card
                                 </label>
+                            </div>
+                            <div *ngIf="hasSavedCard">
+                                <button (click)="setHasSavedCardFalse()" class="btn btn-secondary">New card</button>
                             </div>
                         </div>
                         <div class="col-8">
@@ -128,7 +140,8 @@
                                     data-bs-toggle="modal">
                                     Back
                                 </button>
-                                <button (click)="pay()" class="btn btn-primary" data-bs-dismiss="modal">Complete Payment</button>
+                                <button (click)="pay()" class="btn btn-primary" data-bs-dismiss="modal">Complete
+                                    Payment</button>
                             </div>
                         </div>
                     </div>

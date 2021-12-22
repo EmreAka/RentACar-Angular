@@ -1,3 +1,4 @@
+import { LocalStorageService } from './../../services/local-storage.service';
 import { CardService } from './../../services/card.service';
 import { PaymentService } from './../../services/payment.service';
 import { CardToPay } from './../../models/cardToPay';
@@ -23,14 +24,17 @@ export class RentingModalComponent implements OnInit {
   messageToDisplay: string;
   carId: number;
   isSaveCardChecked: boolean;
+  cards: Card[];
+  hasSavedCard: boolean = false;
+  cardFromDropdown: Card;
 
   paymentForm: FormGroup;
   months: string[] = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-  years: number[] = [2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033];
+  years: string[] = ["2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033"];
 
   constructor(private rentalService: RentalService, private activatedRoute: ActivatedRoute,
     private datePipe: DatePipe, private formBuilder: FormBuilder, private paymentService: PaymentService,
-    private toastrService: ToastrService, private cardService: CardService) { }
+    private toastrService: ToastrService, private cardService: CardService, private localStorageservice: LocalStorageService) { }
 
   ngOnInit(): void {
     this.currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -42,6 +46,8 @@ export class RentingModalComponent implements OnInit {
     this.createPaymentForm()
 
     this.paymentForm.valueChanges.subscribe(console.log);
+
+    this.getCards();
   }
 
   createPaymentForm() {
@@ -49,7 +55,7 @@ export class RentingModalComponent implements OnInit {
       cardNumber: ["", Validators.required],
       nameOnCard: ["", Validators.required],
       cvv: ["", Validators.required],
-      expirationMonth: ["1", Validators.required],
+      expirationMonth: ["01", Validators.required],
       expirationYear: ["2022", Validators.required]
     });
   }
@@ -87,7 +93,7 @@ export class RentingModalComponent implements OnInit {
   addRental() {
     let values = this.returnDate.split("-");
     let returnDataConverted = this.datePipe.transform(new Date(+values[0], +values[1] - 1, +values[2]), 'yyyy-MM-dd');
-    let rental = { carId: this.carId, customerId: 3023, rentDate: this.currentDate, returnDate: returnDataConverted };
+    let rental = { carId: this.carId, customerId: 6023, rentDate: this.currentDate, returnDate: returnDataConverted };
     this.rentalService.addRental(rental).subscribe((response) => {
       if (response.success) {
         this.toastrService.success("The rent has been successfully completed.");
@@ -101,13 +107,15 @@ export class RentingModalComponent implements OnInit {
 
   //user id is temporarily set to 2023 manually.
   addCard() {
-    let card: Card = {
+    let card = {
       cardNumber: this.paymentForm.value.cardNumber, cvv: this.paymentForm.value.cvv,
       expiration: this.paymentForm.value.expirationYear + "-" + this.paymentForm.value.expirationMonth + "-" + "01",
-      nameOnCard: this.paymentForm.value.nameOnCard, userId: 3023
+      nameOnCard: this.paymentForm.value.nameOnCard, userId: 6023
     };
+
+    let cardToAdd = Object.assign({id: 0}, card);
     console.log(card.expiration);
-    this.cardService.addCard(card).subscribe((response) => {
+    this.cardService.addCard(cardToAdd).subscribe((response) => {
       if (response.success) {
         this.toastrService.success("Card saved successfully.");
       }
@@ -118,12 +126,19 @@ export class RentingModalComponent implements OnInit {
   }
 
   pay() {
-    let card: CardToPay = {
+    let card: CardToPay;
+    card = {
       nameOnCard: this.paymentForm.value.nameOnCard, cardNumber: this.paymentForm.value.cardNumber,
       cvv: this.paymentForm.value.cvv, expirationMonth: this.paymentForm.value.expirationMonth, expirationYear: this.paymentForm.value.expirationYear
     };
+    if (this.hasSavedCard) {
+      card = {cardNumber: this.cardFromDropdown.cardNumber, cvv: this.cardFromDropdown.cvv,
+      nameOnCard: this.cardFromDropdown.nameOnCard, expirationMonth: this.cardFromDropdown.expiration.split("-")[1], 
+      expirationYear: this.cardFromDropdown.expiration.split("-")[0]}
+      console.log(this.cardFromDropdown.cardNumber);
+    }
     if (this.isSaveCardChecked != true) {
-      if (this.paymentForm.valid) {
+      if (this.paymentForm.valid || this.hasSavedCard) {
         this.paymentService.pay(card, this.carId).subscribe((response) => {
           if (response.success) {
             this.toastrService.success("Payment has been made successfully");
@@ -153,4 +168,22 @@ export class RentingModalComponent implements OnInit {
       }
     }
   }
+
+  getCards(){
+    let userString: any = this.localStorageservice.get('user');
+    let userId: number = JSON.parse(userString).id;
+    this.cardService.getCardsByUserId(userId).subscribe((response) => {
+      this.cards = response.data;
+      if (this.cards.length > 0) {
+        this.hasSavedCard = true;
+      } else {
+        this.hasSavedCard = false;
+      }
+    });
+  }
+
+  setHasSavedCardFalse(){
+    this.hasSavedCard = false;
+  }
+
 }

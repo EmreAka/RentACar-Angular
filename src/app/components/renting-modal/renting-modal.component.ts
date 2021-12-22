@@ -1,3 +1,4 @@
+import { LocalStorageService } from './../../services/local-storage.service';
 import { CardService } from './../../services/card.service';
 import { PaymentService } from './../../services/payment.service';
 import { CardToPay } from './../../models/cardToPay';
@@ -23,6 +24,8 @@ export class RentingModalComponent implements OnInit {
   messageToDisplay: string;
   carId: number;
   isSaveCardChecked: boolean;
+  cards: Card[];
+  hasSavedCard: boolean = false;
 
   paymentForm: FormGroup;
   months: string[] = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
@@ -30,7 +33,7 @@ export class RentingModalComponent implements OnInit {
 
   constructor(private rentalService: RentalService, private activatedRoute: ActivatedRoute,
     private datePipe: DatePipe, private formBuilder: FormBuilder, private paymentService: PaymentService,
-    private toastrService: ToastrService, private cardService: CardService) { }
+    private toastrService: ToastrService, private cardService: CardService, private localStorageservice: LocalStorageService) { }
 
   ngOnInit(): void {
     this.currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -42,6 +45,8 @@ export class RentingModalComponent implements OnInit {
     this.createPaymentForm()
 
     this.paymentForm.valueChanges.subscribe(console.log);
+
+    this.getCards();
   }
 
   createPaymentForm() {
@@ -49,7 +54,7 @@ export class RentingModalComponent implements OnInit {
       cardNumber: ["", Validators.required],
       nameOnCard: ["", Validators.required],
       cvv: ["", Validators.required],
-      expirationMonth: ["1", Validators.required],
+      expirationMonth: ["01", Validators.required],
       expirationYear: ["2022", Validators.required]
     });
   }
@@ -154,5 +159,18 @@ export class RentingModalComponent implements OnInit {
         this.toastrService.error("Complete the form!");
       }
     }
+  }
+
+  getCards(){
+    let userString: any = this.localStorageservice.get('user');
+    let userId: number = JSON.parse(userString).id;
+    this.cardService.getCardsByUserId(userId).subscribe((response) => {
+      this.cards = response.data;
+      if (this.cards.length > 0) {
+        this.hasSavedCard = true;
+      } else {
+        this.hasSavedCard = false;
+      }
+    });
   }
 }

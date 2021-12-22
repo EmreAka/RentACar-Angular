@@ -26,6 +26,7 @@ export class RentingModalComponent implements OnInit {
   isSaveCardChecked: boolean;
   cards: Card[];
   hasSavedCard: boolean = false;
+  cardFromDropdown: Card;
 
   paymentForm: FormGroup;
   months: string[] = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
@@ -125,12 +126,19 @@ export class RentingModalComponent implements OnInit {
   }
 
   pay() {
-    let card: CardToPay = {
+    let card: CardToPay;
+    card = {
       nameOnCard: this.paymentForm.value.nameOnCard, cardNumber: this.paymentForm.value.cardNumber,
       cvv: this.paymentForm.value.cvv, expirationMonth: this.paymentForm.value.expirationMonth, expirationYear: this.paymentForm.value.expirationYear
     };
+    if (this.hasSavedCard) {
+      card = {cardNumber: this.cardFromDropdown.cardNumber, cvv: this.cardFromDropdown.cvv,
+      nameOnCard: this.cardFromDropdown.nameOnCard, expirationMonth: this.cardFromDropdown.expiration.split("-")[1], 
+      expirationYear: this.cardFromDropdown.expiration.split("-")[0]}
+      console.log(this.cardFromDropdown.cardNumber);
+    }
     if (this.isSaveCardChecked != true) {
-      if (this.paymentForm.valid) {
+      if (this.paymentForm.valid || this.hasSavedCard) {
         this.paymentService.pay(card, this.carId).subscribe((response) => {
           if (response.success) {
             this.toastrService.success("Payment has been made successfully");
@@ -173,4 +181,9 @@ export class RentingModalComponent implements OnInit {
       }
     });
   }
+
+  setHasSavedCardFalse(){
+    this.hasSavedCard = false;
+  }
+
 }

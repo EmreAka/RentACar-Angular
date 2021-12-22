@@ -77,12 +77,12 @@
                 <div *ngIf="hasSavedCard" class="row" style="margin-bottom: 6px;">
                     <div class="col-6">
                         <label for="card" class="form-label">Saved Cards</label>
-                        <select class="form-select" id="card">
-                            <option *ngFor="let card of cards">ends with...</option>
+                        <select [(ngModel)]="cardFromDropdown" class="form-select" id="card">
+                            <option [ngValue]="card" *ngFor="let card of cards">{{card.cardNumber | cardNumber}}</option>
                         </select>
                     </div>
                 </div>
-                <form [formGroup]="paymentForm">
+                <form *ngIf="hasSavedCard == false" [formGroup]="paymentForm">
                     <div>
                         <div class="row">
                             <div class="col-8">
@@ -123,12 +123,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            <div class="form-check float-start">
+                            <div *ngIf="hasSavedCard == false" class="form-check float-start">
                                 <input [(ngModel)]="isSaveCardChecked" class="form-check-input" type="checkbox"
                                     value="true" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Save the card
                                 </label>
+                            </div>
+                            <div *ngIf="hasSavedCard">
+                                <button (click)="setHasSavedCardFalse()" class="btn btn-secondary">New card</button>
                             </div>
                         </div>
                         <div class="col-8">

@@ -26,7 +26,7 @@ export class RentingModalComponent implements OnInit {
 
   paymentForm: FormGroup;
   months: string[] = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-  years: number[] = [2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033];
+  years: string[] = ["2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033"];
 
   constructor(private rentalService: RentalService, private activatedRoute: ActivatedRoute,
     private datePipe: DatePipe, private formBuilder: FormBuilder, private paymentService: PaymentService,
@@ -87,7 +87,7 @@ export class RentingModalComponent implements OnInit {
   addRental() {
     let values = this.returnDate.split("-");
     let returnDataConverted = this.datePipe.transform(new Date(+values[0], +values[1] - 1, +values[2]), 'yyyy-MM-dd');
-    let rental = { carId: this.carId, customerId: 3023, rentDate: this.currentDate, returnDate: returnDataConverted };
+    let rental = { carId: this.carId, customerId: 6023, rentDate: this.currentDate, returnDate: returnDataConverted };
     this.rentalService.addRental(rental).subscribe((response) => {
       if (response.success) {
         this.toastrService.success("The rent has been successfully completed.");
@@ -104,7 +104,7 @@ export class RentingModalComponent implements OnInit {
     let card: Card = {
       cardNumber: this.paymentForm.value.cardNumber, cvv: this.paymentForm.value.cvv,
       expiration: this.paymentForm.value.expirationYear + "-" + this.paymentForm.value.expirationMonth + "-" + "01",
-      nameOnCard: this.paymentForm.value.nameOnCard, userId: 3023
+      nameOnCard: this.paymentForm.value.nameOnCard, userId: 6023
     };
     console.log(card.expiration);
     this.cardService.addCard(card).subscribe((response) => {

@@ -101,13 +101,15 @@ export class RentingModalComponent implements OnInit {
 
   //user id is temporarily set to 2023 manually.
   addCard() {
-    let card: Card = {
+    let card = {
       cardNumber: this.paymentForm.value.cardNumber, cvv: this.paymentForm.value.cvv,
       expiration: this.paymentForm.value.expirationYear + "-" + this.paymentForm.value.expirationMonth + "-" + "01",
       nameOnCard: this.paymentForm.value.nameOnCard, userId: 6023
     };
+
+    let cardToAdd = Object.assign({id: 0}, card);
     console.log(card.expiration);
-    this.cardService.addCard(card).subscribe((response) => {
+    this.cardService.addCard(cardToAdd).subscribe((response) => {
       if (response.success) {
         this.toastrService.success("Card saved successfully.");
       }

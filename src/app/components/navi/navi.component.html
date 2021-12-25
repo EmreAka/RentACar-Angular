@@ -22,7 +22,7 @@
         <ul *ngIf="isLoggedIn()" class="navbar-nav">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {{getUserName()}}
+              {{userName}}
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
               <li><a (click)="setCurrentRouteToProfile()" class="dropdown-item">Profile</a></li>

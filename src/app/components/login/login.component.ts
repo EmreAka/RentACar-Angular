@@ -28,22 +28,13 @@ export class LoginComponent implements OnInit {
       password: ["", Validators.required]
     });
   }
-
-  getCustomerDetailByEmail(){
-    this.customerService.getCustomerByEmail(this.loginForm.value.email).subscribe((response) => {
-      this.localStorageService.add('user', JSON.stringify(response.data[0]))
-    }, (responseError) => {
-      this.toastrService.error("An error occured!");
-    });
-  }
-
+  
   login() {
     let loginModel: LoginModel = Object.assign({}, this.loginForm.value);
     if (this.loginForm.valid) {
       this.authService.login(loginModel).subscribe((response) => {
         this.toastrService.info(response.message);
         this.localStorageService.add('token', response.data.token);
-        this.getCustomerDetailByEmail();
       }, (responseError) => {
         this.toastrService.error(responseError.error);
       })

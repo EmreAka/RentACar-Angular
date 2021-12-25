@@ -1,3 +1,4 @@
+import { LoginGuard } from './guards/login.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -33,7 +34,7 @@ const routes: Routes = [
   {path: "colours/edit/:colourId", component: ColourEditComponent},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
-  {path: "profile", component: ProfileComponent}
+  {path: "profile", component: ProfileComponent, canActivate: [LoginGuard]}
 ];
 
 @NgModule({

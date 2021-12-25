@@ -34,7 +34,7 @@
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-light" type="submit">Search</button>
         </form> -->
-        <div *ngIf="isLoggedIn() == false" class="btn-group ms-3" role="group">
+        <div *ngIf="isLoggedIn() == false" class="btn-group" role="group">
           <button (click)="setCurrentRouteToLogin()" [class]="getSignInButtonClass()">Sign In</button>
           <button (click)="setCurrentRouteToRegister()" [class]="getSignUpButtonClass()">Sign Up</button>
         </div>

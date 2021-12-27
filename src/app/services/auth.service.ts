@@ -14,6 +14,12 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   apiUrl = "https://localhost:5001/api/Auth/";
+  
+  fullName: string;
+  email: string;
+  roles: string[];
+  role: string;
+  userId: number;
 
   constructor(private httpClient: HttpClient, private jwtHelperService: JwtHelperService, 
     private localStorageService: LocalStorageService) { }
@@ -38,5 +44,15 @@ export class AuthService {
     else {
       return false;
     }
+  }
+
+  getUserDetailsFromToken(){
+    let token: any = this.localStorageService.get('token');
+    let decodedToken = this.jwtHelperService.decodeToken(token);
+    this.fullName = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+    this.role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    this.roles = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    this.email = decodedToken['email'];
+    this.userId = parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
   }
 }

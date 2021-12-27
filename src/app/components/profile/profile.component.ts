@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Customer } from './../../models/customer';
 import { CustomerService } from './../../services/customer.service';
@@ -13,30 +14,24 @@ import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms'
 export class ProfileComponent implements OnInit {
 
   profileForm: FormGroup
-  user: any;
+  user: Customer = {id: 0, companyName: "", email: "", firstName: "", lastName: "", status: true};
 
   constructor(private formBuilder: FormBuilder, private localStorageService: LocalStorageService,
-    private customerService: CustomerService, private toastrService: ToastrService) { }
+    private customerService: CustomerService, private toastrService: ToastrService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.getUserInformation();
+    this.getCustomerDetailByEmail();
     this.createProfileForm();
-    this.profileForm.valueChanges.subscribe(console.log);
   }
 
   createProfileForm(){
     this.profileForm = this.formBuilder.group({
-      firstName: [this.user.firstName, Validators.required],
-      lastName: [this.user.lastName, Validators.required],
-      email: [this.user.email, Validators.required],
-      companyName: [this.user.companyName, Validators.required],
+      firstName: ["", Validators.required],
+      lastName: ["", Validators.required],
+      email: ["", Validators.required],
+      companyName: ["", Validators.required],
       status: [true, Validators.required]
     });
-  }
-
-  getUserInformation(){
-    this.user = this.localStorageService.get('user');
-    this.user = JSON.parse(this.user);
   }
 
   checkIfValuesChanged(){
@@ -62,6 +57,18 @@ export class ProfileComponent implements OnInit {
       this.toastrService.success(response.message);
     }, (responseError) => {
       this.toastrService.error("An error occured. Try later.");
+    });
+  }
+
+  getCustomerDetailByEmail(){
+    this.customerService.getCustomerByEmail(this.authService.email).subscribe((response) => {
+      this.user = response.data[0];
+      this.profileForm.controls['firstName'].setValue(this.user.firstName);
+      this.profileForm.controls['lastName'].setValue(this.user.lastName);
+      this.profileForm.controls['email'].setValue(this.user.email);
+      this.profileForm.controls['companyName'].setValue(this.user.companyName);
+    }, (responseError) => {
+      this.toastrService.error("An error occured!");
     });
   }
 

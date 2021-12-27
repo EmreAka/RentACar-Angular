@@ -13,13 +13,17 @@ export class NaviComponent implements OnInit {
 
   isSignInButtonActive = false;
   isSignUpButtonActive = false;
+  userName: string;
 
   userString: any;
   
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
-    private authService: AuthService, private localStorageService: LocalStorageService) { }
+    public authService: AuthService, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
+    if (this.isLoggedIn()) {
+      this.authService.getUserDetailsFromToken();
+    }
   }
 
   setCurrentRouteToLogin(){
@@ -62,11 +66,5 @@ export class NaviComponent implements OnInit {
 
   isLoggedIn(){
     return this.authService.isAuthenticated();
-  }
-
-  getUserName(){
-    this.userString = this.localStorageService.get('user');
-    let userObject = JSON.parse(this.userString); 
-    return userObject.firstName + " " + userObject.lastName;
   }
 }

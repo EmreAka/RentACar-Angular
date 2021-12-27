@@ -19,8 +19,8 @@ export class CarAddComponent implements OnInit {
   brands: Brand[];
   colours: Colour[];
 
-  constructor(private formBuilder: FormBuilder, private brandService: BrandService, 
-    private colourService: ColourService, private carService: CarService, 
+  constructor(private formBuilder: FormBuilder, private brandService: BrandService,
+    private colourService: ColourService, private carService: CarService,
     private toastrService: ToastrService) { }
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class CarAddComponent implements OnInit {
     this.carAddForm.valueChanges.subscribe(console.log);
   }
 
-  createCarAddForm(){
+  createCarAddForm() {
     this.carAddForm = this.formBuilder.group({
       brandId: ["", Validators.required],
       colourId: ["", Validators.required],
@@ -40,28 +40,33 @@ export class CarAddComponent implements OnInit {
     })
   }
 
-  getBrands(){
+  getBrands() {
     this.brandService.getBrands().subscribe((response) => {
       this.brands = response.data;
     });
   }
 
-  getColours(){
+  getColours() {
     this.colourService.getColours().subscribe((response) => {
       this.colours = response.data;
     });
   }
 
-  add(){
+  add() {
     let carModel = Object.assign({}, this.carAddForm.value);
     if (this.carAddForm.valid) {
       this.carService.add(carModel).subscribe((response) => {
         this.toastrService.success(`Car is added successfully`);
       }, (responseError) => {
-        if (responseError.error.Errors.length > 0) {
-          for (let i = 0; i < responseError.error.Errors.length; i++) {
-            this.toastrService.error(responseError.error.Errors[i]);
+        if (responseError.error.Errors) {
+          if (responseError.error.Errors.length > 0) {
+            for (let i = 0; i < responseError.error.Errors.length; i++) {
+              this.toastrService.error(responseError.error.Errors[i].ErrorMessage);
+            }
           }
+        }
+        else {
+          this.toastrService.error(responseError.error.Message);
         }
       });
     } else {

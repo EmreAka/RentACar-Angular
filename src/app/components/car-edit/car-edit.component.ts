@@ -1,3 +1,5 @@
+import { CarImageService } from './../../services/car-image.service';
+import { CarImage } from './../../models/carImage';
 import { PlainCar } from './../../models/plainCar';
 import { ActivatedRoute } from '@angular/router';
 import { Car } from './../../models/car';
@@ -22,14 +24,17 @@ export class CarEditComponent implements OnInit {
   brands: Brand[];
   colours: Colour[];
   car: PlainCar = {brandId: 0, colourId: 0, dailyPrice: 0, description: "", id: 0, modelYear: 0};
+  carImages: CarImage[];
 
   constructor(private formBuilder: FormBuilder, private brandService: BrandService, 
     private colourService: ColourService, private carService: CarService, 
-    private toastrService: ToastrService, private activatedRoute: ActivatedRoute) { }
+    private toastrService: ToastrService, private activatedRoute: ActivatedRoute,
+    private carImageService: CarImageService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.getCarById(params["carId"]);
+      this.getCarImagesByCarId(params["carId"]);
     })
     this.getBrands();
     this.getColours();
@@ -66,6 +71,17 @@ export class CarEditComponent implements OnInit {
       this.carUpdateForm.controls['modelYear'].setValue(this.car.modelYear);
       this.carUpdateForm.controls['dailyPrice'].setValue(this.car.dailyPrice);
       this.carUpdateForm.controls['description'].setValue(this.car.description);
+    });
+  }
+
+  getCarImagesByCarId(carId: number){
+    this.carImageService.getCarImagesByCarId(carId).subscribe((response) => {
+      this.carImages = response.data;
+      console.log(response);
+      console.log(this.carImages);
+    }, (responseError) => {
+      this.toastrService.warning(responseError.error.message);
+      console.log(responseError.error.message);
     });
   }
 

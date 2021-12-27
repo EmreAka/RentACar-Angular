@@ -85,6 +85,12 @@ export class CarEditComponent implements OnInit {
     });
   }
 
+  deleteCarImageById(carImageId: number){
+    this.carImageService.deletCarImageById(carImageId).subscribe((response) => {
+      this.toastrService.success(response.message);
+    });
+  }
+
   update(){
     let carModel: PlainCar = Object.assign({id: this.car.id}, this.carUpdateForm.value);
     if (this.carUpdateForm.valid) {

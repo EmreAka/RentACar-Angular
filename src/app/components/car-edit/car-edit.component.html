@@ -67,7 +67,7 @@
                 <img [src]="image.imageUrl" class="card-img-top" alt="..." />
                 <div class="card-body">
                     <h5 class="card-title">{{ i + 1 }}. Photograph</h5>
-                    <button class="btn btn-dark float-end">Delete</button>
+                    <button (click)="deleteCarImageById(image.id)" class="btn btn-dark float-end">Delete</button>
                 </div>
             </div>
         </div>

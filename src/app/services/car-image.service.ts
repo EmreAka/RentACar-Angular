@@ -24,14 +24,14 @@ export class CarImageService {
     return this.httpClient.delete<ResponseModel>(newPath);
   }
 
-  upload(file: any):Observable<any> {
+  upload(file: any, carId: string):Observable<any> {
   
     // Create form data
     const formData = new FormData(); 
       
     // Store form name as "file" with file data
     formData.append("file", file);
-    formData.append("carImage.CarId", "1");
+    formData.append("carImage.CarId", carId);
       
     // Make http post request over api
     // with formData as req

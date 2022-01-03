@@ -36,7 +36,7 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
   {path: "profile", component: ProfileComponent, canActivate: [LoginGuard]},
-  {path: "upload", component: CarImageUploadComponent}
+  {path: "upload/:carId", component: CarImageUploadComponent}
 ];
 
 @NgModule({

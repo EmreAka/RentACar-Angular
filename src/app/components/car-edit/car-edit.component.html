@@ -62,7 +62,7 @@
         <div class="card-title">
             <h1 class="display-3">Update Car Images</h1>
         </div>
-        <div class="row">
+        <div class="row mb-3">
             <div *ngFor="let image of carImages; let i = index" class="card ms-3" style="width: 18rem">
                 <img [src]="image.imageUrl" class="card-img-top" alt="..." />
                 <div class="card-body">
@@ -70,6 +70,9 @@
                     <button (click)="deleteCarImageById(image.id)" class="btn btn-dark float-end">Delete</button>
                 </div>
             </div>
+        </div>
+        <div class="card-footer">
+            <button (click)="setCurrentRouteToImageUpload(carIdToUploadPhoto)" class="btn btn-primary float-end">Upload Photo</button>
         </div>
     </div>
 </div>

@@ -1,0 +1,29 @@
+<div class="card shadow p-3 mb-5 bg-body rounded" style="margin-top: 30px">
+    <div class="card-body">
+        <div class="card-title">
+            <h1 class="display-3">Add Photo To Car</h1>
+        </div>
+        <div class="text-center mb-3">
+            <input class="form-control" type="file" (change)="onChange($event)">
+        </div>
+
+        <!-- Shareable short link of uoloaded file -->
+        <!-- <div class="container text-center jumbotron"
+            *ngIf="shortLink">
+            <h2> Visit Here</h2>
+            <a href="{{shortLink}}">{{shortLink}}</a>
+        </div> -->
+
+        <!--Flag variable is used here-->
+        <div class="container" *ngIf="loading">
+            <h3>Loading ...</h3>
+        </div>
+
+        <div class="card-footer">
+            <button (click)="onUpload()" class="btn btn-outline-dark float-end">
+                Upload
+            </button>
+        </div>
+
+    </div>
+</div>

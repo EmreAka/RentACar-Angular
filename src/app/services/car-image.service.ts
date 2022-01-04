@@ -23,4 +23,18 @@ export class CarImageService {
     let newPath = this.apiUrl + "deletebyid?id=" + carImageId;
     return this.httpClient.delete<ResponseModel>(newPath);
   }
+
+  upload(file: any, carId: string):Observable<any> {
+  
+    // Create form data
+    const formData = new FormData(); 
+      
+    // Store form name as "file" with file data
+    formData.append("file", file);
+    formData.append("carImage.CarId", carId);
+      
+    // Make http post request over api
+    // with formData as req
+    return this.httpClient.post(this.apiUrl + "add", formData)
+}
 }

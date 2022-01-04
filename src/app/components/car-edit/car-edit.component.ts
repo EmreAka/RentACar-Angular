@@ -1,7 +1,7 @@
 import { CarImageService } from './../../services/car-image.service';
 import { CarImage } from './../../models/carImage';
 import { PlainCar } from './../../models/plainCar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from './../../models/car';
 import { ToastrService } from 'ngx-toastr';
 import { ColourService } from './../../services/colour.service';
@@ -25,14 +25,16 @@ export class CarEditComponent implements OnInit {
   colours: Colour[];
   car: PlainCar = {brandId: 0, colourId: 0, dailyPrice: 0, description: "", id: 0, modelYear: 0};
   carImages: CarImage[];
+  carIdToUploadPhoto: string;
 
   constructor(private formBuilder: FormBuilder, private brandService: BrandService, 
     private colourService: ColourService, private carService: CarService, 
     private toastrService: ToastrService, private activatedRoute: ActivatedRoute,
-    private carImageService: CarImageService) { }
+    private carImageService: CarImageService, private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
+      this.carIdToUploadPhoto = params["carId"];
       this.getCarById(params["carId"]);
       this.getCarImagesByCarId(params["carId"]);
     })
@@ -107,5 +109,9 @@ export class CarEditComponent implements OnInit {
     } else {
       this.toastrService.error("Complete the form!");
     }
+  }
+
+  setCurrentRouteToImageUpload(carId: string){
+    this.router.navigate([`upload/${carId}`]);
   }
 }

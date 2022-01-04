@@ -1,3 +1,4 @@
+import { CarImageUploadComponent } from './components/car-image-upload/car-image-upload.component';
 import { LoginGuard } from './guards/login.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -34,7 +35,8 @@ const routes: Routes = [
   {path: "colours/edit/:colourId", component: ColourEditComponent},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
-  {path: "profile", component: ProfileComponent, canActivate: [LoginGuard]}
+  {path: "profile", component: ProfileComponent, canActivate: [LoginGuard]},
+  {path: "upload/:carId", component: CarImageUploadComponent}
 ];
 
 @NgModule({

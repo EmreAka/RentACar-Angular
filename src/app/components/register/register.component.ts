@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private toastrService: ToastrService, 
+  constructor(private formBuilder: FormBuilder, private toastrService: ToastrService,
     private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -25,7 +25,8 @@ export class RegisterComponent implements OnInit {
       email: ["", Validators.required],
       password: ["", Validators.required],
       firstName: ["", Validators.required],
-      lastName: ["", Validators.required]
+      lastName: ["", Validators.required],
+      companyName: ["", Validators.required]
     });
   }
 

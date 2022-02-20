@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Brand } from './../../models/brand';
 import { BrandService } from './../../services/brand.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +17,7 @@ export class BrandEditComponent implements OnInit {
   brand: Brand = {id: 0, name: ""};
 
   constructor(private formBuilder: FormBuilder, private toastrService: ToastrService,
-    private brandService: BrandService, private activatedRoute: ActivatedRoute) { }
+    private brandService: BrandService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -37,6 +37,13 @@ export class BrandEditComponent implements OnInit {
       this.brand = response.data;
       this.brandUpdateForm.controls['name'].setValue(this.brand.name);
     });
+  }
+
+  delete(){
+    this.brandService.delete(this.brand).subscribe(response => {
+      this.toastrService.success(response.message);
+      this.router.navigate(["brands"]);
+    })
   }
 
   update() {

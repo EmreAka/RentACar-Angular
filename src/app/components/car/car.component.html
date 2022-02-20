@@ -51,7 +51,7 @@
         <td>{{ car.dailyPrice | currency }}</td>
         <td>{{ car.description }}</td>
         <td>
-          <div class="btn-group" role="group">
+          <div class="btn-group float-end" role="group">
             <button (click)="setCurrentRouteToCarEdit(car.id)" type="button" class="btn btn-outline-dark">Edit</button>
             <button
               (click)="setCurrentRouteToCarDetail(car.id)"

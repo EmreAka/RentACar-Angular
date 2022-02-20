@@ -27,8 +27,8 @@ export class CarEditComponent implements OnInit {
   carImages: CarImage[];
   carIdToUploadPhoto: string;
 
-  constructor(private formBuilder: FormBuilder, private brandService: BrandService, 
-    private colourService: ColourService, private carService: CarService, 
+  constructor(private formBuilder: FormBuilder, private brandService: BrandService,
+    private colourService: ColourService, private carService: CarService,
     private toastrService: ToastrService, private activatedRoute: ActivatedRoute,
     private carImageService: CarImageService, private router: Router) { }
 
@@ -91,6 +91,13 @@ export class CarEditComponent implements OnInit {
     this.carImageService.deletCarImageById(carImageId).subscribe((response) => {
       this.toastrService.success(response.message);
     });
+  }
+
+  deleteCar(){
+    this.carService.delete(this.car).subscribe(response => {
+      this.toastrService.success(response.message);
+      this.router.navigate(["cars"]);
+    })
   }
 
   update(){

@@ -41,7 +41,7 @@
         Return Date
       </th>
       <th>
-        <Button class="btn btn-outline-danger float-end">Delete All</Button>
+        <div class="float-end">Delete</div>
       </th>
     </tr>
     </thead>
@@ -53,7 +53,7 @@
       <td>{{rental.rentDate}}</td>
       <td>{{rental.returnDate}}</td>
       <td>
-        <button class="btn btn-outline-danger float-end">Delete</button>
+        <button (click)="delete({id: rental.id})" class="btn btn-outline-danger float-end">Delete</button>
       </td>
     </tr>
     </tbody>

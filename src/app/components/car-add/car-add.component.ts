@@ -6,6 +6,7 @@ import { Brand } from './../../models/brand';
 import { BrandService } from './../../services/brand.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-car-add',
@@ -21,7 +22,7 @@ export class CarAddComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private brandService: BrandService,
     private colourService: ColourService, private carService: CarService,
-    private toastrService: ToastrService) { }
+    private toastrService: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.getBrands();
@@ -57,6 +58,7 @@ export class CarAddComponent implements OnInit {
     if (this.carAddForm.valid) {
       this.carService.add(carModel).subscribe((response) => {
         this.toastrService.success(`Car is added successfully`);
+        this.router.navigate(["cars"]);
       }, (responseError) => {
         if (responseError.error.Errors) {
           if (responseError.error.Errors.length > 0) {

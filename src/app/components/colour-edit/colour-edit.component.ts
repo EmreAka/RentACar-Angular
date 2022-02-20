@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Colour } from './../../models/colour';
 import { ToastrService } from 'ngx-toastr';
 import { ColourService } from './../../services/colour.service';
@@ -16,8 +16,9 @@ export class ColourEditComponent implements OnInit {
 
   colour: Colour = {id: 0, name: ""};
 
-  constructor(private formBuilder: FormBuilder, private colourService: ColourService, 
-    private toastrService: ToastrService, private activatedRoute: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder, private colourService: ColourService,
+    private toastrService: ToastrService, private activatedRoute: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -36,6 +37,13 @@ export class ColourEditComponent implements OnInit {
     this.colourService.getColourById(colourId).subscribe((response) => {
       this.colour = response.data;
       this.colourUpdateForm.controls['name'].setValue(this.colour.name);
+    })
+  }
+
+  delete(){
+    this.colourService.delete(this.colour).subscribe(response => {
+      this.toastrService.success(response.message);
+      this.router.navigate(["colours"]);
     })
   }
 

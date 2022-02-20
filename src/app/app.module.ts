@@ -35,6 +35,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CardNumberPipe } from './pipes/card-number.pipe';
 import { CarImageUploadComponent } from './components/car-image-upload/car-image-upload.component';
+import { RentalFilterPipe } from './pipes/rental-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { CarImageUploadComponent } from './components/car-image-upload/car-image
     RegisterComponent,
     ProfileComponent,
     CardNumberPipe,
-    CarImageUploadComponent
+    CarImageUploadComponent,
+    RentalFilterPipe
   ],
   imports: [
     BrowserModule,

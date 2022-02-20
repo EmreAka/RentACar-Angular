@@ -17,6 +17,7 @@ import { CarComponent } from './components/car/car.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ColourComponent } from './components/colour/colour.component';
+import {RentalComponent} from "./components/rental/rental.component";
 
 const routes: Routes = [
   {path: "", pathMatch: "full", component: CarComponent},
@@ -36,7 +37,8 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
   {path: "profile", component: ProfileComponent, canActivate: [LoginGuard]},
-  {path: "upload/:carId", component: CarImageUploadComponent}
+  {path: "upload/:carId", component: CarImageUploadComponent},
+  {path: "rentals", component: RentalComponent}
 ];
 
 @NgModule({

@@ -1,15 +1,16 @@
-import { LocalStorageService } from './../../services/local-storage.service';
-import { CardService } from './../../services/card.service';
-import { PaymentService } from './../../services/payment.service';
-import { CardToPay } from './../../models/cardToPay';
-import { ActivatedRoute } from '@angular/router';
-import { Rental } from './../../models/rental';
-import { RentalService } from './../../services/rental.service';
-import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { Card } from 'src/app/models/card';
+import {LocalStorageService} from './../../services/local-storage.service';
+import {CardService} from './../../services/card.service';
+import {PaymentService} from './../../services/payment.service';
+import {CardToPay} from './../../models/cardToPay';
+import {ActivatedRoute} from '@angular/router';
+import {Rental} from './../../models/rental';
+import {RentalService} from './../../services/rental.service';
+import {Component, OnInit} from '@angular/core';
+import {DatePipe} from '@angular/common';
+import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {Card} from 'src/app/models/card';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-renting-modal',
@@ -33,11 +34,14 @@ export class RentingModalComponent implements OnInit {
   years: string[] = ["2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033"];
 
   constructor(private rentalService: RentalService, private activatedRoute: ActivatedRoute,
-    private datePipe: DatePipe, private formBuilder: FormBuilder, private paymentService: PaymentService,
-    private toastrService: ToastrService, private cardService: CardService, private localStorageservice: LocalStorageService) { }
+              private datePipe: DatePipe, private formBuilder: FormBuilder, private paymentService: PaymentService,
+              private toastrService: ToastrService, private cardService: CardService,
+              private localStorageservice: LocalStorageService, private authService: AuthService) {
+  }
 
   ngOnInit(): void {
     this.currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.authService.getUserDetailsFromToken();
 
     this.activatedRoute.params.subscribe((params) => {
       this.carId = params["carId"];
@@ -93,7 +97,7 @@ export class RentingModalComponent implements OnInit {
   addRental() {
     let values = this.returnDate.split("-");
     let returnDataConverted = this.datePipe.transform(new Date(+values[0], +values[1] - 1, +values[2]), 'yyyy-MM-dd');
-    let rental = { carId: this.carId, customerId: 6023, rentDate: this.currentDate, returnDate: returnDataConverted };
+    let rental = {carId: this.carId, customerId: 6023, rentDate: this.currentDate, returnDate: returnDataConverted};
     this.rentalService.addRental(rental).subscribe((response) => {
       if (response.success) {
         this.toastrService.success("The rent has been successfully completed.");
@@ -118,8 +122,7 @@ export class RentingModalComponent implements OnInit {
     this.cardService.addCard(cardToAdd).subscribe((response) => {
       if (response.success) {
         this.toastrService.success("Card saved successfully.");
-      }
-      else if (response.success == false) {
+      } else if (response.success == false) {
         this.toastrService.error("An error occured when saving the card. Try later.")
       }
     })
@@ -128,13 +131,18 @@ export class RentingModalComponent implements OnInit {
   pay() {
     let card: CardToPay;
     card = {
-      nameOnCard: this.paymentForm.value.nameOnCard, cardNumber: this.paymentForm.value.cardNumber,
-      cvv: this.paymentForm.value.cvv, expirationMonth: this.paymentForm.value.expirationMonth, expirationYear: this.paymentForm.value.expirationYear
+      nameOnCard: this.paymentForm.value.nameOnCard,
+      cardNumber: this.paymentForm.value.cardNumber,
+      cvv: this.paymentForm.value.cvv,
+      expirationMonth: this.paymentForm.value.expirationMonth,
+      expirationYear: this.paymentForm.value.expirationYear
     };
     if (this.hasSavedCard) {
-      card = {cardNumber: this.cardFromDropdown.cardNumber, cvv: this.cardFromDropdown.cvv,
-      nameOnCard: this.cardFromDropdown.nameOnCard, expirationMonth: this.cardFromDropdown.expiration.split("-")[1], 
-      expirationYear: this.cardFromDropdown.expiration.split("-")[0]}
+      card = {
+        cardNumber: this.cardFromDropdown.cardNumber, cvv: this.cardFromDropdown.cvv,
+        nameOnCard: this.cardFromDropdown.nameOnCard, expirationMonth: this.cardFromDropdown.expiration.split("-")[1],
+        expirationYear: this.cardFromDropdown.expiration.split("-")[0]
+      }
       console.log(this.cardFromDropdown.cardNumber);
     }
     if (this.isSaveCardChecked != true) {
@@ -147,12 +155,10 @@ export class RentingModalComponent implements OnInit {
             this.toastrService.error("An error occured! Try later.");
           }
         })
-      }
-      else {
+      } else {
         this.toastrService.error("Complete the form!");
       }
-    }
-    else if (this.isSaveCardChecked == true) {
+    } else if (this.isSaveCardChecked == true) {
       if (this.paymentForm.valid) {
         this.paymentService.pay(card, this.carId).subscribe((response) => {
           if (response.success) {
@@ -163,16 +169,14 @@ export class RentingModalComponent implements OnInit {
             this.toastrService.error("An error occured! Try later.");
           }
         });
-      }else {
+      } else {
         this.toastrService.error("Complete the form!");
       }
     }
   }
 
-  getCards(){
-    let userString: any = this.localStorageservice.get('user');
-    let userId: number = JSON.parse(userString).id;
-    this.cardService.getCardsByUserId(userId).subscribe((response) => {
+  getCards() {
+    this.cardService.getCardsByUserId(this.authService.decodedToken['userId']).subscribe((response) => {
       this.cards = response.data;
       if (this.cards.length > 0) {
         this.hasSavedCard = true;
@@ -182,7 +186,7 @@ export class RentingModalComponent implements OnInit {
     });
   }
 
-  setHasSavedCardFalse(){
+  setHasSavedCardFalse() {
     this.hasSavedCard = false;
   }
 

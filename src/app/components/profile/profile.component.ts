@@ -35,9 +35,9 @@ export class ProfileComponent implements OnInit {
   }
 
   checkIfValuesChanged(){
-    if (this.profileForm.value.firstName === this.user.firstName 
+    if (this.profileForm.value.firstName === this.user.firstName
       && this.profileForm.value.lastName === this.user.lastName
-      && this.profileForm.value.email === this.user.email 
+      && this.profileForm.value.email === this.user.email
       && this.profileForm.value.companyName === this.user.companyName) {
       return false;
     }
@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getCustomerDetailByEmail(){
-    this.customerService.getCustomerByEmail(this.authService.email).subscribe((response) => {
+    this.customerService.getCustomerByEmail(this.authService.decodedToken['email']).subscribe((response) => {
       this.user = response.data[0];
       this.profileForm.controls['firstName'].setValue(this.user.firstName);
       this.profileForm.controls['lastName'].setValue(this.user.lastName);

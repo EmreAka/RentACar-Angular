@@ -1,12 +1,12 @@
-import { LocalStorageService } from './local-storage.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { RegisterModel } from './../models/registerModel';
-import { Observable } from 'rxjs';
-import { TokenModel } from './../models/tokenModel';
-import { SingleResponseModel } from './../models/singleResponseModel';
-import { LoginModel } from './../models/loginModel';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {LocalStorageService} from './local-storage.service';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {RegisterModel} from './../models/registerModel';
+import {Observable} from 'rxjs';
+import {TokenModel} from './../models/tokenModel';
+import {SingleResponseModel} from './../models/singleResponseModel';
+import {LoginModel} from './../models/loginModel';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -14,46 +14,44 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   apiUrl = "https://localhost:5001/api/Auth/";
-  
-  fullName: string;
-  email: string;
-  roles: string[];
-  role: string;
-  userId: number;
+  decodedToken: any = {};
 
-  constructor(private httpClient: HttpClient, private jwtHelperService: JwtHelperService, 
-    private localStorageService: LocalStorageService) { }
+  constructor(private httpClient: HttpClient, private jwtHelperService: JwtHelperService,
+              private localStorageService: LocalStorageService) {
+  }
 
-  login(login: LoginModel): Observable<SingleResponseModel<TokenModel>>{
+  login(login: LoginModel): Observable<SingleResponseModel<TokenModel>> {
     // return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + "login", login, {withCredentials: true});
     return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + "login", login);
   }
 
-  logout(){
+  logout() {
     this.localStorageService.delete('token');
     this.localStorageService.delete('user');
   }
 
-  register(register: RegisterModel): Observable<SingleResponseModel<TokenModel>>{
+  register(register: RegisterModel): Observable<SingleResponseModel<TokenModel>> {
     return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + "register", register);
   }
 
-  isAuthenticated(){
+  isAuthenticated() {
     if (localStorage.getItem('token')) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
 
-  getUserDetailsFromToken(){
-    let token: any = this.localStorageService.get('token');
-    let decodedToken = this.jwtHelperService.decodeToken(token);
-    this.fullName = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
-    this.role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-    this.roles = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-    this.email = decodedToken['email'];
-    this.userId = parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
+  getUserDetailsFromToken() {
+    const token: any = this.localStorageService.get('token');
+    const decodedToken = this.jwtHelperService.decodeToken(token);
+    this.decodedToken['Token'] = this.localStorageService.get('token');
+    this.decodedToken['DecodedToken'] = this.jwtHelperService.decodeToken(token);
+    this.decodedToken['expiration'] = decodedToken['exp'];
+    this.decodedToken['Name'] = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+    this.decodedToken['role'] = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    this.decodedToken['roles'] = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    this.decodedToken['email'] = decodedToken['email'];
+    this.decodedToken['userId'] = parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
   }
 }

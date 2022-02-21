@@ -28,13 +28,14 @@ export class LoginComponent implements OnInit {
       password: ["", Validators.required]
     });
   }
-  
+
   login() {
     let loginModel: LoginModel = Object.assign({}, this.loginForm.value);
     if (this.loginForm.valid) {
       this.authService.login(loginModel).subscribe((response) => {
         this.toastrService.info(response.message);
         this.localStorageService.add('token', response.data.token);
+        this.authService.getUserDetailsFromToken();
       }, (responseError) => {
         this.toastrService.error(responseError.error);
       })

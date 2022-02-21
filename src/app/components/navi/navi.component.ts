@@ -13,10 +13,7 @@ export class NaviComponent implements OnInit {
 
   isSignInButtonActive = false;
   isSignUpButtonActive = false;
-  userName: string;
 
-  userString: any;
-  
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
     public authService: AuthService, private localStorageService: LocalStorageService) { }
 

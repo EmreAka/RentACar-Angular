@@ -7,6 +7,7 @@ import { BrandService } from './../../services/brand.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import {Router} from "@angular/router";
+import {LocalStorageService} from "../../services/local-storage.service";
 
 @Component({
   selector: 'app-car-add',
@@ -22,7 +23,7 @@ export class CarAddComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private brandService: BrandService,
     private colourService: ColourService, private carService: CarService,
-    private toastrService: ToastrService, private router: Router) { }
+    private toastrService: ToastrService, private router: Router, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
     this.getBrands();
@@ -69,6 +70,8 @@ export class CarAddComponent implements OnInit {
         }
         else {
           this.toastrService.error(responseError.error.Message);
+          this.router.navigate(["login"]);
+          this.localStorageService.delete('token');
         }
       });
     } else {

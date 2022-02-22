@@ -7,6 +7,7 @@ import {SingleResponseModel} from './../models/singleResponseModel';
 import {LoginModel} from './../models/loginModel';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {DecodedToken} from "../models/decodedToken";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ import {Injectable} from '@angular/core';
 export class AuthService {
 
   apiUrl = "https://localhost:5001/api/Auth/";
-  decodedToken: any = {};
+  decodedToken: DecodedToken = {Token: "", DecodedToken: "", Expiration: 0, Email: "", Name: "", Role: "", Roles: [], UserId: 0};
 
   constructor(private httpClient: HttpClient, private jwtHelperService: JwtHelperService,
               private localStorageService: LocalStorageService) {
@@ -42,12 +43,24 @@ export class AuthService {
     }
   }
 
+  isTokenExpired(): boolean {
+    if (new Date(this.decodedToken['Expiration'] * 1000) < new Date()  || this.decodedToken['Expiration'] == undefined
+      || this.decodedToken['Expiration'] == null) {
+      console.log("token exp date: " + new Date(this.decodedToken['Expiration'] * 1000))
+      console.log("date: " + new Date())
+      console.log("boolean: " + (new Date(this.decodedToken['Expiration'] * 1000) < new Date()));
+      return true;
+    } else {
+      return false
+    }
+  }
+
   getUserDetailsFromToken() {
     const token: any = this.localStorageService.get('token');
     const decodedToken = this.jwtHelperService.decodeToken(token);
     this.decodedToken['Token'] = this.localStorageService.get('token');
     this.decodedToken['DecodedToken'] = this.jwtHelperService.decodeToken(token);
-    this.decodedToken['Expiration'] = decodedToken['exp'];
+    this.decodedToken['Expiration'] = +decodedToken['exp'];
     this.decodedToken['Name'] = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
     this.decodedToken['Role'] = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
     this.decodedToken['Roles'] = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];

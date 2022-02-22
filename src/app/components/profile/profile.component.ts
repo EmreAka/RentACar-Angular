@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getCustomerDetailByEmail(){
-    this.customerService.getCustomerByEmail(this.authService.decodedToken['email']).subscribe((response) => {
+    this.customerService.getCustomerByEmail(this.authService.decodedToken['Email']).subscribe((response) => {
       this.user = response.data[0];
       this.profileForm.controls['firstName'].setValue(this.user.firstName);
       this.profileForm.controls['lastName'].setValue(this.user.lastName);

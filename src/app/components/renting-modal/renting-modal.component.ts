@@ -176,7 +176,7 @@ export class RentingModalComponent implements OnInit {
   }
 
   getCards() {
-    this.cardService.getCardsByUserId(this.authService.decodedToken['userId']).subscribe((response) => {
+    this.cardService.getCardsByUserId(this.authService.decodedToken['UserId']).subscribe((response) => {
       this.cards = response.data;
       if (this.cards.length > 0) {
         this.hasSavedCard = true;

@@ -47,11 +47,11 @@ export class AuthService {
     const decodedToken = this.jwtHelperService.decodeToken(token);
     this.decodedToken['Token'] = this.localStorageService.get('token');
     this.decodedToken['DecodedToken'] = this.jwtHelperService.decodeToken(token);
-    this.decodedToken['expiration'] = decodedToken['exp'];
+    this.decodedToken['Expiration'] = decodedToken['exp'];
     this.decodedToken['Name'] = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
-    this.decodedToken['role'] = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-    this.decodedToken['roles'] = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-    this.decodedToken['email'] = decodedToken['email'];
-    this.decodedToken['userId'] = parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
+    this.decodedToken['Role'] = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    this.decodedToken['Roles'] = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    this.decodedToken['Email'] = decodedToken['email'];
+    this.decodedToken['UserId'] = parseInt(decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
   }
 }

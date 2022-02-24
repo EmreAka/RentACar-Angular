@@ -22,7 +22,7 @@ import {RentalComponent} from "./components/rental/rental.component";
 const routes: Routes = [
   {path: "", pathMatch: "full", component: CarComponent},
   {path: "cars", component: CarComponent},
-  {path: "cars/add", component: CarAddComponent},
+  {path: "cars/add", component: CarAddComponent, canActivate: [LoginGuard]},
   {path: "cars/edit/:carId", component: CarEditComponent},
   {path: "cars/brand/:brandId", component: CarComponent},
   {path: "cars/colour/:colourId", component: CarComponent},

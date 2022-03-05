@@ -33,7 +33,7 @@
     <div fxLayout="row wrap" fxLayoutGap="20px grid">
       <div fxFlex="33%" fxFlex.xs="100%" fxFlex.md="50%" fxFlex.sm="50%" fxFlex.xl="25%" *ngFor="let car of cars | carFilter: filterText; let i = index">
         <div class="card shadow p-3 mb-5 bg-body rounded">
-          <img [src]="car.images[0]" class="card-img-top" alt="...">
+          <img [src]="car.images[0]" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">{{car.brandName}}</h5>
             <p class="card-text">{{car.description}}</p>

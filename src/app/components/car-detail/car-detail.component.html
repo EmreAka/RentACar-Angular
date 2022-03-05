@@ -13,58 +13,60 @@
     <div class="card-title">
       <h1 class="display-3">{{ car.brandName }}</h1>
     </div>
-    <div
-      id="carouselExampleControls"
-      data-interval="false"
-      id="carouselExampleControls"
-      class="carousel slide"
-      data-bs-ride="carousel"
-    >
-      <div class="carousel-inner">
-        <div
-          class="carousel-item"
-          *ngFor="let imageUrl of car.images; let i = index"
-          [ngClass]="{ active: i == 0 }"
-        >
-          <img [src]="imageUrl" class="d-block w-100" alt="..." />
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <div
+            id="carouselExampleControls"
+            data-interval="false"
+            id="carouselExampleControls"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div
+                class="carousel-item"
+                *ngFor="let imageUrl of car.images; let i = index"
+                [ngClass]="{ active: i == 0 }"
+              >
+                <img [src]="imageUrl" class="d-block w-100" alt="..." />
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide="prev"
+            >
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide="next"
+            >
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="card-body">
+            <h5 class="card-title">Description</h5>
+            <p class="card-text">{{ car.description }}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Colour: {{ car.colourName }}</li>
+            <li class="list-group-item">Model: {{ car.modelYear }}</li>
+            <li class="list-group-item">
+              Daily Price: {{ car.dailyPrice | currency }}
+            </li>
+          </ul>
         </div>
       </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleControls"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleControls"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
   </div>
-  <div class="card-body">
-    <h5 class="card-title">Description</h5>
-    <p class="card-text">{{ car.description }}</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Colour: {{ car.colourName }}</li>
-    <li class="list-group-item">Model: {{ car.modelYear }}</li>
-    <li class="list-group-item">
-      Daily Price: {{ car.dailyPrice | currency }}
-    </li>
-    <li class="list-group-item">
-      <!-- <button type="button" class="btn btn-outline-dark float-end">
-        Rent The Car
-        <i class="bi-wallet" style="font-size: 1rem; color: rgb(5, 5, 5);"></i>
-      </button> -->
-      <app-renting-modal></app-renting-modal>
-    </li>
-  </ul>
+  <app-renting-modal></app-renting-modal>
 </div>

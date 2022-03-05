@@ -36,6 +36,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CardNumberPipe } from './pipes/card-number.pipe';
 import { CarImageUploadComponent } from './components/car-image-upload/car-image-upload.component';
 import { RentalFilterPipe } from './pipes/rental-filter.pipe';
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { RentalFilterPipe } from './pipes/rental-filter.pipe';
     ReactiveFormsModule,
     CommonModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     })

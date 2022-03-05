@@ -5,7 +5,7 @@
         </div>
         <form [formGroup]="carAddForm">
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <div class="mb-3">
                         <label for="brandId" class="form-label">Select Brand</label>
                         <select id="brandId" class="form-select" formControlName="brandId">
@@ -15,7 +15,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <div class="mb-3">
                         <label for="colourId" class="form-label">Select Colour</label>
                         <select id="colourId" formControlName="colourId" class="form-select">
@@ -25,14 +25,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <div class="mb-3">
                         <label for="modelYear" class="form-label">Model Year</label>
                         <input id="modelYear" type="number" class="form-control" placeholder="Enter model year"
                             formControlName="modelYear" />
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <label for="dailyPrice" class="form-label">Daily Price</label>
                     <div class="input-group md-3">
                         <span class="input-group-text">$</span>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mt-lg-0 mt-sm-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea id="description" type="text" class="form-control" placeholder="Enter a description"
                     formControlName="description" rows="3"></textarea>

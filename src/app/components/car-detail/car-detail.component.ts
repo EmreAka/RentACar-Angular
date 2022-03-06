@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarDetailComponent implements OnInit {
 
-  car:Car = {id: 0, brandName: "", colourName: "", dailyPrice: 0, description: "", images: [], modelYear: 0};
+  car:Car = {id: 0, brandName: "", colourName: "", companyName: "",dailyPrice: 0, description: "", images: [], modelYear: 0};
   dataLoaded:boolean = false;
   constructor(private carService:CarService, private activatedRoute:ActivatedRoute) { }
 

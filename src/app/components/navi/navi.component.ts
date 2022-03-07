@@ -39,6 +39,10 @@ export class NaviComponent implements OnInit {
     this.router.navigate(["profile"]);
   }
 
+  setCurrentRouteToMyCars(){
+    this.router.navigate(["mycars"]);
+  }
+
   getSignInButtonClass(){
     if (this.isSignInButtonActive) {
       return "btn btn-primary";

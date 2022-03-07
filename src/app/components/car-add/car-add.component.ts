@@ -1,13 +1,14 @@
-import { ToastrService } from 'ngx-toastr';
-import { CarService } from './../../services/car.service';
-import { ColourService } from './../../services/colour.service';
-import { Colour } from './../../models/colour';
-import { Brand } from './../../models/brand';
-import { BrandService } from './../../services/brand.service';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {CarService} from './../../services/car.service';
+import {ColourService} from './../../services/colour.service';
+import {Colour} from './../../models/colour';
+import {Brand} from './../../models/brand';
+import {BrandService} from './../../services/brand.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
 import {Router} from "@angular/router";
 import {LocalStorageService} from "../../services/local-storage.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-car-add',
@@ -22,8 +23,10 @@ export class CarAddComponent implements OnInit {
   colours: Colour[];
 
   constructor(private formBuilder: FormBuilder, private brandService: BrandService,
-    private colourService: ColourService, private carService: CarService,
-    private toastrService: ToastrService, private router: Router, private localStorageService: LocalStorageService) { }
+              private colourService: ColourService, private carService: CarService,
+              private toastrService: ToastrService, private router: Router,
+              private localStorageService: LocalStorageService, private authService: AuthService) {
+  }
 
   ngOnInit(): void {
     this.getBrands();
@@ -55,7 +58,7 @@ export class CarAddComponent implements OnInit {
   }
 
   add() {
-    let carModel = Object.assign({}, this.carAddForm.value);
+    let carModel = Object.assign({userId: this.authService.decodedToken["UserId"]}, this.carAddForm.value);
     if (this.carAddForm.valid) {
       this.carService.add(carModel).subscribe((response) => {
         this.toastrService.success(`Car is added successfully`);
@@ -67,8 +70,7 @@ export class CarAddComponent implements OnInit {
               this.toastrService.error(responseError.error.Errors[i].ErrorMessage);
             }
           }
-        }
-        else {
+        } else {
           this.toastrService.error(responseError.error.Message);
           this.router.navigate(["login"]);
           this.localStorageService.delete('token');

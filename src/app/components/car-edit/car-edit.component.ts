@@ -23,7 +23,7 @@ export class CarEditComponent implements OnInit {
 
   brands: Brand[];
   colours: Colour[];
-  car: PlainCar = {brandId: 0, colourId: 0, dailyPrice: 0, description: "", id: 0, modelYear: 0};
+  car: PlainCar = {brandId: 0, colourId: 0, dailyPrice: 0, description: "", id: 0, modelYear: 0, userId: 0};
   carImages: CarImage[];
   carIdToUploadPhoto: string;
 
@@ -47,6 +47,7 @@ export class CarEditComponent implements OnInit {
     this.carUpdateForm = this.formBuilder.group({
       brandId: ["", Validators.required],
       colourId: ["", Validators.required],
+      userId: ["", Validators.required],
       modelYear: ["", Validators.required],
       dailyPrice: ["", Validators.required],
       description: ["", Validators.required]
@@ -70,6 +71,7 @@ export class CarEditComponent implements OnInit {
       this.car = response.data;
       this.carUpdateForm.controls['brandId'].setValue(this.car.brandId);
       this.carUpdateForm.controls['colourId'].setValue(this.car.colourId);
+      this.carUpdateForm.controls['userId'].setValue(this.car.userId);
       this.carUpdateForm.controls['modelYear'].setValue(this.car.modelYear);
       this.carUpdateForm.controls['dailyPrice'].setValue(this.car.dailyPrice);
       this.carUpdateForm.controls['description'].setValue(this.car.description);

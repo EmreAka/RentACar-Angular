@@ -46,6 +46,11 @@ export class CarService {
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
+  getCarDetailsByCustomerId(customerId:number):Observable<ListResponseModel<Car>>{
+    let newPath:string = this.apiUrl + "Cars/getcardetailsbycustomerid?customerId=" + customerId;
+    return this.httpClient.get<ListResponseModel<Car>>(newPath);
+  }
+
   add(car:Car):Observable<ResponseModel>{
     let newPath: string = this.apiUrl + "Cars/add";
     // return this.httpClient.post<ResponseModel>(newPath, car, {withCredentials: true});

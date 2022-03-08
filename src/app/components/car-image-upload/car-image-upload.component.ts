@@ -1,6 +1,7 @@
-import { ActivatedRoute } from '@angular/router';
-import { CarImageService } from './../../services/car-image.service';
-import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CarImageService} from './../../services/car-image.service';
+import {Component, OnInit} from '@angular/core';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-car-image-upload',
@@ -13,7 +14,9 @@ export class CarImageUploadComponent implements OnInit {
   file: File;
   carId: string;
 
-  constructor(private carImageService: CarImageService, private activatedRoute: ActivatedRoute) { }
+  constructor(private carImageService: CarImageService, private activatedRoute: ActivatedRoute,
+              private toastrService: ToastrService) {
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -32,7 +35,18 @@ export class CarImageUploadComponent implements OnInit {
       if (typeof (event) === 'object') {
         this.loading = false;
       }
+    }, (responseError) => {
+      if (responseError.error.Errors) {
+        if (responseError.error.Errors.length > 0) {
+          for (let i = 0; i < responseError.error.Errors.length; i++) {
+            this.toastrService.error(responseError.error.Errors[i]);
+          }
+          this.loading = false;
+        }
+      } else {
+        this.toastrService.error(responseError.error.Message);
+        this.loading = false;
+      }
     });
   }
-
 }

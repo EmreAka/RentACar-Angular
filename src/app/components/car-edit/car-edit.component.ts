@@ -24,7 +24,7 @@ export class CarEditComponent implements OnInit {
   brands: Brand[];
   colours: Colour[];
   car: PlainCar = {brandId: 0, colourId: 0, dailyPrice: 0, description: "", id: 0, modelYear: 0, userId: 0};
-  carImages: CarImage[];
+  carImages: CarImage[] = [];
   carIdToUploadPhoto: string;
 
   constructor(private formBuilder: FormBuilder, private brandService: BrandService,
@@ -96,10 +96,36 @@ export class CarEditComponent implements OnInit {
     });
   }
 
+  deleteCarImage(carImage: CarImage) {
+    this.carImageService.deleteCarImage(carImage).subscribe((response) => {
+      this.toastrService.success(response.message);
+    }, (responseError) => {
+      if (responseError.error.Errors) {
+        if (responseError.error.Errors.length > 0) {
+          for (let i = 0; i < responseError.error.Errors.length; i++) {
+            this.toastrService.error(responseError.error.Errors[i]);
+          }
+        }
+      } else {
+        this.toastrService.error(responseError.error.Message);
+      }
+    });
+  }
+
   deleteCar() {
     this.carService.delete(this.car).subscribe(response => {
       this.toastrService.success(response.message);
       this.router.navigate(["cars"]);
+    }, (responseError) => {
+      if (responseError.error.Errors) {
+        if (responseError.error.Errors.length > 0) {
+          for (let i = 0; i < responseError.error.Errors.length; i++) {
+            this.toastrService.error(responseError.error.Errors[i]);
+          }
+        }
+      } else {
+        this.toastrService.error(responseError.error.Message);
+      }
     })
   }
 

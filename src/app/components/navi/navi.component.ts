@@ -1,13 +1,21 @@
-import { LocalStorageService } from './../../services/local-storage.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { AuthService } from './../../services/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import {LocalStorageService} from './../../services/local-storage.service';
+import {AuthService} from './../../services/auth.service';
+import {Router, ActivatedRoute} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-navi',
   templateUrl: './navi.component.html',
-  styleUrls: ['./navi.component.css']
+  styleUrls: ['./navi.component.css'],
+  animations: [
+    trigger('fade', [
+      state('void', style({opacity: 0})),
+      transition('void => *, * => void', [
+        animate(1000)
+      ])
+    ])
+  ]
 })
 export class NaviComponent implements OnInit {
 
@@ -15,7 +23,8 @@ export class NaviComponent implements OnInit {
   isSignUpButtonActive = false;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
-    public authService: AuthService, private localStorageService: LocalStorageService) { }
+              public authService: AuthService, private localStorageService: LocalStorageService) {
+  }
 
   ngOnInit(): void {
     if (this.isLoggedIn()) {
@@ -23,49 +32,47 @@ export class NaviComponent implements OnInit {
     }
   }
 
-  setCurrentRouteToLogin(){
+  setCurrentRouteToLogin() {
     this.router.navigate(["login"]);
     this.isSignInButtonActive = true;
     this.isSignUpButtonActive = false;
   }
 
-  setCurrentRouteToRegister(){
+  setCurrentRouteToRegister() {
     this.router.navigate(["register"]);
     this.isSignUpButtonActive = true;
     this.isSignInButtonActive = false;
   }
 
-  setCurrentRouteToProfile(){
+  setCurrentRouteToProfile() {
     this.router.navigate(["profile"]);
   }
 
-  setCurrentRouteToMyCars(){
+  setCurrentRouteToMyCars() {
     this.router.navigate(["mycars"]);
   }
 
-  getSignInButtonClass(){
+  getSignInButtonClass() {
     if (this.isSignInButtonActive) {
       return "btn btn-primary";
-    }
-    else {
+    } else {
       return "btn btn-light";
     }
   }
 
-  getSignUpButtonClass(){
+  getSignUpButtonClass() {
     if (this.isSignUpButtonActive) {
       return "btn btn-primary"
-    }
-    else {
+    } else {
       return "btn btn-light"
     }
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     return this.authService.isAuthenticated();
   }
 }

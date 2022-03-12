@@ -20,6 +20,9 @@ export class CarFilterComponent implements OnInit {
   brandId:number;
   colourId:number;
 
+  currentBrand:Brand = {id: 0, name: ""};
+  currentColour:Colour = {id: 0, name: ""};
+
   constructor(private brandService:BrandService, private colourService:ColourService, private router:Router) { }
 
   ngOnInit(): void {
@@ -48,6 +51,72 @@ export class CarFilterComponent implements OnInit {
       this.router.navigateByUrl("cars/colour/" + this.colourId);
     }else {
       this.router.navigateByUrl("cars/brand/" + this.brandId + "/colour/" + this.colourId);
+    }
+  }
+
+  setCurrentRouteNew(){
+    console.log("Hey, I am working!");
+    if (this.currentBrand.id != 0 && this.currentColour.id == 0){
+      this.router.navigateByUrl("cars/brand/" + this.currentBrand.id);
+    }else if(this.currentBrand.id == 0 && this.currentColour.id != 0){
+      this.router.navigateByUrl("cars/colour/" + this.currentColour.id);
+    }else if(this.currentBrand.id != 0 && this.currentColour.id != 0) {
+      this.router.navigateByUrl("cars/brand/" + this.currentBrand.id + "/colour/" + this.currentColour.id);
+    } else{
+      this.router.navigateByUrl("cars");
+    }
+  }
+
+  setCurrentBrand(brand:Brand){
+    this.currentBrand = brand;
+  }
+
+  getCurrentBrandClass(brand:Brand){
+    if(this.currentBrand == brand){
+      return "list-group-item active";
+    }
+    else{
+      return "list-group-item";
+    }
+  }
+
+  setCurrentBrandDefault(){
+    this.currentBrand = {id: 0, name: ""};
+  }
+
+  getCurrentBrandAllClass(){
+    if(this.currentBrand.id == 0){
+      return "list-group-item active";
+    }
+    else{
+      return "list-group-item";
+    }
+  }
+
+  //Colour
+  setCurrentColour(colour:Colour){
+    this.currentColour = colour;
+  }
+
+  getCurrentColourClass(colour:Colour){
+    if(this.currentColour == colour){
+      return "list-group-item active";
+    }
+    else{
+      return "list-group-item"
+    }
+  }
+
+  setCurrentColourDefault(){
+    this.currentColour = {id: 0, name: ""};
+  }
+
+  getCurrentColourAllClass(){
+    if(this.currentColour.id == 0){
+      return "list-group-item active";
+    }
+    else{
+      return "list-group-item"
     }
   }
 }

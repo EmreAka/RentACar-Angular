@@ -42,7 +42,7 @@ export class ColourComponent implements OnInit {
     this.currentColour = {id: 0, name: ""};
   }
 
-  getCurrentBrandAllClass(){
+  getCurrentColourAllClass(){
     if(this.currentColour.id == 0){
       return "list-group-item active";
     }

@@ -21,7 +21,7 @@ import {Brand} from "../../models/brand";
 export class CarComponent implements OnInit {
 
   currentCars: Car[] = [];
-  dataLoaded: boolean = true;
+  dataLoaded: boolean = false;
   filterText: string = "";
 
   constructor(private carService: CarService, private activatedRoute: ActivatedRoute, private router: Router) {
@@ -32,6 +32,10 @@ export class CarComponent implements OnInit {
 
   receiveCurrentCars($event: Car[]){
     this.currentCars = $event;
+  }
+
+  receiveDataLoaded($event: boolean){
+    this.dataLoaded = $event;
   }
 
   setCurrentRouteToCarDetail(carId: number) {

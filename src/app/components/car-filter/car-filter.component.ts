@@ -3,7 +3,9 @@ import { ColourService } from './../../services/colour.service';
 import { BrandService } from './../../services/brand.service';
 import { Colour } from './../../models/colour';
 import { Brand } from './../../models/brand';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
+import {CarService} from "../../services/car.service";
+import {Car} from "../../models/car";
 
 @Component({
   selector: 'app-car-filter',
@@ -12,6 +14,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class CarFilterComponent implements OnInit {
 
+  cars: Car[] = [];
   brands:Brand[] = [];
   colours:Colour[] = [];
   brandsLoaded:boolean = false;
@@ -23,11 +26,62 @@ export class CarFilterComponent implements OnInit {
   currentBrand:Brand = {id: 0, name: ""};
   currentColour:Colour = {id: 0, name: ""};
 
-  constructor(private brandService:BrandService, private colourService:ColourService, private router:Router) { }
+  @Output() currentCarsEvent = new EventEmitter<Car[]>();
+
+  constructor(private brandService:BrandService, private colourService:ColourService, private router:Router,
+              private carService: CarService) { }
 
   ngOnInit(): void {
     this.getBrands();
     this.getColours();
+    this.getCars();
+    console.log("FİLTER FİLTER")
+  }
+
+  sendCurrentCars(){
+    this.currentCarsEvent.emit(this.cars);
+  }
+
+  filterCars(){
+    if (this.currentBrand.id != 0 && this.currentColour.id == 0){
+      this.getCarsByBrandId(this.currentBrand.id);
+    } else if (this.currentBrand.id == 0 && this.currentColour.id != 0){
+      this.getCarsByColourId(this.currentColour.id);
+    } else if (this.currentBrand.id != 0 && this.currentColour.id != 0){
+      this.getCarsByBrandIdAndColourId(this.currentBrand.id, this.currentColour.id);
+    } else{
+      this.getCars();
+    }
+  }
+
+  getCars() {
+    this.carService.getCars().subscribe((response) => {
+      this.cars = response.data;
+      this.sendCurrentCars();
+      //this.dataLoaded = true;
+    })
+  }
+
+  getCarsByBrandId(brandId: number) {
+    this.carService.getCarsByBrandId(brandId).subscribe((response) => {
+      this.cars = response.data;
+      this.sendCurrentCars();
+      //this.dataLoaded = true;
+    })
+  }
+
+  getCarsByColourId(colourId: number) {
+    this.carService.getCarsByColourId(colourId).subscribe((response) => {
+      this.cars = response.data;
+      this.sendCurrentCars();
+    })
+  }
+
+  getCarsByBrandIdAndColourId(brandId: number, colourId: number) {
+    this.carService.getCarsByBrandIdAndColourId(brandId, colourId).subscribe((response) => {
+      this.cars = response.data;
+      this.sendCurrentCars();
+    })
   }
 
   getBrands(){
@@ -44,31 +98,9 @@ export class CarFilterComponent implements OnInit {
     })
   }
 
-  setCurrentRoute(){
-    if (this.brandId && !this.colourId){
-      this.router.navigateByUrl("cars/brand/" + this.brandId);
-    }else if(!this.brandId && this.colourId){
-      this.router.navigateByUrl("cars/colour/" + this.colourId);
-    }else {
-      this.router.navigateByUrl("cars/brand/" + this.brandId + "/colour/" + this.colourId);
-    }
-  }
-
-  setCurrentRouteNew(){
-    console.log("Hey, I am working!");
-    if (this.currentBrand.id != 0 && this.currentColour.id == 0){
-      this.router.navigateByUrl("cars/brand/" + this.currentBrand.id);
-    }else if(this.currentBrand.id == 0 && this.currentColour.id != 0){
-      this.router.navigateByUrl("cars/colour/" + this.currentColour.id);
-    }else if(this.currentBrand.id != 0 && this.currentColour.id != 0) {
-      this.router.navigateByUrl("cars/brand/" + this.currentBrand.id + "/colour/" + this.currentColour.id);
-    } else{
-      this.router.navigateByUrl("cars");
-    }
-  }
-
   setCurrentBrand(brand:Brand){
     this.currentBrand = brand;
+    this.filterCars();
   }
 
   getCurrentBrandClass(brand:Brand){
@@ -82,6 +114,7 @@ export class CarFilterComponent implements OnInit {
 
   setCurrentBrandDefault(){
     this.currentBrand = {id: 0, name: ""};
+    this.filterCars();
   }
 
   getCurrentBrandAllClass(){
@@ -96,6 +129,7 @@ export class CarFilterComponent implements OnInit {
   //Colour
   setCurrentColour(colour:Colour){
     this.currentColour = colour;
+    this.filterCars();
   }
 
   getCurrentColourClass(colour:Colour){
@@ -109,6 +143,7 @@ export class CarFilterComponent implements OnInit {
 
   setCurrentColourDefault(){
     this.currentColour = {id: 0, name: ""};
+    this.filterCars();
   }
 
   getCurrentColourAllClass(){

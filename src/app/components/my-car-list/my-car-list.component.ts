@@ -3,11 +3,23 @@ import {Car} from "../../models/car";
 import {CarService} from "../../services/car.service";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-my-car-list',
   templateUrl: './my-car-list.component.html',
-  styleUrls: ['./my-car-list.component.css']
+  styleUrls: ['./my-car-list.component.css'],
+  animations: [
+    trigger('fade', [
+      state('void', style({opacity: 0})),
+      transition('void => *', [
+        animate(1000)
+      ]),
+      transition('* => void', [
+        animate(1000)
+      ])
+    ])
+  ]
 })
 export class MyCarListComponent implements OnInit {
 

@@ -3,7 +3,9 @@ import { ColourService } from './../../services/colour.service';
 import { BrandService } from './../../services/brand.service';
 import { Colour } from './../../models/colour';
 import { Brand } from './../../models/brand';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
+import {CarService} from "../../services/car.service";
+import {Car} from "../../models/car";
 
 @Component({
   selector: 'app-car-filter',
@@ -12,6 +14,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class CarFilterComponent implements OnInit {
 
+  cars: Car[] = [];
   brands:Brand[] = [];
   colours:Colour[] = [];
   brandsLoaded:boolean = false;
@@ -20,11 +23,65 @@ export class CarFilterComponent implements OnInit {
   brandId:number;
   colourId:number;
 
-  constructor(private brandService:BrandService, private colourService:ColourService, private router:Router) { }
+  currentBrand:Brand = {id: 0, name: ""};
+  currentColour:Colour = {id: 0, name: ""};
+
+  @Output() currentCarsEvent = new EventEmitter<Car[]>();
+
+  constructor(private brandService:BrandService, private colourService:ColourService, private router:Router,
+              private carService: CarService) { }
 
   ngOnInit(): void {
     this.getBrands();
     this.getColours();
+    this.getCars();
+    console.log("FİLTER FİLTER")
+  }
+
+  sendCurrentCars(){
+    this.currentCarsEvent.emit(this.cars);
+  }
+
+  filterCars(){
+    if (this.currentBrand.id != 0 && this.currentColour.id == 0){
+      this.getCarsByBrandId(this.currentBrand.id);
+    } else if (this.currentBrand.id == 0 && this.currentColour.id != 0){
+      this.getCarsByColourId(this.currentColour.id);
+    } else if (this.currentBrand.id != 0 && this.currentColour.id != 0){
+      this.getCarsByBrandIdAndColourId(this.currentBrand.id, this.currentColour.id);
+    } else{
+      this.getCars();
+    }
+  }
+
+  getCars() {
+    this.carService.getCars().subscribe((response) => {
+      this.cars = response.data;
+      this.sendCurrentCars();
+      //this.dataLoaded = true;
+    })
+  }
+
+  getCarsByBrandId(brandId: number) {
+    this.carService.getCarsByBrandId(brandId).subscribe((response) => {
+      this.cars = response.data;
+      this.sendCurrentCars();
+      //this.dataLoaded = true;
+    })
+  }
+
+  getCarsByColourId(colourId: number) {
+    this.carService.getCarsByColourId(colourId).subscribe((response) => {
+      this.cars = response.data;
+      this.sendCurrentCars();
+    })
+  }
+
+  getCarsByBrandIdAndColourId(brandId: number, colourId: number) {
+    this.carService.getCarsByBrandIdAndColourId(brandId, colourId).subscribe((response) => {
+      this.cars = response.data;
+      this.sendCurrentCars();
+    })
   }
 
   getBrands(){
@@ -41,7 +98,60 @@ export class CarFilterComponent implements OnInit {
     })
   }
 
-  setCurrentRoute(){
-    this.router.navigateByUrl("cars/brand/" + this.brandId + "/colour/" + this.colourId);
+  setCurrentBrand(brand:Brand){
+    this.currentBrand = brand;
+    this.filterCars();
+  }
+
+  getCurrentBrandClass(brand:Brand){
+    if(this.currentBrand == brand){
+      return "list-group-item active";
+    }
+    else{
+      return "list-group-item";
+    }
+  }
+
+  setCurrentBrandDefault(){
+    this.currentBrand = {id: 0, name: ""};
+    this.filterCars();
+  }
+
+  getCurrentBrandAllClass(){
+    if(this.currentBrand.id == 0){
+      return "list-group-item active";
+    }
+    else{
+      return "list-group-item";
+    }
+  }
+
+  //Colour
+  setCurrentColour(colour:Colour){
+    this.currentColour = colour;
+    this.filterCars();
+  }
+
+  getCurrentColourClass(colour:Colour){
+    if(this.currentColour == colour){
+      return "list-group-item active";
+    }
+    else{
+      return "list-group-item"
+    }
+  }
+
+  setCurrentColourDefault(){
+    this.currentColour = {id: 0, name: ""};
+    this.filterCars();
+  }
+
+  getCurrentColourAllClass(){
+    if(this.currentColour.id == 0){
+      return "list-group-item active";
+    }
+    else{
+      return "list-group-item"
+    }
   }
 }

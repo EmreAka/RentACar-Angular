@@ -1,24 +1,16 @@
-<div class="row">
-  <div class="col-5">
-    <h1 class="display-6">Brands</h1>
-  </div>
-  <div class="col-5">
-    <h1 class="display-6">Colours</h1>
-  </div>
+<div>
+  <h1 *ngIf="brandsLoaded == true" class="display-6">Brands</h1>
+  <ul *ngIf="brandsLoaded == true" class="list-group shadow mb-5 bg-body rounded">
+    <li (click)="setCurrentBrandDefault()" [class]="getCurrentBrandAllClass()">All Brands</li>
+    <li (click)="setCurrentBrand(brand)" *ngFor="let brand of brands"
+        [class]="getCurrentBrandClass(brand)">{{brand.name}}</li>
+  </ul>
+
+  <h1 *ngIf="coloursLoaded == true" class="display-6">Colours</h1>
+  <ul *ngIf="coloursLoaded == true" class="list-group shadow mb-5 bg-body rounded">
+    <li (click)="setCurrentColourDefault()" [class]="getCurrentColourAllClass()">All Colours</li>
+    <li (click)="setCurrentColour(colour)" *ngFor="let colour of colours"
+        [class]="getCurrentColourClass(colour)">{{colour.name}}</li>
+  </ul>
 </div>
 
-<div class="row">
-  <div class="col-5">
-    <select [(ngModel)]="brandId" class="form-select" aria-label="Default select example">
-      <option *ngFor="let brand of brands" [ngValue]="brand.id">{{brand.name}}</option>
-    </select>
-  </div>
-  <div class="col-5">
-    <select [(ngModel)]="colourId" class="form-select" aria-label="Default select example">
-      <option *ngFor="let colour of colours" [ngValue]="colour.id">{{colour.name}}</option>
-    </select>
-  </div>
-  <div class="col">
-    <button (click)="setCurrentRoute()" type="button" class="btn btn-outline-dark">Apply Filter</button>
-  </div>
-</div>

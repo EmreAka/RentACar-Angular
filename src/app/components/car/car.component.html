@@ -1,59 +1,62 @@
-<div>
+<div class="container-fluid">
   <div *ngIf="dataLoaded == false" class="d-flex justify-content-center">
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
 
-  <app-car-filter *ngIf="dataLoaded == true"></app-car-filter>
-
-  <div *ngIf="dataLoaded == true" class="mb-3">
-    <label for="filterText" class="form-label"
-    ><h1 class="display-6">Search A Car</h1></label
-    >
-    <input
-      type="text"
-      [(ngModel)]="filterText"
-      class="form-control"
-      id="filterText"
-      placeholder="enter a search expression"
-    />
-  </div>
-
-  <div *ngIf="filterText" class="alert alert-primary">
-    {{ filterText }} searched.
-  </div>
-</div>
-
-<div *ngIf="dataLoaded">
-  <div class="card-title">
-    <h1 class="display-6">Cars</h1>
-    <div class="container-fluid">
-      <div class="row">
-
-        <button class="btn btn-outline-dark" (click)="setCurrentRouteToCarAdd()">Add</button>
-      </div>
+  <div class="row">
+    <div class="col-2">
+      <app-car-filter (currentCarsEvent)="receiveCurrentCars($event)" *ngIf="dataLoaded == true"></app-car-filter>
     </div>
-  </div>
-  <div class="card-body">
-    <div fxLayout="row wrap" fxLayoutGap="20px grid">
-      <div fxFlex.xs="100%" fxFlex.md="50%" fxFlex.sm="50%" fxFlex.lg="33%" fxFlex.xl="25%"
-           *ngFor="let car of cars | carFilter: filterText; let i = index">
-        <div class="card shadow p-3 mb-5 bg-body rounded">
-          <img [src]="car.images[0]" class="card-img-top">
-          <div class="card-body">
-            <h5 class="card-title">{{car.brandName}}</h5>
-            <p class="card-text">{{car.description}}</p>
-            <div class="btn-group float-end" role="group">
-              <button (click)="setCurrentRouteToCarEdit(car.id)" type="button" class="btn btn-outline-dark">Edit
-              </button>
-              <button
-                (click)="setCurrentRouteToCarDetail(car.id)"
-                type="button"
-                class="btn btn-outline-dark"
-              >
-                Review
-              </button>
+    <div class="col-10">
+      <div *ngIf="dataLoaded == true" class="mb-3">
+        <label for="filterText" class="form-label"
+        ><h1 class="display-6">Search A Car</h1></label
+        >
+        <input
+          type="text"
+          [(ngModel)]="filterText"
+          class="form-control"
+          id="filterText"
+          placeholder="enter a search expression"
+        />
+      </div>
+      <div *ngIf="filterText" class="alert alert-primary">
+        {{ filterText }} searched.
+      </div>
+      <div *ngIf="dataLoaded">
+        <div class="card-title">
+          <h1 class="display-6">Cars</h1>
+          <div class="container-fluid">
+            <div class="row">
+
+              <button class="btn btn-outline-dark" (click)="setCurrentRouteToCarAdd()">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div fxLayout="row wrap" fxLayoutGap="20px grid">
+            <div fxFlex.xs="100%" fxFlex.md="50%" fxFlex.sm="50%" fxFlex.lg="33%" fxFlex.xl="25%"
+                 *ngFor="let car of currentCars | carFilter: filterText; let i = index" @fade>
+              <div class="card shadow p-3 mb-5 bg-body rounded">
+                <img [src]="car.images[0]" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">{{car.brandName}}</h5>
+                  <p class="card-text">{{car.description}}</p>
+                  <div class="btn-group float-end" role="group">
+                    <button (click)="setCurrentRouteToCarEdit(car.id)" type="button" class="btn btn-outline-dark">Edit
+                    </button>
+                    <button
+                      (click)="setCurrentRouteToCarDetail(car.id)"
+                      type="button"
+                      class="btn btn-outline-dark"
+                    >
+                      Review
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

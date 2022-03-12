@@ -25,8 +25,10 @@ export class CarFilterComponent implements OnInit {
 
   currentBrand:Brand = {id: 0, name: ""};
   currentColour:Colour = {id: 0, name: ""};
+  dataLoaded: boolean = false;
 
   @Output() currentCarsEvent = new EventEmitter<Car[]>();
+  @Output() dataLoadedEvent = new EventEmitter<boolean>();
 
   constructor(private brandService:BrandService, private colourService:ColourService, private router:Router,
               private carService: CarService) { }
@@ -40,6 +42,7 @@ export class CarFilterComponent implements OnInit {
 
   sendCurrentCars(){
     this.currentCarsEvent.emit(this.cars);
+    this.dataLoadedEvent.emit(this.dataLoaded);
   }
 
   filterCars(){
@@ -57,22 +60,23 @@ export class CarFilterComponent implements OnInit {
   getCars() {
     this.carService.getCars().subscribe((response) => {
       this.cars = response.data;
+      this.dataLoaded = true;
       this.sendCurrentCars();
-      //this.dataLoaded = true;
     })
   }
 
   getCarsByBrandId(brandId: number) {
     this.carService.getCarsByBrandId(brandId).subscribe((response) => {
       this.cars = response.data;
+      this.dataLoaded = true;
       this.sendCurrentCars();
-      //this.dataLoaded = true;
     })
   }
 
   getCarsByColourId(colourId: number) {
     this.carService.getCarsByColourId(colourId).subscribe((response) => {
       this.cars = response.data;
+      this.dataLoaded = true;
       this.sendCurrentCars();
     })
   }
@@ -80,6 +84,7 @@ export class CarFilterComponent implements OnInit {
   getCarsByBrandIdAndColourId(brandId: number, colourId: number) {
     this.carService.getCarsByBrandIdAndColourId(brandId, colourId).subscribe((response) => {
       this.cars = response.data;
+      this.dataLoaded = true;
       this.sendCurrentCars();
     })
   }

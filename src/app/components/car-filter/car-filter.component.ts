@@ -42,6 +42,12 @@ export class CarFilterComponent implements OnInit {
   }
 
   setCurrentRoute(){
-    this.router.navigateByUrl("cars/brand/" + this.brandId + "/colour/" + this.colourId);
+    if (this.brandId && !this.colourId){
+      this.router.navigateByUrl("cars/brand/" + this.brandId);
+    }else if(!this.brandId && this.colourId){
+      this.router.navigateByUrl("cars/colour/" + this.colourId);
+    }else {
+      this.router.navigateByUrl("cars/brand/" + this.brandId + "/colour/" + this.colourId);
+    }
   }
 }

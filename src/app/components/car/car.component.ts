@@ -34,6 +34,8 @@ export class CarComponent implements OnInit {
   filterText: string = "";
   isFav: boolean = false;
 
+  favoritedCar: any = 0;
+
   constructor(private carService: CarService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
@@ -60,15 +62,22 @@ export class CarComponent implements OnInit {
     this.router.navigateByUrl("cars/edit/" + carId);
   }
 
-  setFav(){
-    if (this.isFav == false) this.isFav = true;
-
-    else this.isFav = false;
+  setFav(i: any){
+    /*if (this.isFav == false) this.isFav = true;
+    else this.isFav = false;*/
+    this.favoritedCar = i;
   }
 
-  getFavClass(){
-    if (!this.isFav) return "bi bi-heart";
+  getFavClass(i: any){
+    /*if (!this.isFav) return "bi bi-heart";
+    else return "bi bi-heart-fill";*/
+    if (this.favoritedCar != i) return "bi bi-heart";
     else return "bi bi-heart-fill";
+  }
+
+  triggerAni(i: any){
+    if (this.favoritedCar != i) return 'closed';
+    else return 'open';
   }
 
 }

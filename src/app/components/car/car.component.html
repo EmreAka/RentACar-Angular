@@ -45,6 +45,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{car.brandName}}</h5>
                   <p class="card-text">{{car.description}}</p>
+                  <i [@fav]="triggerAni(i)" (click)="setFav(i)" [class]="getFavClass(i)" style="font-size: 25px"></i>
                   <div class="btn-group float-end" role="group">
                     <button (click)="setCurrentRouteToCarEdit(car.id)" type="button" class="btn btn-outline-dark">Edit
                     </button>

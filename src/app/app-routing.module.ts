@@ -19,6 +19,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ColourComponent } from './components/colour/colour.component';
 import {RentalComponent} from "./components/rental/rental.component";
 import {MyCarListComponent} from "./components/my-car-list/my-car-list.component";
+import {FavoriteCarComponent} from "./components/favorite-car/favorite-car.component";
 
 const routes: Routes = [
   {path: "", pathMatch: "full", component: CarComponent},
@@ -37,7 +38,8 @@ const routes: Routes = [
   {path: "profile", component: ProfileComponent, canActivate: [LoginGuard]},
   {path: "upload/:carId", component: CarImageUploadComponent},
   {path: "rentals", component: RentalComponent},
-  {path: "mycars", component: MyCarListComponent, canActivate: [LoginGuard]}
+  {path: "mycars", component: MyCarListComponent, canActivate: [LoginGuard]},
+  {path: "favoritecars", component: FavoriteCarComponent, canActivate: [LoginGuard]}
 ];
 
 @NgModule({

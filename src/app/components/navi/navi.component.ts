@@ -48,6 +48,10 @@ export class NaviComponent implements OnInit {
     this.router.navigate(["profile"]);
   }
 
+  setCurrentRouteToFavorite() {
+    this.router.navigate(["favoritecars"]);
+  }
+
   setCurrentRouteToMyCars() {
     this.router.navigate(["mycars"]);
   }

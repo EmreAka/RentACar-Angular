@@ -1,4 +1,4 @@
-<h1 class="display-6">My Cars</h1>
+<h1 class="display-6">Favorite Cars</h1>
 <div *ngIf="dataLoaded == false" class="d-flex justify-content-center">
   <div class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>
@@ -9,17 +9,15 @@
   <div class="card-body">
     <div fxLayout="row wrap" fxLayoutGap="20px grid">
       <div fxFlex.xs="100%" fxFlex.md="50%" fxFlex.sm="50%" fxFlex.lg="33%" fxFlex.xl="25%"
-           *ngFor="let car of cars; let i = index" @fade>
+           *ngFor="let car of favoriteCars; let i = index" @fade>
         <div class="card shadow p-3 mb-5 bg-body rounded" @fade>
           <img [src]="car.images[0]" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">{{car.brandName}}</h5>
             <p class="card-text">{{car.description}}</p>
             <div class="btn-group float-end" role="group">
-              <button (click)="setCurrentRouteToCarEdit(car.id)" type="button" class="btn btn-outline-dark">Edit
-              </button>
               <button
-                (click)="setCurrentRouteToCarDetail(car.id)"
+                (click)="setCurrentRouteToCarDetail(car.carId)"
                 type="button"
                 class="btn btn-outline-dark"
               >

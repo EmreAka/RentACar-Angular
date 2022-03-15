@@ -1,9 +1,8 @@
 import {CarService} from './../../services/car.service';
 import {Car} from './../../models/car';
-import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {Brand} from "../../models/brand";
 
 @Component({
   selector: 'app-car',
@@ -15,6 +14,16 @@ import {Brand} from "../../models/brand";
       transition('void <=> *', [
         animate(1000)
       ])
+    ]),
+    trigger('fav', [
+      state('open', style({color: "gray"})),
+      state('closed', style({})),
+      transition('open => closed', [
+        animate(200)
+      ]),
+      transition('closed => open', [
+        animate(200)
+      ])
     ])
   ]
 })
@@ -23,6 +32,9 @@ export class CarComponent implements OnInit {
   currentCars: Car[] = [];
   dataLoaded: boolean = false;
   filterText: string = "";
+  isFav: boolean = false;
+
+  favoritedCar: any = 0;
 
   constructor(private carService: CarService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
@@ -48,6 +60,24 @@ export class CarComponent implements OnInit {
 
   setCurrentRouteToCarEdit(carId: number) {
     this.router.navigateByUrl("cars/edit/" + carId);
+  }
+
+  setFav(i: any){
+    /*if (this.isFav == false) this.isFav = true;
+    else this.isFav = false;*/
+    this.favoritedCar = i;
+  }
+
+  getFavClass(i: any){
+    /*if (!this.isFav) return "bi bi-heart";
+    else return "bi bi-heart-fill";*/
+    if (this.favoritedCar != i) return "bi bi-heart";
+    else return "bi bi-heart-fill";
+  }
+
+  triggerAni(i: any){
+    if (this.favoritedCar != i) return 'closed';
+    else return 'open';
   }
 
 }

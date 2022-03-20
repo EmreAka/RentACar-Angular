@@ -6,11 +6,11 @@
   </div>
 
   <div class="row">
-    <div class="col-2">
+    <div class="col-lg-2 col-sm-12">
       <app-car-filter (currentCarsEvent)="receiveCurrentCars($event)" (dataLoadedEvent)="receiveDataLoaded($event)">
       </app-car-filter>
     </div>
-    <div class="col-10">
+    <div class="col-lg-10 col-sm-12">
       <div *ngIf="dataLoaded == true" class="mb-3">
         <label for="filterText" class="form-label"
         ><h1 class="display-6">Search A Car</h1></label
@@ -45,7 +45,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{car.brandName}}</h5>
                   <p class="card-text">{{car.description}}</p>
-                  <i [@fav]="triggerAni(i)" (click)="setFav(i)" [class]="getFavClass(i)" style="font-size: 25px"></i>
+                  <i [@fav]="triggerAni(i)" (click)="setFav(car.id)" [class]="getFavClass(car.id)" style="font-size: 25px"></i>
                   <div class="btn-group float-end" role="group">
                     <button (click)="setCurrentRouteToCarEdit(car.id)" type="button" class="btn btn-outline-dark">Edit
                     </button>

@@ -3,6 +3,9 @@ import {Car} from './../../models/car';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {AuthService} from "../../services/auth.service";
+import {FavoriteService} from "../../services/favorite.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-car',
@@ -30,23 +33,41 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 export class CarComponent implements OnInit {
 
   currentCars: Car[] = [];
+  favorites: any[] = [];
   dataLoaded: boolean = false;
   filterText: string = "";
   isFav: boolean = false;
 
-  favoritedCar: any = 0;
+  favoritedCar: number;
 
-  constructor(private carService: CarService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private carService: CarService, private activatedRoute: ActivatedRoute, private router: Router,
+              private authService: AuthService, private favService: FavoriteService, private toastrService: ToastrService) {
   }
 
   ngOnInit(): void {
+    if (this.authService.isAuthenticated()){
+      this.getFavoritesByUserId();
+    }
   }
 
-  receiveCurrentCars($event: Car[]){
+  getFavoritesByUserId() {
+    this.favService.getFavoritesByUserId(this.authService.decodedToken["UserId"]).subscribe((response) => {
+      this.favorites = response.data;
+      console.log(this.favorites);
+    })
+  }
+
+  deleteFavorite(favorite: any){
+    this.favService.deleteFavorite(favorite).subscribe((response) => {
+      console.log("Deleted")
+    })
+  }
+
+  receiveCurrentCars($event: Car[]) {
     this.currentCars = $event;
   }
 
-  receiveDataLoaded($event: boolean){
+  receiveDataLoaded($event: boolean) {
     this.dataLoaded = $event;
   }
 
@@ -62,20 +83,54 @@ export class CarComponent implements OnInit {
     this.router.navigateByUrl("cars/edit/" + carId);
   }
 
-  setFav(i: any){
-    /*if (this.isFav == false) this.isFav = true;
-    else this.isFav = false;*/
+  /*setFav(i: any) {
     this.favoritedCar = i;
+  }*/
+
+  setFav(carId: number){
+    if (this.authService.isAuthenticated()){
+      let index: number = this.favorites.findIndex(f => f.carId == carId)
+      if (index != -1){
+        this.favService.deleteFavorite(this.favorites[index]).subscribe((response) => {
+          this.favorites.splice(index, 1);
+          this.toastrService.info("Removed from favorites");
+        })
+      }
+      else{
+        this.favService.addFavorite({userId: this.authService.decodedToken["UserId"], carId: carId}).subscribe((response) => {
+          this.getFavoritesByUserId()
+          this.toastrService.info("Added to favorites");
+        })
+      }
+    } else {
+      this.toastrService.info("You need to log in");
+    }
+
   }
 
-  getFavClass(i: any){
-    /*if (!this.isFav) return "bi bi-heart";
-    else return "bi bi-heart-fill";*/
+  /*getFavClass(i: any) {
     if (this.favoritedCar != i) return "bi bi-heart";
     else return "bi bi-heart-fill";
+  }*/
+
+  getFavClass(carId: number){
+    if (this.isThatCarFavorited(carId)) return "bi bi-heart-fill";
+    else return "bi bi-heart"
   }
 
-  triggerAni(i: any){
+  isThatCarFavorited(carId: number): boolean{
+    let isFavorited: boolean = false;
+    if(this.authService.isAuthenticated()){
+      for (let i = 0; i < this.favorites.length; i++){
+        if (this.favorites[i].carId == carId){
+          isFavorited = true;
+        }
+      }
+    }
+    return isFavorited;
+  }
+
+  triggerAni(i: any) {
     if (this.favoritedCar != i) return 'closed';
     else return 'open';
   }

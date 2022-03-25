@@ -9,6 +9,8 @@ import {FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
 import {Router} from "@angular/router";
 import {LocalStorageService} from "../../services/local-storage.service";
 import {AuthService} from "../../services/auth.service";
+import {EngineService} from "../../services/engine.service";
+import {Engine} from "../../models/engine";
 
 @Component({
   selector: 'app-car-add',
@@ -21,16 +23,19 @@ export class CarAddComponent implements OnInit {
 
   brands: Brand[];
   colours: Colour[];
+  engines: Engine[];
 
   constructor(private formBuilder: FormBuilder, private brandService: BrandService,
               private colourService: ColourService, private carService: CarService,
               private toastrService: ToastrService, private router: Router,
-              private localStorageService: LocalStorageService, private authService: AuthService) {
+              private localStorageService: LocalStorageService, private authService: AuthService,
+              private engineService: EngineService) {
   }
 
   ngOnInit(): void {
     this.getBrands();
     this.getColours();
+    this.getEngines();
     this.createCarAddForm();
     this.carAddForm.valueChanges.subscribe(console.log);
   }
@@ -39,10 +44,21 @@ export class CarAddComponent implements OnInit {
     this.carAddForm = this.formBuilder.group({
       brandId: ["", Validators.required],
       colourId: ["", Validators.required],
+      engineId: ["", Validators.required],
+      fuelId: ["", Validators.required],
+      doorNumber: ["", Validators.required],
+      fuelConsumption: ["", Validators.required],
       modelYear: ["", Validators.required],
       dailyPrice: ["", Validators.required],
       description: ["", Validators.required]
     })
+  }
+
+  getEngines(){
+    this.engineService.getEngines().subscribe((response) => {
+      this.engines = response.data;
+      console.log(response.data);
+    });
   }
 
   getBrands() {

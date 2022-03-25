@@ -23,7 +23,19 @@ export class CarEditComponent implements OnInit {
 
   brands: Brand[];
   colours: Colour[];
-  car: PlainCar = {brandId: 0, colourId: 0, dailyPrice: 0, description: "", id: 0, modelYear: 0, userId: 0};
+  car: PlainCar = {
+    brandId: 0,
+    colourId: 0,
+    fuelId: 0,
+    engineId: 0,
+    doorNumber: 0,
+    fuelConsumption: 0,
+    dailyPrice: 0,
+    description: "",
+    id: 0,
+    modelYear: 0,
+    userId: 0
+  };
   carImages: CarImage[] = [];
   carIdToUploadPhoto: string;
 

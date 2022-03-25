@@ -1,4 +1,4 @@
-import { ListResponseModel } from './../models/listResponseModel';
+import { ListResponseModel } from '../models/listResponseModel';
 import { Observable } from 'rxjs';
 import { Card } from './../models/card';
 import { HttpClient } from '@angular/common/http';

@@ -1,7 +1,7 @@
-import { ActivatedRoute } from '@angular/router';
-import { CarService } from './../../services/car.service';
-import { Car } from './../../models/car';
-import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CarService} from './../../services/car.service';
+import {Car} from './../../models/car';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-car-detail',
@@ -10,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarDetailComponent implements OnInit {
 
-  car:Car = {id: 0, brandName: "", colourName: "", companyName: "",dailyPrice: 0, description: "", images: [], modelYear: 0};
-  dataLoaded:boolean = false;
-  constructor(private carService:CarService, private activatedRoute:ActivatedRoute) { }
+  car: Car = {
+    id: 0, brandName: "", colourName: "", companyName: "", engineType: "", fuelType: "", doorNumber: 0,
+    fuelConsumption: 0, dailyPrice: 0, description: "", images: [], modelYear: 0
+  };
+  dataLoaded: boolean = false;
+
+  constructor(private carService: CarService, private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -20,7 +25,7 @@ export class CarDetailComponent implements OnInit {
     })
   }
 
-  getCarDetailByCarId(carId:number){
+  getCarDetailByCarId(carId: number) {
     this.carService.getCarDetailByCarId(carId).subscribe((response) => {
       this.car = response.data[0];
       this.dataLoaded = true;

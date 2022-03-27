@@ -11,6 +11,10 @@ import {Colour} from './../../models/colour';
 import {Brand} from './../../models/brand';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Component, OnInit} from '@angular/core';
+import {Engine} from "../../models/engine";
+import {Fuel} from "../../models/fuel";
+import {EngineService} from "../../services/engine.service";
+import {FuelService} from "../../services/fuel.service";
 
 @Component({
   selector: 'app-car-edit',
@@ -23,6 +27,9 @@ export class CarEditComponent implements OnInit {
 
   brands: Brand[];
   colours: Colour[];
+  engines: Engine[];
+  fuels: Fuel[];
+
   car: PlainCar = {
     brandId: 0,
     colourId: 0,
@@ -42,7 +49,8 @@ export class CarEditComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private brandService: BrandService,
               private colourService: ColourService, private carService: CarService,
               private toastrService: ToastrService, private activatedRoute: ActivatedRoute,
-              private carImageService: CarImageService, private router: Router) {
+              private carImageService: CarImageService, private router: Router, private engineService: EngineService,
+              private fuelService: FuelService) {
   }
 
   ngOnInit(): void {
@@ -53,6 +61,8 @@ export class CarEditComponent implements OnInit {
     })
     this.getBrands();
     this.getColours();
+    this.getEngines();
+    this.getFuels();
     this.createCarAddForm();
   }
 
@@ -60,11 +70,27 @@ export class CarEditComponent implements OnInit {
     this.carUpdateForm = this.formBuilder.group({
       brandId: ["", Validators.required],
       colourId: ["", Validators.required],
+      engineId: ["", Validators.required],
+      fuelId: ["", Validators.required],
+      doorNumber: ["", Validators.required],
+      fuelConsumption: ["", Validators.required],
       userId: ["", Validators.required],
       modelYear: ["", Validators.required],
       dailyPrice: ["", Validators.required],
       description: ["", Validators.required]
     })
+  }
+
+  getFuels() {
+    this.fuelService.getFuels().subscribe((response) => {
+      this.fuels = response.data;
+    });
+  }
+
+  getEngines() {
+    this.engineService.getEngines().subscribe((response) => {
+      this.engines = response.data;
+    });
   }
 
   getBrands() {
@@ -84,6 +110,10 @@ export class CarEditComponent implements OnInit {
       this.car = response.data;
       this.carUpdateForm.controls['brandId'].setValue(this.car.brandId);
       this.carUpdateForm.controls['colourId'].setValue(this.car.colourId);
+      this.carUpdateForm.controls['engineId'].setValue(this.car.engineId);
+      this.carUpdateForm.controls['fuelId'].setValue(this.car.fuelId);
+      this.carUpdateForm.controls['doorNumber'].setValue(this.car.doorNumber);
+      this.carUpdateForm.controls['fuelConsumption'].setValue(this.car.fuelConsumption);
       this.carUpdateForm.controls['userId'].setValue(this.car.userId);
       this.carUpdateForm.controls['modelYear'].setValue(this.car.modelYear);
       this.carUpdateForm.controls['dailyPrice'].setValue(this.car.dailyPrice);

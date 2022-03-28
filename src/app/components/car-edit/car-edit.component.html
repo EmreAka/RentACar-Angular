@@ -1,11 +1,11 @@
-<div class="card shadow p-3 mb-5 bg-body rounded">
-  <div class="card-body">
-    <div class="card-title">
+<div class="container-fluid">
+  <div class="">
+    <div class="">
       <h1 class="display-3">Update Car</h1>
     </div>
     <form [formGroup]="carUpdateForm">
       <div class="row">
-        <div class="col-6">
+        <div class="col-lg-3 col-sm-12">
           <div class="mb-3">
             <label for="brandId" class="form-label">Select Brand</label>
             <select id="brandId" class="form-select" formControlName="brandId">
@@ -15,12 +15,32 @@
             </select>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-lg-3 col-sm-12">
           <div class="mb-3">
             <label for="colourId" class="form-label">Select Colour</label>
             <select id="colourId" formControlName="colourId" class="form-select">
               <option *ngFor="let colour of colours" [ngValue]="colour.id">
                 {{ colour.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-12">
+          <div class="mb-3">
+            <label for="engineId" class="form-label">Select Engine</label>
+            <select id="engineId" formControlName="engineId" class="form-select">
+              <option *ngFor="let engine of engines" [ngValue]="engine.id">
+                {{engine.type}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-12">
+          <div class="mb-3">
+            <label for="fuelId" class="form-label">Select Engine</label>
+            <select id="fuelId" formControlName="fuelId" class="form-select">
+              <option *ngFor="let fuel of fuels" [ngValue]="fuel.id">
+                {{fuel.type}}
               </option>
             </select>
           </div>
@@ -43,13 +63,30 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label for="doorNumber" class="form-label">Door Number</label>
+            <input id="doorNumber" type="number" class="form-control" placeholder="Enter door number"
+                   formControlName="doorNumber"/>
+          </div>
+        </div>
+        <div class="col-6">
+          <label for="fuelConsumption" class="form-label">Fuel Consumption</label>
+          <div class="input-group md-3">
+            <span class="input-group-text">$</span>
+            <input id="fuelConsumption" type="number" class="form-control" placeholder="Enter daily price"
+                   formControlName="fuelConsumption"/>
+          </div>
+        </div>
+      </div>
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
         <textarea id="description" type="text" class="form-control" placeholder="Enter a description"
                   formControlName="description" rows="3"></textarea>
       </div>
     </form>
-    <div class="card-footer">
+    <div class="">
       <div class="btn-group float-end" role="group" aria-label="Button Group">
         <button (click)="deleteCar()" class="btn btn-outline-danger">
           Delete Car
@@ -62,9 +99,9 @@
   </div>
 </div>
 
-<div class="card shadow p-3 mb-5 bg-body rounded">
-  <div class="card-body">
-    <div class="card-title">
+<div class="container-fluid">
+  <div class="">
+    <div class="">
       <h1 class="display-3">Update Car Images</h1>
     </div>
     <div class="row mb-3">

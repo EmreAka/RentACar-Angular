@@ -11,7 +11,7 @@ import { SingleResponseModel } from '../models/singleResponseModel';
 })
 export class CustomerService {
 
-  apiUrl = "https://localhost:5001/api/Customers/";
+  apiUrl = "https://localhost:44384/api/Customers/";
   constructor(private httpClient: HttpClient) { }
 
   getCustomers(): Observable<ListResponseModel<Customer>> {

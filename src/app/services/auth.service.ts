@@ -14,7 +14,7 @@ import {DecodedToken} from "../models/decodedToken";
 })
 export class AuthService {
 
-  apiUrl = "https://localhost:5001/api/Auth/";
+  apiUrl = "https://localhost:44384/api/Auth/";
   decodedToken: DecodedToken = {Token: "", DecodedToken: "", Expiration: 0, Email: "", Name: "", Role: "", Roles: [], UserId: 0};
 
   constructor(private httpClient: HttpClient, private jwtHelperService: JwtHelperService,

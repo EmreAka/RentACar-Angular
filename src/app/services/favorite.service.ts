@@ -9,7 +9,7 @@ import {ResponseModel} from "../models/responseModel";
 })
 export class FavoriteService {
 
-  apiUrl: string = "https://localhost:5001/api/";
+  apiUrl: string = "https://localhost:44384/api/";
 
   constructor(private httpClient: HttpClient) { }
 

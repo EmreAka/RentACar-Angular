@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class PaymentService {
 
-  apiUrl:string = "https://localhost:5001/api/Payments/pay";
+  apiUrl:string = "https://localhost:44384/api/Payments/pay";
   constructor(private httpClient:HttpClient) { }
 
   pay(card: CardToPay, carId: number):Observable<any>{

@@ -10,7 +10,7 @@ import { ResponseModel } from '../models/responseModel';
 })
 export class CarImageService {
 
-  apiUrl: string = "https://localhost:5001/api/CarImages/";
+  apiUrl: string = "https://localhost:44384/api/CarImages/";
 
   constructor(private httpClient: HttpClient) { }
 

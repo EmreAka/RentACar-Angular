@@ -9,7 +9,7 @@ import {Fuel} from "../models/fuel";
 })
 export class FuelService {
 
-  apiUrl: string = "https://localhost:5001/api/"
+  apiUrl: string = "https://localhost:44384/api/"
 
   constructor(private httpClient: HttpClient) { }
 

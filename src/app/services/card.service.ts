@@ -10,7 +10,7 @@ import { ResponseModel } from '../models/responseModel';
 })
 export class CardService {
 
-  apiUrl = "https://localhost:5001/api/";
+  apiUrl = "https://localhost:44384/api/";
   constructor(private httpClient: HttpClient) { }
 
   addCard(card: Card): Observable<ResponseModel> {

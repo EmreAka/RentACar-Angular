@@ -24,7 +24,7 @@ import {FavoriteCarComponent} from "./components/favorite-car/favorite-car.compo
 const routes: Routes = [
   {path: "", pathMatch: "full", component: CarComponent},
   {path: "cars", component: CarComponent},
-  {path: "cars/add", component: CarAddComponent},
+  {path: "cars/add", component: CarAddComponent, canActivate: [LoginGuard]},
   {path: "cars/edit/:carId", component: CarEditComponent},
   {path: "cars/detail/:carId", component: CarDetailComponent},
   {path: "colours", component: ColourListComponent},

@@ -6,13 +6,14 @@ import { Injectable } from '@angular/core';
 import { Car } from '../models/car';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarService {
 
-  apiUrl = "https://localhost:44384/api/";
+  apiUrl = environment.apiUrl + "/api/";
   constructor(private httpClient:HttpClient) { }
 
   getCars():Observable<ListResponseModel<Car>>{

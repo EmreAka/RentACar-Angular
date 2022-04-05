@@ -3,13 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ListResponseModel} from "../models/listResponseModel";
 import {ResponseModel} from "../models/responseModel";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoriteService {
 
-  apiUrl: string = "https://localhost:44384/api/";
+  apiUrl: string = environment.apiUrl + "/api/";
 
   constructor(private httpClient: HttpClient) { }
 

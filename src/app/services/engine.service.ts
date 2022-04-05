@@ -3,13 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ListResponseModel} from "../models/listResponseModel";
 import {Engine} from "../models/engine";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EngineService {
 
-  apiUrl: string = "https://localhost:44384/api/";
+  apiUrl: string = environment.apiUrl + "/api/";
 
   constructor(private httpClient: HttpClient) { }
 

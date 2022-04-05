@@ -4,13 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarImageService {
 
-  apiUrl: string = "https://localhost:44384/api/CarImages/";
+  apiUrl: string = environment.apiUrl + "/api/CarImages/";
 
   constructor(private httpClient: HttpClient) { }
 

@@ -5,13 +5,14 @@ import { Injectable } from '@angular/core';
 import { Customer } from '../models/customer';
 import { ListResponseModel } from '../models/listResponseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
-  apiUrl = "https://localhost:44384/api/Customers/";
+  apiUrl = environment.apiUrl + "/api/Customers/";
   constructor(private httpClient: HttpClient) { }
 
   getCustomers(): Observable<ListResponseModel<Customer>> {

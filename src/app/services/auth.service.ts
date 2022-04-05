@@ -8,13 +8,14 @@ import {LoginModel} from './../models/loginModel';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {DecodedToken} from "../models/decodedToken";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  apiUrl = "https://localhost:44384/api/Auth/";
+  apiUrl = environment.apiUrl + "/api/Auth/";
   decodedToken: DecodedToken = {Token: "", DecodedToken: "", Expiration: 0, Email: "", Name: "", Role: "", Roles: [], UserId: 0};
 
   constructor(private httpClient: HttpClient, private jwtHelperService: JwtHelperService,

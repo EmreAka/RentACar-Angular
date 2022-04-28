@@ -10,12 +10,12 @@ import {environment} from "../../environments/environment";
 })
 export class FuelService {
 
-  apiUrl: string = environment.apiUrl + "/api/"
+  apiUrl: string = environment.apiUrl
 
   constructor(private httpClient: HttpClient) { }
 
   getFuels(): Observable<ListResponseModel<Fuel>>{
-    const newPath: string = this.apiUrl + "fuels/getall";
+    const newPath: string = this.apiUrl + "/fuels/getall";
     return this.httpClient.get<ListResponseModel<Fuel>>(newPath);
   }
 }

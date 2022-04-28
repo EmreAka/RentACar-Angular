@@ -14,6 +14,7 @@ export class PaymentService {
 
   pay(card: CardToPay, carId: number):Observable<any>{
     let newPath = this.apiUrl + "?carId=" + carId;
+    console.log(newPath)
     return this.httpClient.post<any>(newPath, card);
   }
 }

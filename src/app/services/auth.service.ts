@@ -15,7 +15,7 @@ import {environment} from "../../environments/environment";
 })
 export class AuthService {
 
-  apiUrl = environment.apiUrl + "/api/Auth/";
+  apiUrl = environment.apiUrl + "/Auth/";
   decodedToken: DecodedToken = {Token: "", DecodedToken: "", Expiration: 0, Email: "", Name: "", Role: "", Roles: [], UserId: 0};
 
   constructor(private httpClient: HttpClient, private jwtHelperService: JwtHelperService,

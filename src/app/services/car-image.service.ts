@@ -11,7 +11,7 @@ import {environment} from "../../environments/environment";
 })
 export class CarImageService {
 
-  apiUrl: string = environment.apiUrl + "/api/CarImages/";
+  apiUrl: string = environment.apiUrl + "/CarImages/";
 
   constructor(private httpClient: HttpClient) { }
 

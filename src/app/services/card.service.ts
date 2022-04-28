@@ -10,17 +10,17 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class CardService {
-
-  apiUrl = environment.apiUrl + "/api/";
+  //http://localhost:5000/api/Cards/add
+  apiUrl = environment.apiUrl;
   constructor(private httpClient: HttpClient) { }
 
   addCard(card: Card): Observable<ResponseModel> {
-    let newPath: string = this.apiUrl + "Cards/add";
+    let newPath: string = this.apiUrl + "/Cards/add";
     return this.httpClient.post<ResponseModel>(newPath, card);
   }
 
   getCardsByUserId(userId: number): Observable<ListResponseModel<Card>> {
-    let newPath: string = this.apiUrl + "Cards/getallbyuserid?userId=" + userId;
+    let newPath: string = this.apiUrl + "/Cards/getallbyuserid?userId=" + userId;
     return this.httpClient.get<ListResponseModel<Card>>(newPath);
   }
 }

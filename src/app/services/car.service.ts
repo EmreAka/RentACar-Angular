@@ -13,58 +13,58 @@ import {environment} from "../../environments/environment";
 })
 export class CarService {
 
-  apiUrl = environment.apiUrl + "/api/";
+  apiUrl = environment.apiUrl;
   constructor(private httpClient:HttpClient) { }
 
   getCars():Observable<ListResponseModel<Car>>{
-    let newPath:string = this.apiUrl + "Cars/getcardetails";
+    let newPath:string = this.apiUrl + "/Cars/getcardetails";
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
   getCarById(carId: number):Observable<SingleResponseModel<PlainCar>>{
-    let newPath: string = this.apiUrl + "Cars/getbyid?id=" + carId;
+    let newPath: string = this.apiUrl + "/Cars/getbyid?id=" + carId;
     return this.httpClient.get<SingleResponseModel<PlainCar>>(newPath);
   }
 
   getCarsByBrandId(brandId:number):Observable<ListResponseModel<Car>>{
-    let newPath:string = this.apiUrl + "Cars/getcardetailsbybrandid?brandId=" + brandId;
+    let newPath:string = this.apiUrl + "/Cars/getcardetailsbybrandid?brandId=" + brandId;
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
   getCarsByColourId(colourId:number):Observable<ListResponseModel<Car>>{
-    let newPath:string = this.apiUrl + "Cars/getcardetailsbycolourid?colourId=" + colourId;
+    let newPath:string = this.apiUrl + "/Cars/getcardetailsbycolourid?colourId=" + colourId;
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
   getCarsByBrandIdAndColourId(brandId:number, colourId:number):Observable<ListResponseModel<Car>>{
-    let newPath:string = this.apiUrl + "Cars/getcardetailsbybrandidandcolourid?brandId=" + brandId
+    let newPath:string = this.apiUrl + "/Cars/getcardetailsbybrandidandcolourid?brandId=" + brandId
     + "&colourId=" + colourId;
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
   getCarDetailByCarId(carId:number):Observable<ListResponseModel<Car>>{
-    let newPath:string = this.apiUrl + "Cars/getcardetailbycarid?carId=" + carId;
+    let newPath:string = this.apiUrl + "/Cars/getcardetailbycarid?carId=" + carId;
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
   getCarDetailsByCustomerId(customerId:number):Observable<ListResponseModel<Car>>{
-    let newPath:string = this.apiUrl + "Cars/getcardetailsbycustomerid?customerId=" + customerId;
+    let newPath:string = this.apiUrl + "/Cars/getcardetailsbycustomerid?customerId=" + customerId;
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 
   add(car:Car):Observable<ResponseModel>{
-    let newPath: string = this.apiUrl + "Cars/add";
+    let newPath: string = this.apiUrl + "/Cars/add";
     // return this.httpClient.post<ResponseModel>(newPath, car, {withCredentials: true});
     return this.httpClient.post<ResponseModel>(newPath, car);
   }
 
   delete(car:any):Observable<ResponseModel>{
-    let newPath: string = this.apiUrl + "Cars/delete";
+    let newPath: string = this.apiUrl + "/Cars/delete";
     return this.httpClient.post<ResponseModel>(newPath, car);
   }
 
   update(car:PlainCar):Observable<ResponseModel>{
-    let newPath: string = this.apiUrl + "Cars/update";
+    let newPath: string = this.apiUrl + "/Cars/update";
     return this.httpClient.post<ResponseModel>(newPath, car);
   }
 }

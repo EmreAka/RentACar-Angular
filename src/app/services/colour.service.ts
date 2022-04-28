@@ -12,33 +12,33 @@ import {environment} from "../../environments/environment";
 })
 export class ColourService {
 
-  apiUrl = environment.apiUrl + "/api/"
+  apiUrl = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) {
   }
 
   getColours(): Observable<ListResponseModel<Colour>> {
-    let newPath: string = this.apiUrl + "Colours/getall";
+    let newPath: string = this.apiUrl + "/Colours/getall";
     return this.httpClient.get<ListResponseModel<Colour>>(newPath);
   }
 
   getColourById(colourId: number): Observable<SingleResponseModel<Colour>> {
-    let newPath: string = this.apiUrl + "Colours/getbyid?id=" + colourId;
+    let newPath: string = this.apiUrl + "/Colours/getbyid?id=" + colourId;
     return this.httpClient.get<SingleResponseModel<Colour>>(newPath);
   }
 
   add(colour: Colour): Observable<ResponseModel> {
-    let newPath: string = this.apiUrl + "Colours/add";
+    let newPath: string = this.apiUrl + "/Colours/add";
     return this.httpClient.post<ResponseModel>(newPath, colour);
   }
 
   delete(colour: any): Observable<ResponseModel> {
-    let newPath: string = this.apiUrl + "Colours/delete";
+    let newPath: string = this.apiUrl + "/Colours/delete";
     return this.httpClient.post<ResponseModel>(newPath,colour);
   }
 
   update(colour: Colour): Observable<ResponseModel> {
-    let newPath: string = this.apiUrl + "Colours/update";
+    let newPath: string = this.apiUrl + "/Colours/update";
     return this.httpClient.post<ResponseModel>(newPath, colour);
   }
 }

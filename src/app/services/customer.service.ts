@@ -12,7 +12,7 @@ import {environment} from "../../environments/environment";
 })
 export class CustomerService {
 
-  apiUrl = environment.apiUrl + "/api/Customers/";
+  apiUrl = environment.apiUrl + "/Customers/";
   constructor(private httpClient: HttpClient) { }
 
   getCustomers(): Observable<ListResponseModel<Customer>> {

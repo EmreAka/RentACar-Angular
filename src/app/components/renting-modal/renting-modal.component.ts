@@ -97,7 +97,7 @@ export class RentingModalComponent implements OnInit {
   addRental() {
     let values = this.returnDate.split("-");
     let returnDataConverted = this.datePipe.transform(new Date(+values[0], +values[1] - 1, +values[2]), 'yyyy-MM-dd');
-    let rental = {carId: this.carId, customerId: 6023, rentDate: this.currentDate, returnDate: returnDataConverted};
+    let rental = {carId: this.carId, customerId: this.authService.decodedToken["UserId"], rentDate: this.currentDate, returnDate: returnDataConverted};
     this.rentalService.addRental(rental).subscribe((response) => {
       if (response.success) {
         this.toastrService.success("The rent has been successfully completed.");

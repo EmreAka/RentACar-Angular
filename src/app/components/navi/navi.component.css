@@ -11,3 +11,7 @@
 .nav-link {
   border-radius: 30px !important;
 }
+
+.dropdown-menu {
+  cursor: pointer;
+}

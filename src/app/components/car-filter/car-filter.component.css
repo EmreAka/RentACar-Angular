@@ -3,9 +3,15 @@
   color: #ffffff;
   background-color: #212529;
   border-color: #212529;
+  cursor: pointer;
 }
 
 .list-group-item:hover {
   background-color: #212529;
   color: white;
+  cursor: pointer;
+}
+
+.list-group {
+  cursor: pointer;
 }

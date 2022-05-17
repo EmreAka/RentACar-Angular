@@ -3,8 +3,12 @@
   <div>
     <ul *ngIf="brandsLoaded == true" class="list-group shadow mb-5 bg-body rounded">
       <div class="list-group scroll">
-        <li (click)="setCurrentBrandDefault()" [class]="getCurrentBrandAllClass()">All Brands</li>
-        <li (click)="setCurrentBrand(brand)" *ngFor="let brand of brands"
+        <li class="list-group-item">
+          <input [(ngModel)]="brandFilterText" class="form-control" placeholder="Search Brand"/>
+          <label *ngIf="brandFilterText" class="form-label">{{brandFilterText}} is searched.</label>
+        </li>
+        <li *ngIf="!brandFilterText" (click)="setCurrentBrandDefault()" [class]="getCurrentBrandAllClass()">All Brands</li>
+        <li (click)="setCurrentBrand(brand)" *ngFor="let brand of brands | brandFilter: brandFilterText"
             [class]="getCurrentBrandClass(brand)">{{brand.name}}</li>
       </div>
     </ul>
@@ -14,8 +18,12 @@
   <div>
     <ul *ngIf="coloursLoaded == true" class="list-group shadow mb-5 bg-body rounded">
       <div class="list-group scroll">
-        <li (click)="setCurrentColourDefault()" [class]="getCurrentColourAllClass()">All Colours</li>
-        <li (click)="setCurrentColour(colour)" *ngFor="let colour of colours"
+        <li class="list-group-item">
+          <input [(ngModel)]="colourFilterText" class="form-control" placeholder="Search Colour"/>
+          <label *ngIf="colourFilterText" class="form-label">{{colourFilterText}} is searched.</label>
+        </li>
+        <li *ngIf="!colourFilterText" (click)="setCurrentColourDefault()" [class]="getCurrentColourAllClass()">All Colours</li>
+        <li (click)="setCurrentColour(colour)" *ngFor="let colour of colours | colourFilter: colourFilterText"
             [class]="getCurrentColourClass(colour)">{{colour.name}}</li>
       </div>
     </ul>

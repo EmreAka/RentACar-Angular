@@ -27,6 +27,9 @@ export class CarFilterComponent implements OnInit {
   currentColour:Colour = {id: 0, name: ""};
   dataLoaded: boolean = false;
 
+  brandFilterText: string = "";
+  colourFilterText: string = "";
+
   @Output() currentCarsEvent = new EventEmitter<Car[]>();
   @Output() dataLoadedEvent = new EventEmitter<boolean>();
 
@@ -37,7 +40,6 @@ export class CarFilterComponent implements OnInit {
     this.getBrands();
     this.getColours();
     this.getCars();
-    console.log("FİLTER FİLTER")
   }
 
   sendCurrentCars(){

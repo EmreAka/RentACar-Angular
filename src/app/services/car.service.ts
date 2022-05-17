@@ -58,6 +58,25 @@ export class CarService {
     return this.httpClient.post<ResponseModel>(newPath, car);
   }
 
+  addWithImages(files: any, car: any): Observable<any>{
+    const formData = new FormData();
+
+    for (let i = 0; i < files.length; i++){
+      formData.append("carForAddDto.Images", files[i]);
+    }
+    formData.append("carForAddDto.UserId", JSON.stringify(car.userId));
+    formData.append("carForAddDto.BrandId", JSON.stringify(car.brandId));
+    formData.append("carForAddDto.ColourId", JSON.stringify(car.colourId));
+    formData.append("carForAddDto.EngineId", JSON.stringify(car.engineId));
+    formData.append("carForAddDto.FuelId", JSON.stringify(car.fuelId));
+    formData.append("carForAddDto.ModelYear", JSON.stringify(car.modelYear));
+    formData.append("carForAddDto.FuelConsumption", JSON.stringify(car.fuelConsumption));
+    formData.append("carForAddDto.DoorNumber", JSON.stringify(car.doorNumber));
+    formData.append("carForAddDto.Description", car.description);
+
+    return this.httpClient.post(this.apiUrl + "/Cars/addWithImages", formData);
+  }
+
   delete(car:any):Observable<ResponseModel>{
     let newPath: string = this.apiUrl + "/Cars/delete";
     return this.httpClient.post<ResponseModel>(newPath, car);

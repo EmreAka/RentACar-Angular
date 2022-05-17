@@ -74,9 +74,20 @@
         <textarea id="description" type="text" class="form-control" placeholder="Enter a description"
                   formControlName="description" rows="3"></textarea>
       </div>
+
+      <div class="text-center mb-3 mt-3">
+        <input class="form-control" type="file" multiple (change)="onChange($event)">
+      </div>
+
+      <div style="margin-bottom: 5rem">
+        <div *ngIf="false">
+          <h3>Loading ...</h3>
+        </div>
+      </div>
+
     </form>
     <div class="card-footer">
-      <button (click)="add()" class="btn btn-outline-dark float-end">Add Car</button>
+      <button (click)="addWithImages()" class="btn btn-outline-dark float-end">Add Car</button>
     </div>
   </div>
 </div>

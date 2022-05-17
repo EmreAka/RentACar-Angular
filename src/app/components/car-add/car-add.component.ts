@@ -28,6 +28,9 @@ export class CarAddComponent implements OnInit {
   engines: Engine[];
   fuels: Fuel[];
 
+  loading: Boolean = false;
+  files: File[];
+
   constructor(private formBuilder: FormBuilder, private brandService: BrandService,
               private colourService: ColourService, private carService: CarService,
               private toastrService: ToastrService, private router: Router,
@@ -42,6 +45,33 @@ export class CarAddComponent implements OnInit {
     this.getFuels();
     this.createCarAddForm();
     this.carAddForm.valueChanges.subscribe(console.log);
+  }
+
+  onChange(event: any) {
+    this.files = event.target.files;
+    console.log(this.files);
+  }
+
+  onUpload() {
+    this.loading = !this.loading;
+    console.log(this.files);
+    /*this.carImageService.upload(this.file, this.carId).subscribe((event: any) => {
+      if (typeof (event) === 'object') {
+        this.loading = false;
+      }
+    }, (responseError) => {
+      if (responseError.error.Errors) {
+        if (responseError.error.Errors.length > 0) {
+          for (let i = 0; i < responseError.error.Errors.length; i++) {
+            this.toastrService.error(responseError.error.Errors[i]);
+          }
+          this.loading = false;
+        }
+      } else {
+        this.toastrService.error(responseError.error.Message);
+        this.loading = false;
+      }
+    });*/
   }
 
   createCarAddForm() {
@@ -82,6 +112,30 @@ export class CarAddComponent implements OnInit {
     this.colourService.getColours().subscribe((response) => {
       this.colours = response.data;
     });
+  }
+
+  addWithImages(){
+    let carModel = Object.assign({userId: this.authService.decodedToken["UserId"]}, this.carAddForm.value);
+    if (this.carAddForm.valid) {
+      this.carService.addWithImages(this.files, carModel).subscribe((response) => {
+        this.toastrService.success(`Car is added successfully`);
+        this.router.navigate(["cars"]);
+      }, (responseError) => {
+        if (responseError.error.Errors) {
+          if (responseError.error.Errors.length > 0) {
+            for (let i = 0; i < responseError.error.Errors.length; i++) {
+              this.toastrService.error(responseError.error.Errors[i].ErrorMessage);
+            }
+          }
+        } else {
+          this.toastrService.error(responseError.error.Message);
+          this.router.navigate(["login"]);
+          this.localStorageService.delete('token');
+        }
+      });
+    } else {
+      this.toastrService.error("Complete the form!");
+    }
   }
 
   add() {

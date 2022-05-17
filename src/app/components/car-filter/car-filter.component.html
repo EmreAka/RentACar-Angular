@@ -2,7 +2,7 @@
   <h1 *ngIf="brandsLoaded == true" class="display-6">Brands</h1>
   <div>
     <ul *ngIf="brandsLoaded == true" class="list-group shadow mb-5 bg-body rounded">
-      <div class="list-group">
+      <div class="list-group scroll">
         <li (click)="setCurrentBrandDefault()" [class]="getCurrentBrandAllClass()">All Brands</li>
         <li (click)="setCurrentBrand(brand)" *ngFor="let brand of brands"
             [class]="getCurrentBrandClass(brand)">{{brand.name}}</li>
@@ -13,7 +13,7 @@
   <h1 *ngIf="coloursLoaded == true" class="display-6">Colours</h1>
   <div>
     <ul *ngIf="coloursLoaded == true" class="list-group shadow mb-5 bg-body rounded">
-      <div class="list-group">
+      <div class="list-group scroll">
         <li (click)="setCurrentColourDefault()" [class]="getCurrentColourAllClass()">All Colours</li>
         <li (click)="setCurrentColour(colour)" *ngFor="let colour of colours"
             [class]="getCurrentColourClass(colour)">{{colour.name}}</li>

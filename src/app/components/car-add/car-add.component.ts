@@ -55,23 +55,6 @@ export class CarAddComponent implements OnInit {
   onUpload() {
     this.loading = !this.loading;
     console.log(this.files);
-    /*this.carImageService.upload(this.file, this.carId).subscribe((event: any) => {
-      if (typeof (event) === 'object') {
-        this.loading = false;
-      }
-    }, (responseError) => {
-      if (responseError.error.Errors) {
-        if (responseError.error.Errors.length > 0) {
-          for (let i = 0; i < responseError.error.Errors.length; i++) {
-            this.toastrService.error(responseError.error.Errors[i]);
-          }
-          this.loading = false;
-        }
-      } else {
-        this.toastrService.error(responseError.error.Message);
-        this.loading = false;
-      }
-    });*/
   }
 
   createCarAddForm() {
@@ -116,7 +99,7 @@ export class CarAddComponent implements OnInit {
 
   addWithImages(){
     let carModel = Object.assign({userId: this.authService.decodedToken["UserId"]}, this.carAddForm.value);
-    if (this.carAddForm.valid) {
+    if (this.carAddForm.valid && this.files) {
       this.carService.addWithImages(this.files, carModel).subscribe((response) => {
         this.toastrService.success(`Car is added successfully`);
         this.router.navigate(["cars"]);
@@ -138,6 +121,7 @@ export class CarAddComponent implements OnInit {
     }
   }
 
+  //Not in-use.
   add() {
     let carModel = Object.assign({userId: this.authService.decodedToken["UserId"]}, this.carAddForm.value);
     if (this.carAddForm.valid) {

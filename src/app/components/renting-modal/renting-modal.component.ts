@@ -41,7 +41,9 @@ export class RentingModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    this.authService.getUserDetailsFromToken();
+    if (this.authService.isAuthenticated()){
+      this.authService.getUserDetailsFromToken();
+    }
 
     this.activatedRoute.params.subscribe((params) => {
       this.carId = params["carId"];
@@ -51,7 +53,9 @@ export class RentingModalComponent implements OnInit {
 
     this.paymentForm.valueChanges.subscribe(console.log);
 
-    this.getCards();
+    if (this.authService.isAuthenticated()){
+      this.getCards();
+    }
   }
 
   createPaymentForm() {
@@ -70,6 +74,9 @@ export class RentingModalComponent implements OnInit {
       this.messageToDisplay = response.message;
       if (response.success) {
         this.toastrService.success(response.message);
+        if (!this.authService.isAuthenticated()){
+          this.toastrService.info("To continue, please log in.");
+        }
       } else {
         this.toastrService.error(response.message);
       }
@@ -77,22 +84,12 @@ export class RentingModalComponent implements OnInit {
   }
 
   getCurrentClassOfPayButton() {
-    if (this.isCarAvailable) {
+    if (this.isCarAvailable && this.authService.isAuthenticated()) {
       return "btn btn-primary";
     } else {
       return "btn btn-primary disabled";
     }
   }
-
-  // addRental(currentDate:string, returnDate:string, carId:number){
-  //   let values = returnDate.split("-");
-  //   let returnDataConverted = this.datePipe.transform(new Date(+values[0], +values[1] - 1, +values[2]), 'yyyy-MM-dd');
-  //   let rental = {carId: carId, customerId: 2023, rentDate: currentDate, returnDate: returnDataConverted};
-  //   this.rentalService.addRental(rental).subscribe((response) => {
-  //     console.log(response);
-  //   }
-  //   );
-  // }
 
   addRental() {
     let values = this.returnDate.split("-");

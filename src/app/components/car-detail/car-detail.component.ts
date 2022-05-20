@@ -2,6 +2,7 @@ import {ActivatedRoute} from '@angular/router';
 import {CarService} from './../../services/car.service';
 import {Car} from './../../models/car';
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-car-detail',
@@ -16,7 +17,7 @@ export class CarDetailComponent implements OnInit {
   };
   dataLoaded: boolean = false;
 
-  constructor(private carService: CarService, private activatedRoute: ActivatedRoute) {
+  constructor(private carService: CarService, private activatedRoute: ActivatedRoute, public auth: AuthService) {
   }
 
   ngOnInit(): void {

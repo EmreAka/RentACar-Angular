@@ -66,7 +66,7 @@ export class CarAddComponent implements OnInit {
       doorNumber: ["", Validators.required],
       fuelConsumption: ["", Validators.required],
       modelYear: ["", Validators.required],
-      dailyPrice: ["", Validators.required],
+      dailyPrice: [0, Validators.required],
       description: ["", Validators.required]
     })
   }

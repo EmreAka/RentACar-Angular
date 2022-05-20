@@ -72,6 +72,7 @@ export class CarService {
     formData.append("carForAddDto.ModelYear", JSON.stringify(car.modelYear));
     formData.append("carForAddDto.FuelConsumption", JSON.stringify(car.fuelConsumption));
     formData.append("carForAddDto.DoorNumber", JSON.stringify(car.doorNumber));
+    formData.append("carForAddDto.DailyPrice", JSON.stringify(car.dailyPrice));
     formData.append("carForAddDto.Description", car.description);
 
     return this.httpClient.post(this.apiUrl + "/Cars/addWithImages", formData);

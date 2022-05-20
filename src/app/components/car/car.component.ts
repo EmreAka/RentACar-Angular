@@ -6,6 +6,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 import {AuthService} from "../../services/auth.service";
 import {FavoriteService} from "../../services/favorite.service";
 import {ToastrService} from "ngx-toastr";
+import {LocalStorageService} from "../../services/local-storage.service";
 
 @Component({
   selector: 'app-car',
@@ -41,11 +42,12 @@ export class CarComponent implements OnInit {
   favoritedCar: number;
 
   constructor(private carService: CarService, private activatedRoute: ActivatedRoute, private router: Router,
-              private authService: AuthService, private favService: FavoriteService, private toastrService: ToastrService) {
+              private authService: AuthService, private favService: FavoriteService, private toastrService: ToastrService,
+              private localStorageService: LocalStorageService) {
   }
 
   ngOnInit(): void {
-    if (this.authService.isAuthenticated()){
+    if (this.authService.isAuthenticated() && !this.authService.isTokenExpired()){
       this.getFavoritesByUserId();
     }
   }
@@ -88,7 +90,7 @@ export class CarComponent implements OnInit {
   }*/
 
   setFav(carId: number){
-    if (this.authService.isAuthenticated()){
+    if (this.authService.isAuthenticated() && !this.authService.isTokenExpired()){
       let index: number = this.favorites.findIndex(f => f.carId == carId)
       if (index != -1){
         this.favService.deleteFavorite(this.favorites[index]).subscribe((response) => {
@@ -103,6 +105,7 @@ export class CarComponent implements OnInit {
         })
       }
     } else {
+      this.localStorageService.delete('token');
       this.toastrService.info("You need to log in");
     }
 

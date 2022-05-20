@@ -51,6 +51,7 @@ export class AuthService {
       console.log("date: " + new Date())
       console.log("boolean: " + (new Date(this.decodedToken['Expiration'] * 1000) < new Date()));
       return true;
+      this.localStorageService.delete('token');
     } else {
       return false
     }

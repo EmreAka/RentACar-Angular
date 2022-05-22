@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 import {ListResponseModel} from '../models/listResponseModel';
 import {ResponseModel} from "../models/responseModel";
 import {environment} from "../../environments/environment";
+import {RentalWithCard} from "../models/rentalWithCard";
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class RentalService {
     return this.httpClient.get<any>(newPath);
   }
 
-  addRental(rental: any): Observable<any> {
+  addRental(rental: RentalWithCard): Observable<any> {
     let newPath = this.apiUrl + "/Rentals/add";
     return this.httpClient.post<any>(newPath, rental);
   }

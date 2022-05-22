@@ -30,6 +30,9 @@ export class NaviComponent implements OnInit {
     if (this.isLoggedIn()) {
       this.authService.getUserDetailsFromToken();
     }
+    if (this.isTokenExpired()){
+      this.localStorageService.delete('token');
+    }
   }
 
   setCurrentRouteToLogin() {
@@ -78,5 +81,13 @@ export class NaviComponent implements OnInit {
 
   isLoggedIn() {
     return this.authService.isAuthenticated();
+  }
+
+  isTokenExpired(){
+    if (this.authService.isTokenExpired()){
+      return true;
+    }else {
+      return false;
+    }
   }
 }

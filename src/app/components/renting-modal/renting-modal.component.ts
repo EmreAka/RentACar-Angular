@@ -4,6 +4,7 @@ import {PaymentService} from './../../services/payment.service';
 import {CardToPay} from './../../models/cardToPay';
 import {ActivatedRoute} from '@angular/router';
 import {Rental} from './../../models/rental';
+import {RentalWithCard} from "../../models/rentalWithCard";
 import {RentalService} from './../../services/rental.service';
 import {Component, OnInit} from '@angular/core';
 import {DatePipe} from '@angular/common';
@@ -92,9 +93,21 @@ export class RentingModalComponent implements OnInit {
   }
 
   addRental() {
+    //--CARD--
+    let card: CardToPay;
+    card = {
+      nameOnCard: this.paymentForm.value.nameOnCard,
+      cardNumber: this.paymentForm.value.cardNumber,
+      cvv: this.paymentForm.value.cvv,
+      expirationMonth: this.paymentForm.value.expirationMonth,
+      expirationYear: this.paymentForm.value.expirationYear
+    };
+
+    //--RENTAL--
     let values = this.returnDate.split("-");
-    let returnDataConverted = this.datePipe.transform(new Date(+values[0], +values[1] - 1, +values[2]), 'yyyy-MM-dd');
-    let rental = {carId: this.carId, customerId: this.authService.decodedToken["UserId"], rentDate: this.currentDate, returnDate: returnDataConverted};
+    let returnDataConverted: string | null= this.datePipe.transform(new Date(+values[0], +values[1] - 1, +values[2]), 'yyyy-MM-dd');
+    let rental: RentalWithCard = {rental: {carId: this.carId, customerId: this.authService.decodedToken["UserId"], rentDate: this.currentDate, returnDate: returnDataConverted},
+    card: {...card}};
     this.rentalService.addRental(rental).subscribe((response) => {
       if (response.success) {
         this.toastrService.success("The rent has been successfully completed.");
@@ -106,12 +119,12 @@ export class RentingModalComponent implements OnInit {
     });
   }
 
-  //user id is temporarily set to 2023 manually.
+  //user id is temporarily set to 1 manually.
   addCard() {
     let card = {
       cardNumber: this.paymentForm.value.cardNumber, cvv: this.paymentForm.value.cvv,
       expiration: this.paymentForm.value.expirationYear + "-" + this.paymentForm.value.expirationMonth + "-" + "01",
-      nameOnCard: this.paymentForm.value.nameOnCard, userId: 6023
+      nameOnCard: this.paymentForm.value.nameOnCard, userId: this.authService.decodedToken['UserId']
     };
 
     let cardToAdd = Object.assign({id: 0}, card);
@@ -125,49 +138,11 @@ export class RentingModalComponent implements OnInit {
     })
   }
 
-  pay() {
-    let card: CardToPay;
-    card = {
-      nameOnCard: this.paymentForm.value.nameOnCard,
-      cardNumber: this.paymentForm.value.cardNumber,
-      cvv: this.paymentForm.value.cvv,
-      expirationMonth: this.paymentForm.value.expirationMonth,
-      expirationYear: this.paymentForm.value.expirationYear
-    };
-    if (this.hasSavedCard) {
-      card = {
-        cardNumber: this.cardFromDropdown.cardNumber, cvv: this.cardFromDropdown.cvv,
-        nameOnCard: this.cardFromDropdown.nameOnCard, expirationMonth: this.cardFromDropdown.expiration.split("-")[1],
-        expirationYear: this.cardFromDropdown.expiration.split("-")[0]
-      }
-      console.log(this.cardFromDropdown.cardNumber);
-    }
-    if (this.isSaveCardChecked != true) {
-      if (this.paymentForm.valid || this.hasSavedCard) {
-        this.paymentService.pay(card, this.carId).subscribe((response) => {
-          if (response.success) {
-            this.toastrService.success("Payment has been made successfully");
-            this.addRental();
-          } else {
-            this.toastrService.error("An error occured! Try later.");
-          }
-        })
-      } else {
-        this.toastrService.error("Complete the form!");
-      }
-    } else if (this.isSaveCardChecked == true) {
-      if (this.paymentForm.valid) {
-        this.paymentService.pay(card, this.carId).subscribe((response) => {
-          if (response.success) {
-            this.toastrService.success("Payment has been made successfully");
-            this.addRental();
-            this.addCard();
-          } else {
-            this.toastrService.error("An error occured! Try later.");
-          }
-        });
-      } else {
-        this.toastrService.error("Complete the form!");
+  pay(){
+    if (this.paymentForm.valid){
+      this.addRental()
+      if (this.isSaveCardChecked){
+        this.addCard()
       }
     }
   }

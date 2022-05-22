@@ -4,5 +4,5 @@ export interface Rental{
     firstName:string;
     lastName:string;
     rentDate:string;
-    returnDate:string;
+    returnDate:string | null;
 }

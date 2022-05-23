@@ -90,4 +90,8 @@ export class NaviComponent implements OnInit {
       return false;
     }
   }
+
+  setCurrentRouteToRentals() {
+    this.router.navigate(["/rentals"]);
+  }
 }

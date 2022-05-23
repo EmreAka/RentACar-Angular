@@ -37,7 +37,7 @@ const routes: Routes = [
   {path: "register", component: RegisterComponent},
   {path: "profile", component: ProfileComponent, canActivate: [LoginGuard]},
   {path: "upload/:carId", component: CarImageUploadComponent},
-  {path: "rentals", component: RentalComponent},
+  {path: "rentals", component: RentalComponent, canActivate: [LoginGuard]},
   {path: "mycars", component: MyCarListComponent, canActivate: [LoginGuard]},
   {path: "favoritecars", component: FavoriteCarComponent, canActivate: [LoginGuard]}
 ];

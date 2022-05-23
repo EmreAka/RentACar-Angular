@@ -31,6 +31,8 @@ export class CarAddComponent implements OnInit {
   loading: Boolean = false;
   files: File[];
 
+  imageSrc: any[] = [];
+
   constructor(private formBuilder: FormBuilder, private brandService: BrandService,
               private colourService: ColourService, private carService: CarService,
               private toastrService: ToastrService, private router: Router,
@@ -48,8 +50,22 @@ export class CarAddComponent implements OnInit {
   }
 
   onChange(event: any) {
-    this.files = event.target.files;
-    console.log(this.files);
+    this.imageSrc = [];
+    if (event.target.files) {
+      this.files = event.target.files;
+      console.log("Length of files: "+ this.files.length);
+      for (const [key, value] of Object.entries(this.files)){
+        // @ts-ignore
+        let file: File = this.files[key];
+        // @ts-ignore
+        console.log(this.files[key] instanceof Blob);
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          this.imageSrc.push(reader.result as string);
+        }
+      }
+    }
   }
 
   onUpload() {

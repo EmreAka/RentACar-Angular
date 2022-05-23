@@ -85,6 +85,15 @@
         </div>
       </div>
 
+      <div *ngIf="imageSrc.length > 0">
+        <h1 class="display-3">Images</h1>
+        <div fxLayout="row wrap" fxLayoutGap="20px grid">
+          <div fxFlex.xs="100%" fxFlex.md="50%" fxFlex.sm="50%" fxFlex.lg="33%" fxFlex.xl="25%" *ngFor="let img of imageSrc">
+            <img [src]="img" class="img-thumbnail" alt="...">
+          </div>
+        </div>
+      </div>
+
     </form>
     <div class="card-footer">
       <button (click)="addWithImages()" class="btn btn-outline-dark float-end">Add Car</button>

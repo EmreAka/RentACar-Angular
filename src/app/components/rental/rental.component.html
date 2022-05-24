@@ -43,9 +43,6 @@
       <th>
         Return Date
       </th>
-      <th>
-        <div class="float-end">Delete</div>
-      </th>
     </tr>
     </thead>
     <tbody>
@@ -56,9 +53,6 @@
       <td>{{rental.customerName}}</td>
       <td>{{rental.rentDate}}</td>
       <td>{{rental.returnDate}}</td>
-      <td>
-        <button (click)="delete({id: rental.id})" class="btn btn-outline-danger float-end">Delete</button>
-      </td>
     </tr>
     </tbody>
   </table>

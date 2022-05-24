@@ -20,8 +20,8 @@ export class CustomerService {
     return this.httpClient.get<ListResponseModel<Customer>>(newPath);
   }
 
-  getCustomerByEmail(email: string): Observable<ListResponseModel<Customer>> {
-    let newPath = this.apiUrl + "getcustomerdetailbyemail?email=" + email;
+  getCustomerByEmail(): Observable<ListResponseModel<Customer>> {
+    let newPath = this.apiUrl + "getcustomerdetailbyemail";
     return this.httpClient.get<ListResponseModel<Customer>>(newPath);
   }
 

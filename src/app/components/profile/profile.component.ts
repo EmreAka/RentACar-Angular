@@ -55,13 +55,14 @@ export class ProfileComponent implements OnInit {
     let updateModel: Customer = Object.assign({}, this.profileForm.value);
     this.customerService.updateCustomerDetails(updateModel).subscribe((response) => {
       this.toastrService.success(response.message);
+      this.getCustomerDetailByEmail()
     }, (responseError) => {
       this.toastrService.error("An error occured. Try later.");
     });
   }
 
   getCustomerDetailByEmail(){
-    this.customerService.getCustomerByEmail(this.authService.decodedToken['Email']).subscribe((response) => {
+    this.customerService.getCustomerByEmail().subscribe((response) => {
       this.user = response.data[0];
       this.profileForm.controls['firstName'].setValue(this.user.firstName);
       this.profileForm.controls['lastName'].setValue(this.user.lastName);

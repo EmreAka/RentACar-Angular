@@ -14,13 +14,13 @@ export class FavoriteService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getFavoriteDetailsByUserId(userId: number): Observable<ListResponseModel<any>>{
-    let newPath: string = this.apiUrl + "/Favorites/getfavoritedetailsbyuserid?userId=" + userId;
+  getFavoriteDetailsByUserId(): Observable<ListResponseModel<any>>{
+    let newPath: string = this.apiUrl + "/Favorites/getfavoritedetailsbyuserid";
     return this.httpClient.get<ListResponseModel<any>>(newPath);
   }
 
-  getFavoritesByUserId(userId: number): Observable<ListResponseModel<any>>{
-    let newPath: string = this.apiUrl + "/Favorites/getfavoritesbyuserid?userId=" + userId;
+  getFavoritesByUserId(): Observable<ListResponseModel<any>>{
+    let newPath: string = this.apiUrl + "/Favorites/getfavoritesbyuserid";
     return  this.httpClient.get<ListResponseModel<any>>(newPath);
   }
 

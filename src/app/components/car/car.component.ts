@@ -53,7 +53,7 @@ export class CarComponent implements OnInit {
   }
 
   getFavoritesByUserId() {
-    this.favService.getFavoritesByUserId(this.authService.decodedToken["UserId"]).subscribe((response) => {
+    this.favService.getFavoritesByUserId().subscribe((response) => {
       this.favorites = response.data;
       console.log(this.favorites);
     })

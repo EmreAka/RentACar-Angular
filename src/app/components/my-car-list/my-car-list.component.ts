@@ -33,7 +33,7 @@ export class MyCarListComponent implements OnInit {
   }
 
   getCarDetailsByCustomerId(){
-    this.carService.getCarDetailsByCustomerId(this.authService.decodedToken["UserId"]).subscribe(response => {
+    this.carService.getCarDetailsByCustomerId().subscribe(response => {
       this.cars = response.data;
       this.dataLoaded = true;
     })

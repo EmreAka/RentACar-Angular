@@ -33,7 +33,7 @@ export class FavoriteCarComponent implements OnInit {
   }
 
   getFavoriteDetailsByUserId(){
-    this.favoriteCarService.getFavoriteDetailsByUserId(this.authService.decodedToken['UserId'])
+    this.favoriteCarService.getFavoriteDetailsByUserId()
       .subscribe((response) => {
         this.favoriteCars = response.data;
         this.dataLoaded = true;

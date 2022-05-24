@@ -24,7 +24,7 @@ export class RentalComponent implements OnInit {
   }
 
   getRentalsByUserId() {
-    this.rentalService.getRentalsByUserId(this.auth.decodedToken["UserId"]).subscribe((response) => {
+    this.rentalService.getRentalsByUserId().subscribe((response) => {
       this.rentals = response.data;
       this.dataLoaded = true;
     })

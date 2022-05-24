@@ -22,8 +22,8 @@ export class RentalService {
     return this.httpClient.get<ListResponseModel<Rental>>(newPath);
   }
 
-  getRentalsByUserId(userId: number): Observable<ListResponseModel<Rental>> {
-    let newPath = this.apiUrl + "/Rentals/getDetailsByUserId?userId=" + userId;
+  getRentalsByUserId(): Observable<ListResponseModel<Rental>> {
+    let newPath = this.apiUrl + "/Rentals/getDetailsByUserId";
     return this.httpClient.get<ListResponseModel<Rental>>(newPath);
   }
 

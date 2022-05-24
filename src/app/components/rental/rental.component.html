@@ -14,7 +14,7 @@
       [(ngModel)]="filterText"
       class="form-control"
       id="filterText"
-      placeholder="enter a search expression"
+      placeholder="search"
     />
   </div>
 
@@ -30,6 +30,9 @@
       </th>
       <th>
         Brand Name
+      </th>
+      <th>
+        Owner Name
       </th>
       <th>
         Customer Name
@@ -49,7 +52,8 @@
     <tr *ngFor="let rental of rentals | rentalFilter: filterText">
       <td>{{rental.id}}</td>
       <td>{{rental.brandName}}</td>
-      <td>{{rental.firstName}} {{rental.lastName}}</td>
+      <td>{{rental.carOwner}}</td>
+      <td>{{rental.customerName}}</td>
       <td>{{rental.rentDate}}</td>
       <td>{{rental.returnDate}}</td>
       <td>

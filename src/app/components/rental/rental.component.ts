@@ -3,6 +3,7 @@ import {RentalService} from './../../services/rental.service';
 import {Component, OnInit} from '@angular/core';
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-rental',
@@ -15,15 +16,15 @@ export class RentalComponent implements OnInit {
   rentals: Rental[] = [];
   dataLoaded: boolean = false;
 
-  constructor(private rentalService: RentalService, private toast: ToastrService, private router: Router) {
+  constructor(private rentalService: RentalService, private toast: ToastrService, private router: Router, private auth: AuthService) {
   }
 
   ngOnInit(): void {
-    this.getRentals();
+    this.getRentalsByUserId();
   }
 
-  getRentals() {
-    this.rentalService.getRentals().subscribe((response) => {
+  getRentalsByUserId() {
+    this.rentalService.getRentalsByUserId(this.auth.decodedToken["UserId"]).subscribe((response) => {
       this.rentals = response.data;
       this.dataLoaded = true;
     })

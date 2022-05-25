@@ -63,8 +63,8 @@
           <button class="btn btn-light" type="submit">Search</button>
         </form> -->
         <div *ngIf="!isLoggedIn() || isTokenExpired()" class="btn-group" role="group">
-          <button (click)="setCurrentRouteToLogin()" [class]="getSignInButtonClass()">Sign In</button>
-          <button (click)="setCurrentRouteToRegister()" [class]="getSignUpButtonClass()">Sign Up</button>
+          <button (click)="setCurrentRouteToLogin()" [class]="getSignInButtonClass()">Login</button>
+          <button (click)="setCurrentRouteToRegister()" [class]="getSignUpButtonClass()">Register</button>
         </div>
         <!-- <div *ngIf="isLoggedIn()">
           <h4 class="text-light">{{getUserName()}}</h4>

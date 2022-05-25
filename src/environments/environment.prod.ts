@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://rentacarapi.azurewebsites.net'
+  apiUrl: 'https://rentacar.azurewebsites.net/api'
 };

@@ -21,39 +21,40 @@
   <div *ngIf="filterText" class="alert alert-primary">
     {{ filterText }} searched.
   </div>
-
-  <table *ngIf="dataLoaded == true" class="table">
-    <thead>
-    <tr>
-      <th>
-        Rental Id
-      </th>
-      <th>
-        Brand Name
-      </th>
-      <th>
-        Owner Name
-      </th>
-      <th>
-        Customer Name
-      </th>
-      <th>
-        Rent Date
-      </th>
-      <th>
-        Return Date
-      </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let rental of rentals | rentalFilter: filterText">
-      <td>{{rental.id}}</td>
-      <td>{{rental.brandName}}</td>
-      <td>{{rental.carOwner}}</td>
-      <td>{{rental.customerName}}</td>
-      <td>{{rental.rentDate}}</td>
-      <td>{{rental.returnDate}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table *ngIf="dataLoaded == true" class="table">
+      <thead>
+      <tr>
+        <th>
+          Rental Id
+        </th>
+        <th>
+          Brand Name
+        </th>
+        <th>
+          Owner Name
+        </th>
+        <th>
+          Customer Name
+        </th>
+        <th>
+          Rent Date
+        </th>
+        <th>
+          Return Date
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let rental of rentals | rentalFilter: filterText">
+        <td>{{rental.id}}</td>
+        <td>{{rental.brandName}}</td>
+        <td>{{rental.carOwner}}</td>
+        <td>{{rental.customerName}}</td>
+        <td>{{rental.rentDate}}</td>
+        <td>{{rental.returnDate}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

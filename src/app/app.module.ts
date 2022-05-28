@@ -39,6 +39,7 @@ import { RentalFilterPipe } from './pipes/rental-filter.pipe';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { MyCarListComponent } from './components/my-car-list/my-car-list.component';
 import { FavoriteCarComponent } from './components/favorite-car/favorite-car.component';
+import { CardDescriptionPipe } from './pipes/card-description.pipe';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { FavoriteCarComponent } from './components/favorite-car/favorite-car.com
     CarImageUploadComponent,
     RentalFilterPipe,
     MyCarListComponent,
-    FavoriteCarComponent
+    FavoriteCarComponent,
+    CardDescriptionPipe
   ],
   imports: [
     BrowserModule,

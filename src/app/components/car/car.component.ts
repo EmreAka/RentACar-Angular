@@ -47,7 +47,7 @@ export class CarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.authService.isAuthenticated() && !this.authService.isTokenExpired()){
+    if (this.authService.isAuthenticated() && !this.authService.isTokenExpired()) {
       this.getFavoritesByUserId();
     }
   }
@@ -59,7 +59,7 @@ export class CarComponent implements OnInit {
     })
   }
 
-  deleteFavorite(favorite: any){
+  deleteFavorite(favorite: any) {
     this.favService.deleteFavorite(favorite).subscribe((response) => {
       console.log("Deleted")
     })
@@ -89,17 +89,19 @@ export class CarComponent implements OnInit {
     this.favoritedCar = i;
   }*/
 
-  setFav(carId: number){
-    if (this.authService.isAuthenticated() && !this.authService.isTokenExpired()){
+  setFav(carId: number) {
+    if (this.authService.isAuthenticated() && !this.authService.isTokenExpired()) {
       let index: number = this.favorites.findIndex(f => f.carId == carId)
-      if (index != -1){
+      if (index != -1) {
         this.favService.deleteFavorite(this.favorites[index]).subscribe((response) => {
           this.favorites.splice(index, 1);
           this.toastrService.info("Removed from favorites");
         })
-      }
-      else{
-        this.favService.addFavorite({userId: this.authService.decodedToken["UserId"], carId: carId}).subscribe((response) => {
+      } else {
+        this.favService.addFavorite({
+          userId: this.authService.decodedToken["UserId"],
+          carId: carId
+        }).subscribe((response) => {
           this.getFavoritesByUserId()
           this.toastrService.info("Added to favorites");
         })
@@ -116,16 +118,16 @@ export class CarComponent implements OnInit {
     else return "bi bi-heart-fill";
   }*/
 
-  getFavClass(carId: number){
+  getFavClass(carId: number) {
     if (this.isThatCarFavorited(carId)) return "bi bi-heart-fill";
     else return "bi bi-heart"
   }
 
-  isThatCarFavorited(carId: number): boolean{
+  isThatCarFavorited(carId: number): boolean {
     let isFavorited: boolean = false;
-    if(this.authService.isAuthenticated()){
-      for (let i = 0; i < this.favorites.length; i++){
-        if (this.favorites[i].carId == carId){
+    if (this.authService.isAuthenticated()) {
+      for (let i = 0; i < this.favorites.length; i++) {
+        if (this.favorites[i].carId == carId) {
           isFavorited = true;
         }
       }

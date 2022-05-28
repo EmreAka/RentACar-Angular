@@ -1,3 +1,36 @@
 i {
   cursor: pointer;
 }
+
+@media only screen and (max-width: 1400px){
+  .grid-container {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    gap: 1rem;
+    padding-right: 0.3rem;
+  }
+}
+
+@media only screen and (min-width: 1400px){
+  .grid-container {
+    display: grid;
+    grid-template-columns: 24.3% 24.3% 24.3% 24.3%;
+    gap: 1rem;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 1rem;
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .grid-container {
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 1rem;
+  }
+}

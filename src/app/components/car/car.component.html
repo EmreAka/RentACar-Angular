@@ -36,7 +36,7 @@
             </div>
           </div>
         </div>
-        <div class="card-body">
+        <!--<div class="card-body">
           <div fxLayout="row wrap" fxLayoutGap="20px grid">
             <div fxFlex.xs="100%" fxFlex.md="50%" fxFlex.sm="50%" fxFlex.lg="33%" fxFlex.xl="25%"
                  *ngFor="let car of currentCars | carFilter: filterText; let i = index" @fade>
@@ -59,6 +59,29 @@
                     </button>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>-->
+        <div class="grid-container">
+          <div class="card shadow p-3 mb-5 bg-body rounded"
+               *ngFor="let car of currentCars | carFilter: filterText; let i = index" @fade>
+            <img [src]="car.images[0]" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">{{car.brandName}}</h5>
+              <p class="card-text">{{car.description | cardDescription}}</p>
+              <i [@fav]="triggerAni(i)" (click)="setFav(car.id)" [class]="getFavClass(car.id)"
+                 style="font-size: 25px"></i>
+              <div class="btn-group float-end" role="group">
+                <button (click)="setCurrentRouteToCarEdit(car.id)" type="button" class="btn btn-outline-dark">Edit
+                </button>
+                <button
+                  (click)="setCurrentRouteToCarDetail(car.id)"
+                  type="button"
+                  class="btn btn-outline-dark"
+                >
+                  Review
+                </button>
               </div>
             </div>
           </div>

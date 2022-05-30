@@ -14,15 +14,6 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="/cars">Cars</a>
           </li>
-          <!--<li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/colours">Colours</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/brands">Brands</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/rentals">Rentals</a>
-          </li>-->
         </ul>
         <ul *ngIf="isLoggedIn() && !isTokenExpired()" class="navbar-nav">
           <li class="nav-item dropdown" @fade>
@@ -58,17 +49,10 @@
             </ul>
           </li>
         </ul>
-        <!-- <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-light" type="submit">Search</button>
-        </form> -->
         <div *ngIf="!isLoggedIn() || isTokenExpired()" class="btn-group" role="group">
           <button (click)="setCurrentRouteToLogin()" [class]="getSignInButtonClass()">Login</button>
           <button (click)="setCurrentRouteToRegister()" [class]="getSignUpButtonClass()">Register</button>
         </div>
-        <!-- <div *ngIf="isLoggedIn()">
-          <h4 class="text-light">{{getUserName()}}</h4>
-        </div> -->
       </div>
     </div>
   </nav>

@@ -61,17 +61,17 @@ export class NaviComponent implements OnInit {
 
   getSignInButtonClass() {
     if (this.isSignInButtonActive) {
-      return "btn btn-primary";
-    } else {
       return "btn btn-light";
+    } else {
+      return "btn btn-dark";
     }
   }
 
   getSignUpButtonClass() {
     if (this.isSignUpButtonActive) {
-      return "btn btn-primary"
-    } else {
       return "btn btn-light"
+    } else {
+      return "btn btn-dark"
     }
   }
 

@@ -22,6 +22,9 @@ export class NaviComponent implements OnInit {
   isSignInButtonActive = false;
   isSignUpButtonActive = false;
 
+  isMouseOverSignIn = false;
+  isMouseOverSignUp = false;
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
               public authService: AuthService, private localStorageService: LocalStorageService) {
   }
@@ -60,7 +63,7 @@ export class NaviComponent implements OnInit {
   }
 
   getSignInButtonClass() {
-    if (this.isSignInButtonActive) {
+    if (this.isSignInButtonActive || this.isMouseOverSignIn) {
       return "btn btn-light";
     } else {
       return "btn btn-dark";
@@ -68,7 +71,7 @@ export class NaviComponent implements OnInit {
   }
 
   getSignUpButtonClass() {
-    if (this.isSignUpButtonActive) {
+    if (this.isSignUpButtonActive || this.isMouseOverSignUp) {
       return "btn btn-light"
     } else {
       return "btn btn-dark"
@@ -93,5 +96,21 @@ export class NaviComponent implements OnInit {
 
   setCurrentRouteToRentals() {
     this.router.navigate(["/rentals"]);
+  }
+
+  setMouseIsOverSignIn() {
+    this.isMouseOverSignIn = true;
+  }
+
+  setMouseIsIverSignUp() {
+    this.isMouseOverSignUp = true;
+  }
+
+  setMouseIsNotOverSignIn() {
+    this.isMouseOverSignIn = false;
+  }
+
+  setMouseIsNotOverSignUp() {
+    this.isMouseOverSignUp = false;
   }
 }

@@ -46,19 +46,16 @@ export class CarAddComponent implements OnInit {
     this.getEngines();
     this.getFuels();
     this.createCarAddForm();
-    this.carAddForm.valueChanges.subscribe(console.log);
+    this.carAddForm.valueChanges.subscribe();
   }
 
   onChange(event: any) {
     this.imageSrc = [];
     if (event.target.files) {
       this.files = event.target.files;
-      console.log("Length of files: "+ this.files.length);
       for (const [key, value] of Object.entries(this.files)){
         // @ts-ignore
         let file: File = this.files[key];
-        // @ts-ignore
-        console.log(this.files[key] instanceof Blob);
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
@@ -70,7 +67,6 @@ export class CarAddComponent implements OnInit {
 
   onUpload() {
     this.loading = !this.loading;
-    console.log(this.files);
   }
 
   createCarAddForm() {
@@ -90,14 +86,12 @@ export class CarAddComponent implements OnInit {
   getFuels(){
     this.fuelService.getFuels().subscribe((response) => {
       this.fuels = response.data;
-      console.log(response.data);
     });
   }
 
   getEngines(){
     this.engineService.getEngines().subscribe((response) => {
       this.engines = response.data;
-      console.log(response.data);
     });
   }
 

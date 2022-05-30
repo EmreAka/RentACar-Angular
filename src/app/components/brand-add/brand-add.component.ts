@@ -19,7 +19,6 @@ export class BrandAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.createBrandAddFrom();
-    this.brandAddForm.valueChanges.subscribe(console.log);
   }
 
   createBrandAddFrom() {

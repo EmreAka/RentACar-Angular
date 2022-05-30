@@ -19,7 +19,7 @@ export class ColourAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.createColourAddForm();
-    this.colourAddForm.valueChanges.subscribe(console.log);
+    this.colourAddForm.valueChanges.subscribe();
   }
 
   createColourAddForm(){

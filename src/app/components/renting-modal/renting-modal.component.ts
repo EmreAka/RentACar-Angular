@@ -52,7 +52,7 @@ export class RentingModalComponent implements OnInit {
 
     this.createPaymentForm()
 
-    this.paymentForm.valueChanges.subscribe(console.log);
+    this.paymentForm.valueChanges.subscribe();
 
     if (this.authService.isAuthenticated()){
       this.getCards();
@@ -128,7 +128,6 @@ export class RentingModalComponent implements OnInit {
     };
 
     let cardToAdd = Object.assign({id: 0}, card);
-    console.log(card.expiration);
     this.cardService.addCard(cardToAdd).subscribe((response) => {
       if (response.success) {
         this.toastrService.success("Card saved successfully.");

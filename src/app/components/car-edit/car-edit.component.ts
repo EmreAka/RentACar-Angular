@@ -124,11 +124,8 @@ export class CarEditComponent implements OnInit {
   getCarImagesByCarId(carId: number) {
     this.carImageService.getCarImagesByCarId(carId).subscribe((response) => {
       this.carImages = response.data;
-      console.log(response);
-      console.log(this.carImages);
     }, (responseError) => {
       this.toastrService.warning(responseError.error.message);
-      console.log(responseError.error.message);
     });
   }
 

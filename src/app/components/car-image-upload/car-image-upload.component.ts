@@ -30,7 +30,6 @@ export class CarImageUploadComponent implements OnInit {
 
   onUpload() {
     this.loading = !this.loading;
-    console.log(this.file);
     this.carImageService.upload(this.file, this.carId).subscribe((event: any) => {
       if (typeof (event) === 'object') {
         this.loading = false;

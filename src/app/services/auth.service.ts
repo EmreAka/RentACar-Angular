@@ -47,9 +47,6 @@ export class AuthService {
   isTokenExpired(): boolean {
     if (new Date(this.decodedToken['Expiration'] * 1000) < new Date()  || this.decodedToken['Expiration'] == undefined
       || this.decodedToken['Expiration'] == null) {
-      console.log("token exp date: " + new Date(this.decodedToken['Expiration'] * 1000))
-      console.log("date: " + new Date())
-      console.log("boolean: " + (new Date(this.decodedToken['Expiration'] * 1000) < new Date()));
       return true;
       this.localStorageService.delete('token');
     } else {

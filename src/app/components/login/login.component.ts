@@ -41,8 +41,6 @@ export class LoginComponent implements OnInit {
       }, (responseError) => {
         this.toastrService.error(responseError.error);
       })
-    } else {
-      console.log("hata!");
     }
   }
 }

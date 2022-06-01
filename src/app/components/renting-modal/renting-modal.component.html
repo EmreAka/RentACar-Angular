@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <button [class]="getCurrentClassOfPayButton()" data-bs-target="#exampleModalToggle2"
+                            <button (click)="showInfo()" [class]="getCurrentClassOfPayButton()" data-bs-target="#exampleModalToggle2"
                                 data-bs-toggle="modal">
                                 Pay
                             </button>

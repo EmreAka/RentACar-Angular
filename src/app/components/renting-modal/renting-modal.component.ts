@@ -42,7 +42,7 @@ export class RentingModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-    if (this.authService.isAuthenticated()){
+    if (this.authService.isAuthenticated()) {
       this.authService.getUserDetailsFromToken();
     }
 
@@ -54,7 +54,7 @@ export class RentingModalComponent implements OnInit {
 
     this.paymentForm.valueChanges.subscribe();
 
-    if (this.authService.isAuthenticated()){
+    if (this.authService.isAuthenticated()) {
       this.getCards();
     }
   }
@@ -75,7 +75,7 @@ export class RentingModalComponent implements OnInit {
       this.messageToDisplay = response.message;
       if (response.success) {
         this.toastrService.success(response.message);
-        if (!this.authService.isAuthenticated()){
+        if (!this.authService.isAuthenticated()) {
           this.toastrService.info("To continue, please log in.");
         }
       } else {
@@ -105,9 +105,16 @@ export class RentingModalComponent implements OnInit {
 
     //--RENTAL--
     let values = this.returnDate.split("-");
-    let returnDataConverted: string | null= this.datePipe.transform(new Date(+values[0], +values[1] - 1, +values[2]), 'yyyy-MM-dd');
-    let rental: RentalWithCard = {rental: {carId: this.carId, customerId: this.authService.decodedToken["UserId"], rentDate: this.currentDate, returnDate: returnDataConverted},
-    card: {...card}};
+    let returnDataConverted: string | null = this.datePipe.transform(new Date(+values[0], +values[1] - 1, +values[2]), 'yyyy-MM-dd');
+    let rental: RentalWithCard = {
+      rental: {
+        carId: this.carId,
+        customerId: this.authService.decodedToken["UserId"],
+        rentDate: this.currentDate,
+        returnDate: returnDataConverted
+      },
+      card: {...card}
+    };
     this.rentalService.addRental(rental).subscribe((response) => {
       if (response.success) {
         this.toastrService.success("The rent has been successfully completed.");
@@ -137,10 +144,10 @@ export class RentingModalComponent implements OnInit {
     })
   }
 
-  pay(){
-    if (this.paymentForm.valid){
+  pay() {
+    if (this.paymentForm.valid) {
       this.addRental()
-      if (this.isSaveCardChecked){
+      if (this.isSaveCardChecked) {
         this.addCard()
       }
     }
@@ -161,4 +168,9 @@ export class RentingModalComponent implements OnInit {
     this.hasSavedCard = false;
   }
 
+  showInfo() {
+    this.toastrService.info("DO NOT ENTER REAL INFORMATIN. THIS IS A DEMO.", "READ!", {
+      timeOut: 6000
+    });
+  }
 }

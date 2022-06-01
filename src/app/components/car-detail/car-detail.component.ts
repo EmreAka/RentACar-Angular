@@ -54,9 +54,8 @@ export class CarDetailComponent implements OnInit {
   }
 
   setNextCurrentImage() {
-    debugger;
     this.indexOfCurrentImage += 1;
-    if (this.indexOfCurrentImage >= this.sizeOfImages){
+    if (this.indexOfCurrentImage > (this.sizeOfImages - 1)){
       this.indexOfCurrentImage = 0;
     }
     this.currentImgSrc = this.car.images[this.indexOfCurrentImage];

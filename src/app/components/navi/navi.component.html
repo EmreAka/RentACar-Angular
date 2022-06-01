@@ -50,10 +50,13 @@
         </li>
       </ul>
       <div *ngIf="!isLoggedIn() || isTokenExpired()" class="btn-group" role="group">
-        <button (mouseleave)="setMouseIsNotOverSignIn()" (mouseover)="setMouseIsOverSignIn()" (click)="setCurrentRouteToLogin()"
-                [class]="getSignInButtonClass()"  #SignIn>Login
+        <button (mouseleave)="setMouseIsNotOverSignIn()" (mouseover)="setMouseIsOverSignIn()"
+                (click)="setCurrentRouteToLogin()"
+                [class]="getSignInButtonClass()" #SignIn>Login
         </button>
-        <button (mouseleave)="setMouseIsNotOverSignUp()" (mouseover)="setMouseIsIverSignUp()" (click)="setCurrentRouteToRegister()" [class]="getSignUpButtonClass()">Register</button>
+        <button (mouseleave)="setMouseIsNotOverSignUp()" (mouseover)="setMouseIsIverSignUp()"
+                (click)="setCurrentRouteToRegister()" [class]="getSignUpButtonClass()">Register
+        </button>
       </div>
     </div>
   </div>

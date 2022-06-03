@@ -13,6 +13,7 @@ import {EngineService} from "../../services/engine.service";
 import {Engine} from "../../models/engine";
 import {Fuel} from "../../models/fuel";
 import {FuelService} from "../../services/fuel.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-car-add',
@@ -37,7 +38,7 @@ export class CarAddComponent implements OnInit {
               private colourService: ColourService, private carService: CarService,
               private toastrService: ToastrService, private router: Router,
               private localStorageService: LocalStorageService, private authService: AuthService,
-              private engineService: EngineService, private fuelService: FuelService) {
+              private engineService: EngineService, private fuelService: FuelService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -53,7 +54,7 @@ export class CarAddComponent implements OnInit {
     this.imageSrc = [];
     if (event.target.files) {
       this.files = event.target.files;
-      for (const [key, value] of Object.entries(this.files)){
+      for (const [key, value] of Object.entries(this.files)) {
         // @ts-ignore
         let file: File = this.files[key];
         const reader = new FileReader();
@@ -83,13 +84,13 @@ export class CarAddComponent implements OnInit {
     })
   }
 
-  getFuels(){
+  getFuels() {
     this.fuelService.getFuels().subscribe((response) => {
       this.fuels = response.data;
     });
   }
 
-  getEngines(){
+  getEngines() {
     this.engineService.getEngines().subscribe((response) => {
       this.engines = response.data;
     });
@@ -107,10 +108,12 @@ export class CarAddComponent implements OnInit {
     });
   }
 
-  addWithImages(){
+  addWithImages() {
+    this.spinner.show("s1");
     let carModel = Object.assign({userId: this.authService.decodedToken["UserId"]}, this.carAddForm.value);
     if (this.carAddForm.valid && this.files) {
       this.carService.addWithImages(this.files, carModel).subscribe((response) => {
+        this.spinner.hide("s1");
         this.toastrService.success(`Car is added successfully`);
         this.router.navigate(["cars"]);
       }, (responseError) => {

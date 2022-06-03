@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RegisterModel } from './../../models/registerModel';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private toastrService: ToastrService,
-    private authService: AuthService) { }
+    private authService: AuthService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -31,9 +32,11 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
+    this.spinner.show("s1");
     let registerModel: RegisterModel = Object.assign({}, this.registerForm.value);
     if (this.registerForm.valid) {
       this.authService.register(registerModel).subscribe((response) => {
+        this.spinner.hide("s1");
         localStorage.setItem('token', response.data.token);
         this.toastrService.success(response.message);
       }, (responseError) => {

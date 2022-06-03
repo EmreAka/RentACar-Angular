@@ -15,8 +15,10 @@
     </div>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-6 col-sm-12">
-          <img [src]="getCurrentImage()" (click)="setNextCurrentImage()" class="d-block w-100"/>
+        <div class="col-lg-6 col-sm-12 imageContainer">
+          <img [src]="getCurrentImage()" class="d-block w-100 h-100"/>
+          <div class="right" (click)="setNextCurrentImage()"></div>
+          <div class="left" (click)="setBackCurrentImage()"></div>
         </div>
         <div class="col-lg-6 col-sm-12">
           <div class="card-body">

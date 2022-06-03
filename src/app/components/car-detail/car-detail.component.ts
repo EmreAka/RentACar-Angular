@@ -54,10 +54,22 @@ export class CarDetailComponent implements OnInit {
   }
 
   setNextCurrentImage() {
-    this.indexOfCurrentImage += 1;
-    if (this.indexOfCurrentImage > (this.sizeOfImages - 1)){
+    if (this.indexOfCurrentImage >= (this.sizeOfImages - 1)){
       this.indexOfCurrentImage = 0;
+      this.currentImgSrc = this.car.images[this.indexOfCurrentImage];
+    } else {
+      this.indexOfCurrentImage += 1;
+      this.currentImgSrc = this.car.images[this.indexOfCurrentImage];
     }
-    this.currentImgSrc = this.car.images[this.indexOfCurrentImage];
+  }
+
+  setBackCurrentImage() {
+    if (this.indexOfCurrentImage == 0) {
+      this.indexOfCurrentImage = this.sizeOfImages - 1;
+      this.currentImgSrc = this.car.images[this.sizeOfImages - 1]
+    } else {
+      this.indexOfCurrentImage -= 1;
+      this.currentImgSrc = this.car.images[this.indexOfCurrentImage];
+    }
   }
 }

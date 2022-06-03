@@ -1,0 +1,27 @@
+.imageContainer {
+  position: relative;
+  padding-left: 0;
+  padding-right: 0
+}
+
+.right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  height: 100%;
+  width: 50%;
+}
+
+.left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  height: 100%;
+  width: 50%;
+}
+
+.bi::before {
+ text-align: center;
+}

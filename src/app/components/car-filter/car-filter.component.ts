@@ -6,6 +6,7 @@ import { Brand } from './../../models/brand';
 import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
 import {CarService} from "../../services/car.service";
 import {Car} from "../../models/car";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-car-filter',
@@ -34,9 +35,10 @@ export class CarFilterComponent implements OnInit {
   @Output() dataLoadedEvent = new EventEmitter<boolean>();
 
   constructor(private brandService:BrandService, private colourService:ColourService, private router:Router,
-              private carService: CarService) { }
+              private carService: CarService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.spinner.show("s2");
     this.getBrands();
     this.getColours();
     this.getCars();
@@ -64,6 +66,7 @@ export class CarFilterComponent implements OnInit {
       this.cars = response.data;
       this.dataLoaded = true;
       this.sendCurrentCars();
+      this.spinner.hide("s2");
     })
   }
 

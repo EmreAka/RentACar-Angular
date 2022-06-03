@@ -40,6 +40,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import { MyCarListComponent } from './components/my-car-list/my-car-list.component';
 import { FavoriteCarComponent } from './components/favorite-car/favorite-car.component';
 import { CardDescriptionPipe } from './pipes/card-description.pipe';
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { CardDescriptionPipe } from './pipes/card-description.pipe';
     FlexLayoutModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
-    })
+    }),
+    NgxSpinnerModule
   ],
   providers: [
     DatePipe,

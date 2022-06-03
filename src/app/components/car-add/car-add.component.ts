@@ -117,6 +117,7 @@ export class CarAddComponent implements OnInit {
         this.toastrService.success(`Car is added successfully`);
         this.router.navigate(["cars"]);
       }, (responseError) => {
+        this.spinner.hide("s1");
         if (responseError.error.Errors) {
           if (responseError.error.Errors.length > 0) {
             for (let i = 0; i < responseError.error.Errors.length; i++) {

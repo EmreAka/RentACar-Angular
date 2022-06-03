@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
         this.authService.getUserDetailsFromToken();
         this.router.navigate([""]);
       }, (responseError) => {
+        this.spinner.hide("s1")
         this.toastrService.error(responseError.error);
       })
     }

@@ -30,8 +30,9 @@
           </div>
         </div>
         <div class="grid-container">
-          <div class="card shadow mb-5 bg-body rounded"
-               *ngFor="let car of currentCars | carFilter: filterText; let i = index" @fade>
+          <div class="card mb-5 bg-body rounded"
+               *ngFor="let car of currentCars | carFilter: filterText; let i = index" @fade
+               (mouseover)="mouseIsOver(i)" (mouseleave)="mouseIsNotOver()" [class]="mouseIsOverOn == i ? 'shadow': null">
             <img [src]="car.images[0]" class="card-img-top">
             <div class="card-body">
               <h5 class="card-title">{{car.brandName}}</h5>

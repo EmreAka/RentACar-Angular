@@ -41,6 +41,8 @@ export class CarComponent implements OnInit {
 
   favoritedCar: number;
 
+  mouseIsOverOn: number = -1;
+
   constructor(private carService: CarService, private activatedRoute: ActivatedRoute, private router: Router,
               private authService: AuthService, private favService: FavoriteService, private toastrService: ToastrService,
               private localStorageService: LocalStorageService) {
@@ -83,10 +85,6 @@ export class CarComponent implements OnInit {
     this.router.navigateByUrl("cars/edit/" + carId);
   }
 
-  /*setFav(i: any) {
-    this.favoritedCar = i;
-  }*/
-
   setFav(carId: number) {
     if (this.authService.isAuthenticated() && !this.authService.isTokenExpired()) {
       let index: number = this.favorites.findIndex(f => f.carId == carId)
@@ -111,11 +109,6 @@ export class CarComponent implements OnInit {
 
   }
 
-  /*getFavClass(i: any) {
-    if (this.favoritedCar != i) return "bi bi-heart";
-    else return "bi bi-heart-fill";
-  }*/
-
   getFavClass(carId: number) {
     if (this.isThatCarFavorited(carId)) return "bi bi-heart-fill";
     else return "bi bi-heart"
@@ -138,4 +131,12 @@ export class CarComponent implements OnInit {
     else return 'open';
   }
 
+  mouseIsOver(i: number) {
+    console.log(i);
+    this.mouseIsOverOn = i;
+  }
+
+  mouseIsNotOver() {
+    this.mouseIsOverOn = -1;
+  }
 }

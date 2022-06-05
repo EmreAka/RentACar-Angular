@@ -1,7 +1,7 @@
 <div>
   <h1 *ngIf="brandsLoaded == true" class="display-6">Brands</h1>
   <div>
-    <ul *ngIf="brandsLoaded == true" class="list-group shadow mb-5 bg-body rounded">
+    <ul *ngIf="brandsLoaded == true" class="list-group mb-5 bg-body rounded">
       <div class="list-group scroll">
         <li class="list-group-item">
           <input [(ngModel)]="brandFilterText" class="form-control" placeholder="Search Brand"/>
@@ -16,7 +16,7 @@
 
   <h1 *ngIf="coloursLoaded == true" class="display-6">Colours</h1>
   <div>
-    <ul *ngIf="coloursLoaded == true" class="list-group shadow mb-5 bg-body rounded">
+    <ul *ngIf="coloursLoaded == true" class="list-group mb-5 bg-body rounded">
       <div class="list-group scroll">
         <li class="list-group-item">
           <input [(ngModel)]="colourFilterText" class="form-control" placeholder="Search Colour"/>

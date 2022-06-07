@@ -45,6 +45,7 @@ export class RegisterComponent implements OnInit {
       });
     }
     else {
+      this.spinner.hide("s1");
       this.toastrService.error("Complete the form!");
     }
   }

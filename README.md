@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This project is built for [Rent A Car API](https://github.com/EmreAka/RentACarProject) which is built with ASP.NET Core 6.0 
 
-# Video of The Project
+# Demo of The Project
 
 [DEMO](https://rentacar.emreaka.tech/)
 

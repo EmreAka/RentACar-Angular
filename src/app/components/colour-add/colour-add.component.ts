@@ -2,7 +2,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ColourService } from './../../services/colour.service';
 import { Colour } from './../../models/colour';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormControl } from '@angular/forms';
 import {Router} from "@angular/router";
 
 @Component({
@@ -12,9 +12,9 @@ import {Router} from "@angular/router";
 })
 export class ColourAddComponent implements OnInit {
 
-  colourAddForm: FormGroup;
+  colourAddForm: UntypedFormGroup;
 
-  constructor(private formBuilder: FormBuilder, private colourService: ColourService,
+  constructor(private formBuilder: UntypedFormBuilder, private colourService: ColourService,
     private toastrService: ToastrService, private router: Router) { }
 
   ngOnInit(): void {

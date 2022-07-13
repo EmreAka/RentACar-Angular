@@ -4,7 +4,7 @@ import { Customer } from './../../models/customer';
 import { CustomerService } from './../../services/customer.service';
 import { LocalStorageService } from './../../services/local-storage.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, Validators, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -13,10 +13,10 @@ import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms'
 })
 export class ProfileComponent implements OnInit {
 
-  profileForm: FormGroup
+  profileForm: UntypedFormGroup
   user: Customer = {id: 0, companyName: "", email: "", firstName: "", lastName: "", status: true};
 
-  constructor(private formBuilder: FormBuilder, private localStorageService: LocalStorageService,
+  constructor(private formBuilder: UntypedFormBuilder, private localStorageService: LocalStorageService,
     private customerService: CustomerService, private toastrService: ToastrService, private authService: AuthService) { }
 
   ngOnInit(): void {

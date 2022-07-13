@@ -3,7 +3,7 @@ import { Colour } from './../../models/colour';
 import { ToastrService } from 'ngx-toastr';
 import { ColourService } from './../../services/colour.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-colour-edit',
@@ -12,11 +12,11 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 })
 export class ColourEditComponent implements OnInit {
 
-  colourUpdateForm: FormGroup;
+  colourUpdateForm: UntypedFormGroup;
 
   colour: Colour = {id: 0, name: ""};
 
-  constructor(private formBuilder: FormBuilder, private colourService: ColourService,
+  constructor(private formBuilder: UntypedFormBuilder, private colourService: ColourService,
     private toastrService: ToastrService, private activatedRoute: ActivatedRoute,
               private router: Router) { }
 

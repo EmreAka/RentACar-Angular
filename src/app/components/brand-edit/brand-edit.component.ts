@@ -2,7 +2,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { Brand } from './../../models/brand';
 import { BrandService } from './../../services/brand.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
+import { UntypedFormGroup, UntypedFormBuilder, FormControl, Validators } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -12,11 +12,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BrandEditComponent implements OnInit {
 
-  brandUpdateForm: FormGroup;
+  brandUpdateForm: UntypedFormGroup;
 
   brand: Brand = {id: 0, name: ""};
 
-  constructor(private formBuilder: FormBuilder, private toastrService: ToastrService,
+  constructor(private formBuilder: UntypedFormBuilder, private toastrService: ToastrService,
     private brandService: BrandService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {

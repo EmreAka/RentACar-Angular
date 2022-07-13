@@ -9,7 +9,7 @@ import {CarService} from './../../services/car.service';
 import {BrandService} from './../../services/brand.service';
 import {Colour} from './../../models/colour';
 import {Brand} from './../../models/brand';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {UntypedFormGroup, UntypedFormBuilder, Validators} from '@angular/forms';
 import {Component, OnInit} from '@angular/core';
 import {Engine} from "../../models/engine";
 import {Fuel} from "../../models/fuel";
@@ -23,7 +23,7 @@ import {FuelService} from "../../services/fuel.service";
 })
 export class CarEditComponent implements OnInit {
 
-  carUpdateForm: FormGroup;
+  carUpdateForm: UntypedFormGroup;
 
   brands: Brand[];
   colours: Colour[];
@@ -46,7 +46,7 @@ export class CarEditComponent implements OnInit {
   carImages: CarImage[] = [];
   carIdToUploadPhoto: string;
 
-  constructor(private formBuilder: FormBuilder, private brandService: BrandService,
+  constructor(private formBuilder: UntypedFormBuilder, private brandService: BrandService,
               private colourService: ColourService, private carService: CarService,
               private toastrService: ToastrService, private activatedRoute: ActivatedRoute,
               private carImageService: CarImageService, private router: Router, private engineService: EngineService,

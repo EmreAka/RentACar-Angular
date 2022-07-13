@@ -8,7 +8,7 @@ import {RentalWithCard} from "../../models/rentalWithCard";
 import {RentalService} from './../../services/rental.service';
 import {Component, OnInit} from '@angular/core';
 import {DatePipe} from '@angular/common';
-import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, FormControl, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {Card} from 'src/app/models/card';
 import {AuthService} from "../../services/auth.service";
@@ -30,12 +30,12 @@ export class RentingModalComponent implements OnInit {
   hasSavedCard: boolean = false;
   cardFromDropdown: Card;
 
-  paymentForm: FormGroup;
+  paymentForm: UntypedFormGroup;
   months: string[] = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
   years: string[] = ["2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033"];
 
   constructor(private rentalService: RentalService, private activatedRoute: ActivatedRoute,
-              private datePipe: DatePipe, private formBuilder: FormBuilder, private paymentService: PaymentService,
+              private datePipe: DatePipe, private formBuilder: UntypedFormBuilder, private paymentService: PaymentService,
               private toastrService: ToastrService, private cardService: CardService,
               private localStorageservice: LocalStorageService, private authService: AuthService) {
   }

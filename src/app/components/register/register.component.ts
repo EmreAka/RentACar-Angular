@@ -2,7 +2,7 @@ import { AuthService } from './../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { RegisterModel } from './../../models/registerModel';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
@@ -12,9 +12,9 @@ import {NgxSpinnerService} from "ngx-spinner";
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm: FormGroup;
+  registerForm: UntypedFormGroup;
 
-  constructor(private formBuilder: FormBuilder, private toastrService: ToastrService,
+  constructor(private formBuilder: UntypedFormBuilder, private toastrService: ToastrService,
     private authService: AuthService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {

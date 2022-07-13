@@ -1,7 +1,7 @@
 import { BrandService } from './../../services/brand.service';
 import { Brand } from './../../models/brand';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
+import { UntypedFormGroup, UntypedFormBuilder, FormControl, Validators } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
 import {Router} from "@angular/router";
 
@@ -12,9 +12,9 @@ import {Router} from "@angular/router";
 })
 export class BrandAddComponent implements OnInit {
 
-  brandAddForm: FormGroup;
+  brandAddForm: UntypedFormGroup;
 
-  constructor(private formBuilder: FormBuilder, private toastrService: ToastrService,
+  constructor(private formBuilder: UntypedFormBuilder, private toastrService: ToastrService,
     private brandService: BrandService, private router: Router) { }
 
   ngOnInit(): void {

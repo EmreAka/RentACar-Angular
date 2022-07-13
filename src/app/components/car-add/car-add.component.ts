@@ -5,7 +5,7 @@ import {Colour} from './../../models/colour';
 import {Brand} from './../../models/brand';
 import {BrandService} from './../../services/brand.service';
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
+import {UntypedFormBuilder, Validators, UntypedFormGroup, FormControl} from '@angular/forms';
 import {Router} from "@angular/router";
 import {LocalStorageService} from "../../services/local-storage.service";
 import {AuthService} from "../../services/auth.service";
@@ -22,7 +22,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 })
 export class CarAddComponent implements OnInit {
 
-  carAddForm: FormGroup;
+  carAddForm: UntypedFormGroup;
 
   brands: Brand[];
   colours: Colour[];
@@ -34,7 +34,7 @@ export class CarAddComponent implements OnInit {
 
   imageSrc: any[] = [];
 
-  constructor(private formBuilder: FormBuilder, private brandService: BrandService,
+  constructor(private formBuilder: UntypedFormBuilder, private brandService: BrandService,
               private colourService: ColourService, private carService: CarService,
               private toastrService: ToastrService, private router: Router,
               private localStorageService: LocalStorageService, private authService: AuthService,

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FavoriteService} from "../../services/favorite.service";
-import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import { FavoriteService } from "../../services/favorite.service";
+import { AuthService } from "../../services/auth.service";
+import { Router } from "@angular/router";
+import { animate, state, style, transition, trigger } from "@angular/animations";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-favorite-car',
@@ -10,7 +11,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
   styleUrls: ['./favorite-car.component.css'],
   animations: [
     trigger('fade', [
-      state('void', style({opacity: 0})),
+      state('void', style({ opacity: 0 })),
       transition('void => *', [
         animate(1000)
       ]),
@@ -26,13 +27,13 @@ export class FavoriteCarComponent implements OnInit {
   dataLoaded: boolean = false;
 
   constructor(private favoriteCarService: FavoriteService, private authService: AuthService,
-              private router: Router) { }
+    private router: Router, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getFavoriteDetailsByUserId();
   }
 
-  getFavoriteDetailsByUserId(){
+  getFavoriteDetailsByUserId() {
     this.favoriteCarService.getFavoriteDetailsByUserId()
       .subscribe((response) => {
         this.favoriteCars = response.data;
@@ -40,7 +41,18 @@ export class FavoriteCarComponent implements OnInit {
       });
   }
 
-  setCurrentRouteToCarDetail(carId:number){
+  removeFavorite(favorite: any) {
+    this.favoriteCarService.deleteFavorite(favorite).subscribe(
+      {
+        next: () => {
+            this.toastrService.success(`Car is deleted from Favorites successfully`);
+            const indeks = this.favoriteCars.findIndex(x => x.id == favorite.id);
+            this.favoriteCars.splice(indeks, 1);
+          }
+      });
+  }
+
+  setCurrentRouteToCarDetail(carId: number) {
     this.router.navigateByUrl("cars/detail/" + carId);
   }
 

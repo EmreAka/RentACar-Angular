@@ -1,8 +1,8 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-dark float-end" data-bs-toggle="modal"
-    data-bs-target="#exampleModalToggle">
+<button type="button" class="btn btn-outline-dark float-end rent-button" data-bs-toggle="modal"
+    data-bs-target="#exampleModalToggle" (mouseover)="this.isMouseOverButton = true" (mouseleave)="this.isMouseOverButton = false">
     Rent The Car
-    <i class="bi-wallet" style="font-size: 1rem; color: rgb(5, 5, 5)"></i>
+    <i class="bi-wallet" style="font-size: 1rem;" [style]="getStyleOfIcon()"></i>
 </button>
 
 <!-- Modal -->

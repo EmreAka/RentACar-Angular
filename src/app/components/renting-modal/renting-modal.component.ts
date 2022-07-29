@@ -30,6 +30,8 @@ export class RentingModalComponent implements OnInit {
   hasSavedCard: boolean = false;
   cardFromDropdown: Card;
 
+  isMouseOverButton = false
+
   paymentForm: UntypedFormGroup;
   months: string[] = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
   years: string[] = ["2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033"];
@@ -57,6 +59,18 @@ export class RentingModalComponent implements OnInit {
     if (this.authService.isAuthenticated()) {
       this.getCards();
     }
+  }
+
+  mouseIsOver(){
+    this.isMouseOverButton = true;
+    console.log("qweqweq")
+  }
+
+  getStyleOfIcon(){
+    if(this.isMouseOverButton){
+      return "color: white"
+    }
+    return "color: black"
   }
 
   createPaymentForm() {

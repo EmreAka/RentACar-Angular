@@ -1,4 +1,4 @@
-<h1 class="display-6">My Cars</h1>
+<h1 class="display-6 mt-3">My Cars</h1>
 <div *ngIf="dataLoaded == false" class="d-flex justify-content-center">
   <div class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>
@@ -10,7 +10,7 @@
     <div fxLayout="row wrap" fxLayoutGap="20px grid">
       <div fxFlex.xs="100%" fxFlex.md="50%" fxFlex.sm="50%" fxFlex.lg="33%" fxFlex.xl="25%"
            *ngFor="let car of cars; let i = index" @fade>
-        <div class="card shadow p-3 mb-5 bg-body rounded" @fade>
+        <div class="card shadow mb-5 bg-body rounded" @fade>
           <img [src]="car.images[0]" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">{{car.brandName}}</h5>

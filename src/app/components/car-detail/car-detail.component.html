@@ -22,19 +22,19 @@
         </div>
         <div class="col-lg-6 col-sm-12">
           <div class="card-body">
-            <h5 class="card-title">Description</h5>
-            <p class="card-text">{{ car.description }}</p>
+            <h5 class="card-title display-6">Description</h5>
+            <p class="card-text lead" style="font-size: 1.5rem;">{{ car.description }}</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Renter: {{car.companyName}}</li>
-            <li class="list-group-item">Colour: {{ car.colourName }}</li>
-            <li class="list-group-item">Door Number: {{car.doorNumber}}</li>
-            <li class="list-group-item">Engine Type: {{car.engineType}}</li>
-            <li class="list-group-item">Fuel Type: {{car.fuelType}}</li>
-            <li class="list-group-item">Fuel Consumption: {{car.fuelConsumption}}</li>
-            <li class="list-group-item">Model: {{ car.modelYear }}</li>
-            <li class="list-group-item">
-              Daily Price: {{ car.dailyPrice | currency }}
+            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Renter: </span>{{car.companyName}}</li>
+            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Colour: </span>{{ car.colourName }}</li>
+            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Door Number: </span>{{car.doorNumber}}</li>
+            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Engine Type: </span>{{car.engineType}}</li>
+            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Fuel Type: </span>{{car.fuelType}}</li>
+            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Fuel Consumption: </span>{{car.fuelConsumption}}</li>
+            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Model: </span>{{ car.modelYear }}</li>
+            <li class="list-group-item lead" style="font-size: 1.5rem;">
+              <span style="font-weight: 400;">Daily Price: </span>{{ car.dailyPrice | currency }}
             </li>
           </ul>
         </div>

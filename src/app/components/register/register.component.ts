@@ -4,6 +4,7 @@ import { RegisterModel } from './../../models/registerModel';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import {NgxSpinnerService} from "ngx-spinner";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   registerForm: UntypedFormGroup;
 
   constructor(private formBuilder: UntypedFormBuilder, private toastrService: ToastrService,
-    private authService: AuthService, private spinner: NgxSpinnerService) { }
+    private authService: AuthService, private spinner: NgxSpinnerService, private router: Router) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -38,6 +39,8 @@ export class RegisterComponent implements OnInit {
       this.authService.register(registerModel).subscribe((response) => {
         this.spinner.hide("s1");
         localStorage.setItem('token', response.data.token);
+        this.authService.getUserDetailsFromToken();
+        this.router.navigate([""]);
         this.toastrService.success(response.message);
       }, (responseError) => {
         this.spinner.hide("s1");

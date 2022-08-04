@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //apiUrl: 'http://localhost:56305/api'
-  apiUrl: 'https://rentacarbackend.herokuapp.com/api'
+  apiUrl: 'http://localhost:56305/api'
+  //apiUrl: 'https://rentacarbackend.herokuapp.com/api'
 };
 
 /*

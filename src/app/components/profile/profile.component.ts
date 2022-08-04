@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
 
   profileForm: UntypedFormGroup
   user: Customer = { id: 0, companyName: "", email: "", firstName: "", lastName: "", status: true };
+  dataLoaded: boolean = false;
 
   constructor(private formBuilder: UntypedFormBuilder, private spinner: NgxSpinnerService,
     private customerService: CustomerService, private toastrService: ToastrService,) { }
@@ -71,6 +72,7 @@ export class ProfileComponent implements OnInit {
       this.profileForm.controls['email'].setValue(this.user.email);
       this.profileForm.controls['companyName'].setValue(this.user.companyName);
       this.spinner.hide("s1");
+      this.dataLoaded = true;
     }, (responseError) => {
       this.toastrService.error("An error occured!");
     });

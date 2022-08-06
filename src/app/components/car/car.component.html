@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" style="position: relative;">
   <div class="row">
     <div class="col-lg-2 col-sm-12">
       <app-car-filter (currentCarsEvent)="receiveCurrentCars($event)" (dataLoadedEvent)="receiveDataLoaded($event)">
@@ -23,11 +23,6 @@
       <div *ngIf="dataLoaded">
         <div class="card-title">
           <h1 class="display-6">Cars</h1>
-          <div class="container-fluid">
-            <div class="row">
-              <button class="btn btn-outline-dark mb-3" (click)="setCurrentRouteToCarAdd()">Rent your car</button>
-            </div>
-          </div>
         </div>
         <div class="grid-container">
           <div class="card mb-5 bg-body rounded"
@@ -55,5 +50,9 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div (click)="setCurrentRouteToCarAdd()" class="bg-dark" style="width: 100px; height: 100px; border-radius: 50px; bottom: 10px; right: 10px; position: fixed; text-align: center; display: flex; justify-content: center; align-items: center; cursor: pointer;">
+    <i class="bi bi-plus-lg" style="color: white; font-size: 2.5rem;"></i>
   </div>
 </div>

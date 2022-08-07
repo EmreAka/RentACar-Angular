@@ -1,13 +1,13 @@
-import {CarService} from './../../services/car.service';
-import {Car} from './../../models/car';
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {animate, state, style, transition, trigger} from "@angular/animations";
-import {AuthService} from "../../services/auth.service";
-import {FavoriteService} from "../../services/favorite.service";
-import {ToastrService} from "ngx-toastr";
-import {LocalStorageService} from "../../services/local-storage.service";
-import { Title } from '@angular/platform-browser';
+import { CarService } from './../../services/car.service';
+import { Car } from './../../models/car';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { animate, state, style, transition, trigger } from "@angular/animations";
+import { AuthService } from "../../services/auth.service";
+import { FavoriteService } from "../../services/favorite.service";
+import { ToastrService } from "ngx-toastr";
+import { LocalStorageService } from "../../services/local-storage.service";
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-car',
@@ -15,13 +15,13 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./car.component.css'],
   animations: [
     trigger('fade', [
-      state('void', style({opacity: 0})),
+      state('void', style({ opacity: 0 })),
       transition('void <=> *', [
         animate(1000)
       ])
     ]),
     trigger('fav', [
-      state('open', style({color: "gray"})),
+      state('open', style({ color: "gray" })),
       state('closed', style({})),
       transition('open => closed', [
         animate(200)
@@ -45,12 +45,15 @@ export class CarComponent implements OnInit {
   mouseIsOverOn: number = -1;
 
   constructor(private carService: CarService, private activatedRoute: ActivatedRoute, private router: Router,
-              private authService: AuthService, private favService: FavoriteService, private toastrService: ToastrService,
-              private localStorageService: LocalStorageService, private title: Title) {
+    private authService: AuthService, private favService: FavoriteService, private toastrService: ToastrService,
+    private localStorageService: LocalStorageService, private title: Title, private meta: Meta) {
   }
 
   ngOnInit(): void {
     this.title.setTitle("Rent A Car - Cars")
+    this.meta.addTags([{ name: "description", content: "Rent A Car - Cars" },
+      {name: "keywords", content: "Car, Rental, Rent A Car"}
+    ], true);
     if (this.authService.isAuthenticated() && !this.authService.isTokenExpired()) {
       this.getFavoritesByUserId();
     }

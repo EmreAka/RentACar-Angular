@@ -7,6 +7,7 @@ import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +19,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: UntypedFormBuilder, private authService: AuthService,
     private toastrService: ToastrService, private localStorageService: LocalStorageService,
-    private customerService: CustomerService, private router: Router, private spinner: NgxSpinnerService) { }
+    private customerService: CustomerService, private router: Router, private spinner: NgxSpinnerService,
+    private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle("Rent A Car - Login")
     this.createLoginForm();
   }
 

@@ -7,6 +7,7 @@ import {AuthService} from "../../services/auth.service";
 import {FavoriteService} from "../../services/favorite.service";
 import {ToastrService} from "ngx-toastr";
 import {LocalStorageService} from "../../services/local-storage.service";
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-car',
@@ -45,10 +46,11 @@ export class CarComponent implements OnInit {
 
   constructor(private carService: CarService, private activatedRoute: ActivatedRoute, private router: Router,
               private authService: AuthService, private favService: FavoriteService, private toastrService: ToastrService,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: LocalStorageService, private title: Title) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle("Rent A Car - Cars")
     if (this.authService.isAuthenticated() && !this.authService.isTokenExpired()) {
       this.getFavoritesByUserId();
     }

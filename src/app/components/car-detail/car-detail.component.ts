@@ -4,6 +4,7 @@ import {Car} from './../../models/car';
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-car-detail',
@@ -31,7 +32,7 @@ export class CarDetailComponent implements OnInit {
 
   dataLoaded: boolean = false;
 
-  constructor(private carService: CarService, private activatedRoute: ActivatedRoute, public auth: AuthService) {
+  constructor(private title:Title, private carService: CarService, private activatedRoute: ActivatedRoute, public auth: AuthService) {
   }
 
   ngOnInit(): void {
@@ -43,6 +44,7 @@ export class CarDetailComponent implements OnInit {
   getCarDetailByCarId(carId: number) {
     this.carService.getCarDetailByCarId(carId).subscribe((response) => {
       this.car = response.data[0];
+      this.title.setTitle(`${this.car.brandName}`)
       this.currentImgSrc = this.car.images[0];
       this.sizeOfImages = this.car.images.length;
       this.dataLoaded = true;

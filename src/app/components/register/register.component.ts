@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import {NgxSpinnerService} from "ngx-spinner";
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -16,9 +17,11 @@ export class RegisterComponent implements OnInit {
   registerForm: UntypedFormGroup;
 
   constructor(private formBuilder: UntypedFormBuilder, private toastrService: ToastrService,
-    private authService: AuthService, private spinner: NgxSpinnerService, private router: Router) { }
+    private authService: AuthService, private spinner: NgxSpinnerService, private router: Router,
+    private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle("Rent A Car - Register")
     this.createRegisterForm();
   }
 

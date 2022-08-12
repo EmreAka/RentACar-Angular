@@ -1,32 +1,31 @@
 <div>
-  <h1 *ngIf="brandsLoaded == true" class="display-6">Brands</h1>
-  <div>
-    <ul *ngIf="brandsLoaded == true" class="list-group mb-5 bg-body rounded">
-      <div class="list-group scroll">
-        <li class="list-group-item">
-          <input [(ngModel)]="brandFilterText" class="form-control" placeholder="Search Brand"/>
-          <label *ngIf="brandFilterText" class="form-label">{{brandFilterText}} is searched.</label>
-        </li>
-        <li *ngIf="!brandFilterText" (click)="setCurrentBrandDefault()" [class]="getCurrentBrandAllClass()">All Brands</li>
-        <li (click)="setCurrentBrand(brand)" *ngFor="let brand of brands | brandFilter: brandFilterText"
-            [class]="getCurrentBrandClass(brand)">{{brand.name}}</li>
-      </div>
+  <div class="brand-list">
+    <h1 class="display-6">Brands</h1>
+    <div>
+      <input placeholder="search" class="search" [(ngModel)]="brandFilterText" />
+    </div>
+    <ul>
+      <li *ngIf="!brandFilterText" (click)="setCurrentBrandDefault()" [class]="getCurrentBrandAllClass()">All
+        Brands</li>
+      <li *ngFor="let brand of brands | colourFilter: colourFilterText; let i = index"
+        [class]="getCurrentBrandClass(brand)" (click)="setCurrentBrand(brand)">
+        {{brand.name}}
+      </li>
     </ul>
   </div>
 
-  <h1 *ngIf="coloursLoaded == true" class="display-6">Colours</h1>
-  <div>
-    <ul *ngIf="coloursLoaded == true" class="list-group mb-5 bg-body rounded">
-      <div class="list-group scroll">
-        <li class="list-group-item">
-          <input [(ngModel)]="colourFilterText" class="form-control" placeholder="Search Colour"/>
-          <label *ngIf="colourFilterText" class="form-label">{{colourFilterText}} is searched.</label>
-        </li>
-        <li *ngIf="!colourFilterText" (click)="setCurrentColourDefault()" [class]="getCurrentColourAllClass()">All Colours</li>
-        <li (click)="setCurrentColour(colour)" *ngFor="let colour of colours | colourFilter: colourFilterText"
-            [class]="getCurrentColourClass(colour)">{{colour.name}}</li>
-      </div>
+  <div class="brand-list" style="margin-top: 3rem; margin-bottom: 3rem;">
+    <h1 class="display-6">Colours</h1>
+    <div>
+      <input placeholder="search" class="search" [(ngModel)]="colourFilterText" />
+    </div>
+    <ul>
+      <li *ngIf="!colourFilterText" (click)="setCurrentColourDefault()" [class]="getCurrentColourAllClass()">All
+        Colours</li>
+      <li *ngFor="let colour of colours | colourFilter: colourFilterText; let i = index"
+        [class]="getCurrentColourClass(colour)" (click)="setCurrentColour(colour)">
+        {{colour.name}}
+      </li>
     </ul>
   </div>
 </div>
-

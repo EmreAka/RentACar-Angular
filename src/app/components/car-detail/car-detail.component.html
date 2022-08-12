@@ -17,8 +17,11 @@
       <div class="row">
         <div class="col-lg-6 col-sm-12 imageContainer">
           <img [src]="getCurrentImage()" class="d-block img-fluid"/>
-          <div class="right" (click)="setNextCurrentImage()"></div>
-          <div class="left" (click)="setBackCurrentImage()"></div>
+          <!-- <div class="right" (click)="setNextCurrentImage()"></div>
+          <div class="left" (click)="setBackCurrentImage()"></div> -->
+          <div class="images-container">
+            <img [src]="image" width="200" *ngFor="let image of car.images" (click)="setCurrentImage(image)"/>
+          </div>
         </div>
         <div class="col-lg-6 col-sm-12">
           <div class="card-body">

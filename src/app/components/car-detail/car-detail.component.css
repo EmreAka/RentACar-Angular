@@ -23,5 +23,20 @@
 }
 
 .bi::before {
- text-align: center;
+  text-align: center;
+}
+
+.images-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  scroll-behavior: smooth;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.images-container img {
+  margin-right: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
 }

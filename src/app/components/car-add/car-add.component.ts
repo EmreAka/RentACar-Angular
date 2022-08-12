@@ -125,12 +125,14 @@ export class CarAddComponent implements OnInit {
             }
           }
         } else {
+          this.spinner.hide("s1");
           this.toastrService.error(responseError.error.Message);
           this.router.navigate(["login"]);
           this.localStorageService.delete('token');
         }
       });
     } else {
+      this.spinner.hide("s1");
       this.toastrService.error("Complete the form!");
     }
   }

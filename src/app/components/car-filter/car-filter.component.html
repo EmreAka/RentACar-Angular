@@ -7,7 +7,7 @@
     <ul>
       <li *ngIf="!brandFilterText" (click)="setCurrentBrandDefault()" [class]="getCurrentBrandAllClass()">All
         Brands</li>
-      <li *ngFor="let brand of brands | colourFilter: colourFilterText; let i = index"
+      <li *ngFor="let brand of brands | brandFilter: brandFilterText; let i = index"
         [class]="getCurrentBrandClass(brand)" (click)="setCurrentBrand(brand)">
         {{brand.name}}
       </li>

@@ -4,40 +4,63 @@
   </div>
 </div>
 
-<div
-  *ngIf="dataLoaded == true"
-  class=""
-  style="margin-top: 30px"
->
-  <div class="card-body">
+<div *ngIf="dataLoaded == true" class="" style="margin-bottom: 5rem">
+  <div class="card-body" style="padding: 0">
     <div class="card-title">
       <h1 class="display-3">{{ car.brandName }}</h1>
     </div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-6 col-sm-12 imageContainer">
-          <img [src]="getCurrentImage()" class="d-block img-fluid"/>
+          <img [src]="getCurrentImage()" class="d-block img-fluid" />
           <!-- <div class="right" (click)="setNextCurrentImage()"></div>
           <div class="left" (click)="setBackCurrentImage()"></div> -->
           <div class="images-container">
-            <img [src]="image" width="200" *ngFor="let image of car.images" (click)="setCurrentImage(image)"/>
+            <img
+              [src]="image"
+              width="200"
+              *ngFor="let image of car.images"
+              (click)="setCurrentImage(image)"
+            />
           </div>
         </div>
         <div class="col-lg-6 col-sm-12">
           <div class="card-body">
             <h5 class="card-title display-6">Description</h5>
-            <p class="card-text lead" style="font-size: 1.5rem;">{{ car.description }}</p>
+            <p class="card-text lead" style="font-size: 1.5rem">
+              {{ car.description }}
+            </p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Renter: </span>{{car.companyName}}</li>
-            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Colour: </span>{{ car.colourName }}</li>
-            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Door Number: </span>{{car.doorNumber}}</li>
-            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Engine Type: </span>{{car.engineType}}</li>
-            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Fuel Type: </span>{{car.fuelType}}</li>
-            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Fuel Consumption: </span>{{car.fuelConsumption}}</li>
-            <li class="list-group-item lead" style="font-size: 1.5rem;"><span style="font-weight: 400;">Model: </span>{{ car.modelYear }}</li>
-            <li class="list-group-item lead" style="font-size: 1.5rem;">
-              <span style="font-weight: 400;">Daily Price: </span>{{ car.dailyPrice | currency }}
+            <li class="list-group-item lead" style="font-size: 1.5rem">
+              <span style="font-weight: 400">Renter: </span
+              >{{ car.companyName }}
+            </li>
+            <li class="list-group-item lead" style="font-size: 1.5rem">
+              <span style="font-weight: 400">Colour: </span>{{ car.colourName }}
+            </li>
+            <li class="list-group-item lead" style="font-size: 1.5rem">
+              <span style="font-weight: 400">Door Number: </span
+              >{{ car.doorNumber }}
+            </li>
+            <li class="list-group-item lead" style="font-size: 1.5rem">
+              <span style="font-weight: 400">Engine Type: </span
+              >{{ car.engineType }}
+            </li>
+            <li class="list-group-item lead" style="font-size: 1.5rem">
+              <span style="font-weight: 400">Fuel Type: </span
+              >{{ car.fuelType }}
+            </li>
+            <li class="list-group-item lead" style="font-size: 1.5rem">
+              <span style="font-weight: 400">Fuel Consumption: </span
+              >{{ car.fuelConsumption }}
+            </li>
+            <li class="list-group-item lead" style="font-size: 1.5rem">
+              <span style="font-weight: 400">Model: </span>{{ car.modelYear }}
+            </li>
+            <li class="list-group-item lead" style="font-size: 1.5rem">
+              <span style="font-weight: 400">Daily Price: </span
+              >{{ car.dailyPrice | currency }}
             </li>
           </ul>
         </div>

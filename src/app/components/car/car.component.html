@@ -1,13 +1,16 @@
-<div class="container-fluid" style="position: relative;">
+<div class="container-fluid" style="position: relative">
   <div class="row">
-    <div class="col-lg-2 col-sm-12">
-      <app-car-filter (currentCarsEvent)="receiveCurrentCars($event)" (dataLoadedEvent)="receiveDataLoaded($event)">
+    <div class="col-lg-3 col-sm-12">
+      <app-car-filter
+        (currentCarsEvent)="receiveCurrentCars($event)"
+        (dataLoadedEvent)="receiveDataLoaded($event)"
+      >
       </app-car-filter>
     </div>
-    <div class="col-lg-10 col-sm-12">
+    <div class="col-lg-9 col-sm-12">
       <div *ngIf="dataLoaded == true" class="mb-3">
         <label for="filterText" class="form-label"
-        ><h1 class="display-6">Search A Car</h1></label
+          ><h1 class="display-6">Search A Car</h1></label
         >
         <input
           type="text"
@@ -25,17 +28,52 @@
           <h1 class="display-6">Cars</h1>
         </div>
         <div class="grid-container">
-          <div class="card mb-5 bg-body rounded"
-               *ngFor="let car of currentCars | carFilter: filterText; let i = index" @fade
-               (mouseover)="mouseIsOver(i)" (mouseleave)="mouseIsNotOver()" [class]="mouseIsOverOn == i ? 'shadow': null">
-            <img [src]="car.images[0]" class="card-img-top">
+          <div
+            class="card mb-5 bg-body rounded"
+            *ngFor="
+              let car of currentCars | carFilter: filterText;
+              let i = index
+            "
+            @fade
+            (mouseover)="mouseIsOver(i)"
+            (mouseleave)="mouseIsNotOver()"
+            [class]="mouseIsOverOn == i ? 'shadow' : null"
+          >
+            <img [src]="car.images[0]" class="card-img-top" />
             <div class="card-body">
-              <h5 class="card-title">{{car.brandName}}</h5>
-              <p class="card-text">{{car.description | cardDescription}}</p>
-              <i [@fav]="triggerAni(i)" (click)="setFav(car.id)" [class]="getFavClass(car.id)"
-                 style="font-size: 25px"></i>
-              <div class="btn-group float-end" role="group">
-                <button (click)="setCurrentRouteToCarEdit(car.id)" type="button" class="btn btn-outline-dark">Edit
+              <h5 class="card-title">{{ car.brandName }}</h5>
+              <p class="card-text">{{ car.description | cardDescription }}</p>
+
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                <i
+                  [@fav]="triggerAni(i)"
+                  (click)="setFav(car.id)"
+                  [class]="getFavClass(car.id)"
+                  style="font-size: 25px"
+                ></i>
+                <button
+                  class="learn-more"
+                  (click)="setCurrentRouteToCarDetail(car.id)"
+                >
+                  <span class="circle" aria-hidden="true">
+                    <span class="icon arrow"></span>
+                  </span>
+                  <span class="button-text">See Details</span>
+                </button>
+              </div>
+              <!-- <div class="btn-group float-end" role="group">
+                <button
+                  (click)="setCurrentRouteToCarEdit(car.id)"
+                  type="button"
+                  class="btn btn-outline-dark"
+                >
+                  Edit
                 </button>
                 <button
                   (click)="setCurrentRouteToCarDetail(car.id)"
@@ -44,7 +82,7 @@
                 >
                   Review
                 </button>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -52,7 +90,23 @@
     </div>
   </div>
 
-  <div (click)="setCurrentRouteToCarAdd()" class="bg-dark" style="width: 70px; height: 70px; border-radius: 50px; bottom: 10px; right: 10px; position: fixed; text-align: center; display: flex; justify-content: center; align-items: center; cursor: pointer;">
-    <i class="bi bi-plus-lg" style="color: white; font-size: 2.5rem;"></i>
+  <div
+    (click)="setCurrentRouteToCarAdd()"
+    class="bg-dark"
+    style="
+      width: 70px;
+      height: 70px;
+      border-radius: 50px;
+      bottom: 10px;
+      right: 10px;
+      position: fixed;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    "
+  >
+    <i class="bi bi-plus-lg" style="color: white; font-size: 2.5rem"></i>
   </div>
 </div>

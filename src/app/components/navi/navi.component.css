@@ -1,9 +1,9 @@
-.nav-link:hover{
+.nav-link:hover {
   background-color: dimgray !important;
   border-radius: 30px !important;
 }
 
-.nav-link:focus{
+.nav-link:focus {
   background-color: dimgray !important;
   border-radius: 30px !important;
 }

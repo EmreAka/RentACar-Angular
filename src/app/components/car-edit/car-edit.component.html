@@ -18,7 +18,11 @@
         <div class="col-lg-3 col-sm-12">
           <div class="mb-3">
             <label for="colourId" class="form-label">Select Colour</label>
-            <select id="colourId" formControlName="colourId" class="form-select">
+            <select
+              id="colourId"
+              formControlName="colourId"
+              class="form-select"
+            >
               <option *ngFor="let colour of colours" [ngValue]="colour.id">
                 {{ colour.name }}
               </option>
@@ -28,9 +32,13 @@
         <div class="col-lg-3 col-sm-12">
           <div class="mb-3">
             <label for="engineId" class="form-label">Select Engine</label>
-            <select id="engineId" formControlName="engineId" class="form-select">
+            <select
+              id="engineId"
+              formControlName="engineId"
+              class="form-select"
+            >
               <option *ngFor="let engine of engines" [ngValue]="engine.id">
-                {{engine.type}}
+                {{ engine.type }}
               </option>
             </select>
           </div>
@@ -40,7 +48,7 @@
             <label for="fuelId" class="form-label">Select Engine</label>
             <select id="fuelId" formControlName="fuelId" class="form-select">
               <option *ngFor="let fuel of fuels" [ngValue]="fuel.id">
-                {{fuel.type}}
+                {{ fuel.type }}
               </option>
             </select>
           </div>
@@ -50,16 +58,26 @@
         <div class="col-6">
           <div class="mb-3">
             <label for="modelYear" class="form-label">Model Year</label>
-            <input id="modelYear" type="number" class="form-control" placeholder="Enter model year"
-                   formControlName="modelYear"/>
+            <input
+              id="modelYear"
+              type="number"
+              class="form-control"
+              placeholder="Enter model year"
+              formControlName="modelYear"
+            />
           </div>
         </div>
         <div class="col-6">
           <label for="dailyPrice" class="form-label">Daily Price</label>
           <div class="input-group md-3">
             <span class="input-group-text">$</span>
-            <input id="dailyPrice" type="number" class="form-control" placeholder="Enter daily price"
-                   formControlName="dailyPrice"/>
+            <input
+              id="dailyPrice"
+              type="number"
+              class="form-control"
+              placeholder="Enter daily price"
+              formControlName="dailyPrice"
+            />
           </div>
         </div>
       </div>
@@ -67,23 +85,41 @@
         <div class="col-6">
           <div class="mb-3">
             <label for="doorNumber" class="form-label">Door Number</label>
-            <input id="doorNumber" type="number" class="form-control" placeholder="Enter door number"
-                   formControlName="doorNumber"/>
+            <input
+              id="doorNumber"
+              type="number"
+              class="form-control"
+              placeholder="Enter door number"
+              formControlName="doorNumber"
+            />
           </div>
         </div>
         <div class="col-6">
-          <label for="fuelConsumption" class="form-label">Fuel Consumption</label>
+          <label for="fuelConsumption" class="form-label"
+            >Fuel Consumption</label
+          >
           <div class="input-group md-3">
             <span class="input-group-text">$</span>
-            <input id="fuelConsumption" type="number" class="form-control" placeholder="Enter daily price"
-                   formControlName="fuelConsumption"/>
+            <input
+              id="fuelConsumption"
+              type="number"
+              class="form-control"
+              placeholder="Enter daily price"
+              formControlName="fuelConsumption"
+            />
           </div>
         </div>
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea id="description" type="text" class="form-control" placeholder="Enter a description"
-                  formControlName="description" rows="3"></textarea>
+        <textarea
+          id="description"
+          type="text"
+          class="form-control"
+          placeholder="Enter a description"
+          formControlName="description"
+          rows="3"
+        ></textarea>
       </div>
     </form>
     <div class="">
@@ -105,17 +141,29 @@
       <h1 class="display-3">Update Car Images</h1>
     </div>
     <div class="row mb-3">
-      <div *ngFor="let image of carImages; let i = index" class="card ms-3" style="width: 18rem">
-        <img [src]="image.imageUrl" class="card-img-top" alt="..."/>
+      <div
+        *ngFor="let image of carImages; let i = index"
+        class="card ms-3"
+        style="width: 18rem"
+      >
+        <img [src]="image.imageUrl" class="card-img-top" alt="..." />
         <div class="card-body">
           <h5 class="card-title">{{ i + 1 }}. Photograph</h5>
-          <button (click)="deleteCarImage(image)" class="btn btn-outline-danger float-end">Delete</button>
+          <button
+            (click)="deleteCarImage(image)"
+            class="btn btn-outline-danger float-end"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
     <div class="card-footer">
-      <button (click)="setCurrentRouteToImageUpload(carIdToUploadPhoto)" class="btn btn-outline-dark float-end">Upload
-        Photo
+      <button
+        (click)="setCurrentRouteToImageUpload(carIdToUploadPhoto)"
+        class="btn btn-outline-dark float-end"
+      >
+        Upload Photo
       </button>
     </div>
   </div>

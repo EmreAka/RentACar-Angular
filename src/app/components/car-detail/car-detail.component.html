@@ -17,6 +17,7 @@
           <div class="left" (click)="setBackCurrentImage()"></div> -->
           <div class="images-container">
             <img
+              id="image"
               [src]="image"
               width="200"
               *ngFor="let image of car.images"

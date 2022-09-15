@@ -29,6 +29,7 @@
         </div>
         <div class="grid-container">
           <div
+            id="card"
             class="card mb-5 bg-body rounded"
             *ngFor="
               let car of currentCars | carFilter: filterText;
@@ -37,7 +38,6 @@
             @fade
             (mouseover)="mouseIsOver(i)"
             (mouseleave)="mouseIsNotOver()"
-            [class]="mouseIsOverOn == i ? 'shadow' : null"
           >
             <img [src]="car.images[0]" class="card-img-top" />
             <div class="card-body">
@@ -56,6 +56,7 @@
                   (click)="setFav(car.id)"
                   [class]="getFavClass(car.id)"
                   style="font-size: 25px"
+                  id="icon"
                 ></i>
                 <button
                   class="learn-more"
@@ -67,22 +68,6 @@
                   <span class="button-text">See Details</span>
                 </button>
               </div>
-              <!-- <div class="btn-group float-end" role="group">
-                <button
-                  (click)="setCurrentRouteToCarEdit(car.id)"
-                  type="button"
-                  class="btn btn-outline-dark"
-                >
-                  Edit
-                </button>
-                <button
-                  (click)="setCurrentRouteToCarDetail(car.id)"
-                  type="button"
-                  class="btn btn-outline-dark"
-                >
-                  Review
-                </button>
-              </div> -->
             </div>
           </div>
         </div>

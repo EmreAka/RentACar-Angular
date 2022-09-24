@@ -36,11 +36,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CardNumberPipe } from './pipes/card-number.pipe';
 import { CarImageUploadComponent } from './components/car-image-upload/car-image-upload.component';
 import { RentalFilterPipe } from './pipes/rental-filter.pipe';
-import {FlexLayoutModule} from "@angular/flex-layout";
 import { MyCarListComponent } from './components/my-car-list/my-car-list.component';
 import { FavoriteCarComponent } from './components/favorite-car/favorite-car.component';
 import { CardDescriptionPipe } from './pipes/card-description.pipe';
-import {NgxSpinnerModule} from "ngx-spinner";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -83,7 +82,6 @@ import {NgxSpinnerModule} from "ngx-spinner";
     ReactiveFormsModule,
     CommonModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     }),
@@ -91,8 +89,8 @@ import {NgxSpinnerModule} from "ngx-spinner";
   ],
   providers: [
     DatePipe,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService
   ],
   bootstrap: [AppComponent]

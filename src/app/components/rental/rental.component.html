@@ -7,7 +7,7 @@
 
   <div class="mb-3">
     <label for="filterText" class="form-label"
-    ><h1 class="display-6">Search A Rental By Brand Name</h1></label
+      ><h1 class="display-6">Search A Rental By Brand Name</h1></label
     >
     <input
       type="text"
@@ -24,36 +24,24 @@
   <div class="table-responsive">
     <table *ngIf="dataLoaded == true" class="table">
       <thead>
-      <tr>
-        <th>
-          Rental Id
-        </th>
-        <th>
-          Brand Name
-        </th>
-        <th>
-          Owner Name
-        </th>
-        <th>
-          Customer Name
-        </th>
-        <th>
-          Rent Date
-        </th>
-        <th>
-          Return Date
-        </th>
-      </tr>
+        <tr>
+          <th>Rental Id</th>
+          <th>Brand Name</th>
+          <th>Owner Name</th>
+          <th>Customer Name</th>
+          <th>Rent Date</th>
+          <th>Return Date</th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let rental of rentals | rentalFilter: filterText">
-        <td>{{rental.id}}</td>
-        <td>{{rental.brandName}}</td>
-        <td>{{rental.carOwner}}</td>
-        <td>{{rental.customerName}}</td>
-        <td>{{rental.rentDate}}</td>
-        <td>{{rental.returnDate}}</td>
-      </tr>
+        <tr *ngFor="let rental of rentals | rentalFilter: filterText">
+          <td>{{ rental.id }}</td>
+          <td>{{ rental.brandName }}</td>
+          <td>{{ rental.carOwner }}</td>
+          <td>{{ rental.customerName }}</td>
+          <td>{{ rental.rentDate | date }}</td>
+          <td>{{ rental.returnDate | date }}</td>
+        </tr>
       </tbody>
     </table>
   </div>

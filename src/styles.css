@@ -17,4 +17,11 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}/* You can add global styles to this file, and also import other style files */
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+::selection {
+  background: rgb(43, 43, 43);
+  color: white;
+}

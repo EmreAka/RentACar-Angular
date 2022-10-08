@@ -23,7 +23,12 @@
       <div *ngIf="filterText" class="alert alert-primary">
         {{ filterText }} searched.
       </div>
-      <div *ngIf="dataLoaded">
+      <div *ngIf="currentCars.length == 0">
+        <h1 class="error-title">
+          There is no car found with the selected filter.
+        </h1>
+      </div>
+      <div *ngIf="dataLoaded && currentCars.length > 0">
         <div class="card-title">
           <h1 class="display-6">Cars</h1>
         </div>
@@ -35,7 +40,6 @@
               let car of currentCars | carFilter: filterText;
               let i = index
             "
-            @fade
             (mouseover)="mouseIsOver(i)"
             (mouseleave)="mouseIsNotOver()"
           >

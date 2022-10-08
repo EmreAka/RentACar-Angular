@@ -148,3 +148,8 @@ button:hover .button-text {
 #icon:hover {
   transform: scale(1.1);
 }
+
+.error-title {
+  text-align: center;
+  font-weight: 300;
+}

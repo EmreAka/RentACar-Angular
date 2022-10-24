@@ -6,26 +6,28 @@
 </div>
 
 <div *ngIf="dataLoaded">
-  <div class="card-body">
-    <div fxLayout="row wrap" fxLayoutGap="20px grid">
-      <div fxFlex.xs="100%" fxFlex.md="50%" fxFlex.sm="50%" fxFlex.lg="33%" fxFlex.xl="25%"
-           *ngFor="let car of cars; let i = index" @fade>
-        <div class="card shadow mb-5 bg-body rounded" @fade>
-          <img [src]="car.images[0]" class="card-img-top">
-          <div class="card-body">
-            <h5 class="card-title">{{car.brandName}}</h5>
-            <p class="card-text">{{car.description}}</p>
-            <div class="btn-group float-end" role="group">
-              <button (click)="setCurrentRouteToCarEdit(car.id)" type="button" class="btn btn-outline-dark">Edit
-              </button>
-              <button
-                (click)="setCurrentRouteToCarDetail(car.id)"
-                type="button"
-                class="btn btn-outline-dark"
-              >
-                Review
-              </button>
-            </div>
+  <div class="card-body cars-container">
+    <div *ngFor="let car of cars; let i = index" @fade>
+      <div class="card shadow mb-5 bg-body rounded" @fade>
+        <img [src]="car.images[0]" class="card-img-top" />
+        <div class="card-body">
+          <h5 class="card-title">{{ car.brandName }}</h5>
+          <p class="card-text">{{ car.description }}</p>
+          <div class="btn-group float-end" role="group">
+            <button
+              (click)="setCurrentRouteToCarEdit(car.id)"
+              type="button"
+              class="btn btn-outline-dark"
+            >
+              Edit
+            </button>
+            <button
+              (click)="setCurrentRouteToCarDetail(car.id)"
+              type="button"
+              class="btn btn-outline-dark"
+            >
+              Review
+            </button>
           </div>
         </div>
       </div>

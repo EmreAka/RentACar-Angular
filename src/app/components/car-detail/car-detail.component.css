@@ -41,6 +41,10 @@
   margin-bottom: 1rem;
 }
 
+#image-single {
+  transition: all 3s ease-in-out;
+}
+
 #image {
   transition: all .3s ease-in-out;
 }

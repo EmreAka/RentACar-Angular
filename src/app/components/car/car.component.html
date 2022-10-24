@@ -23,7 +23,7 @@
       <div *ngIf="filterText" class="alert alert-primary">
         {{ filterText }} searched.
       </div>
-      <div *ngIf="currentCars.length == 0">
+      <div *ngIf="currentCars.length == 0 && dataLoaded">
         <h1 class="error-title">
           There is no car found with the selected filter.
         </h1>
